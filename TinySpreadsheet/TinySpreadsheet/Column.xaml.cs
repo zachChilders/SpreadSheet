@@ -26,7 +26,7 @@ namespace TinySpreadsheet
             {
                 Cell c = new Cell();
 
-                CellColumn.Children.Add(c);
+                CellColumn.Items.Add(c);
             }
         }
     }
