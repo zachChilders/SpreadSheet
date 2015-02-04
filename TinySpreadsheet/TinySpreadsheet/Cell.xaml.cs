@@ -38,7 +38,8 @@ namespace TinySpreadsheet
             TextBox t = sender as TextBox;
 
             listParent.SelectedItems.Add(this);
-            Console.WriteLine(this.IsFocused);
+            if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
+                HighlightCleanup();
         }
 
         void CellText_LostFocus(object sender, RoutedEventArgs e)
@@ -83,8 +84,6 @@ namespace TinySpreadsheet
             {
                 listParent.SelectedItems.Remove(cell);
             }
-
-            Console.WriteLine(Keyboard.GetKeyStates(Key.LeftCtrl) + " " + Keyboard.GetKeyStates(Key.RightCtrl));
         }
 
     }
