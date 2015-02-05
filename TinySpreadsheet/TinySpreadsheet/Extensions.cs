@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 
@@ -18,6 +18,11 @@ namespace TinySpreadsheet
         {
             value.Length = 0;
             value.Capacity = 0;
+        }
+
+        public static bool isEmpty(this Stack s)
+        {
+            return (s.Count > 0);
         }
     }
 }
