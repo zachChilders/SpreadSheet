@@ -71,6 +71,8 @@
     <Compile Include="Column.xaml.cs">
       <DependentUpon>Column.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Formula.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

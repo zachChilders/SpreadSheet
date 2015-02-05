@@ -27,6 +27,7 @@ namespace TinySpreadsheet
             {
                 RowStack.Children.Add(new Column());
             }
+
         }
     }
 }

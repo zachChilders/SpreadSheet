@@ -21,14 +21,24 @@ namespace TinySpreadsheet
     {
         ListBox listParent;
 
+        public String thisFormula;
+        
+        //Dependency graph!
+
         public Cell()
         {
+            //GUI
             InitializeComponent();
             BorderBrush = new SolidColorBrush(Colors.Black);
             BorderThickness = new Thickness(0.25);
             CellText.MouseDoubleClick += Cell_MouseDoubleClick;
             CellText.LostFocus += CellText_LostFocus;
             CellText.GotFocus += CellText_GotFocus;
+            CellText.KeyDown += CellText_KeyDown;
+
+            //!GUI
+            thisFormula = "";
+
         }
 
         void CellText_GotFocus(object sender, RoutedEventArgs e)
@@ -84,6 +94,18 @@ namespace TinySpreadsheet
             {
                 listParent.SelectedItems.Remove(cell);
             }
+        }
+
+        void CellText_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+           // if ((Keyboard.GetKeyStates(Key.Enter) & KeyStates.Down) == 0)
+            if (e.Key == Key.Enter)
+            {
+                this.thisFormula = t.Text;
+                Formula.solve(this);
+            }
+
         }
 
     }
