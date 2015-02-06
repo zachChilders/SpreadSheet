@@ -2,31 +2,34 @@
 using System.Collections;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+
 
 namespace TinySpreadsheet
 {
     static class Formula
     {
 
-        private static Cell currentCell;
-        private static StringBuilder output = new StringBuilder();
-        private static Stack stack = new Stack();
-
         public static void solve(Cell c)
         {
-            currentCell = c;
-            evaluate();
+            //currentCell = c;
+            evaluate(c);
         }
 
-        private static void evaluate()
+        private static void evaluate(Cell c)
         {
-
-            currentCell.cellFormula = postFix(currentCell.cellFormula);    
+            Regex rgx = new Regex(@"^(\(*(\d+[\+\/\-\*])*\d+\)*)([\+\/\-\*](\(*(\d+[\+\/\-\*])*\d+\)*))*$");    //Valid Formula regex check
+            if (rgx.IsMatch(c.CellFormula))
+            {
+                string pfix = postFix(c.CellFormula);
+                Console.WriteLine(pfix);        //Do something with formula
+            }   
         }
 
         private static string postFix(String infix)
         {
-            
+            StringBuilder output = new StringBuilder();
+            Stack stack = new Stack();
             foreach (char c in infix)
             {
                 if (char.IsDigit(c))  //It's either a digit

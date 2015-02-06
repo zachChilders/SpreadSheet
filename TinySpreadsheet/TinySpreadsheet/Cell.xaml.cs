@@ -21,7 +21,10 @@ namespace TinySpreadsheet
     {
         ListBox listParent;
 
-        public String cellFormula;
+        public String CellFormula{
+            get;
+            set;
+        }
         public String cellDisplay;
 
         //Dependency graph!
@@ -38,7 +41,7 @@ namespace TinySpreadsheet
             CellText.KeyDown += CellText_KeyDown;
 
             //!GUI
-            cellFormula = "";
+            CellFormula = "";
 
         }
 
@@ -61,7 +64,7 @@ namespace TinySpreadsheet
             if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                 HighlightCleanup();
 
-            this.cellFormula = t.Text;
+            this.CellFormula = t.Text;
         }
 
         void Cell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -110,7 +113,7 @@ namespace TinySpreadsheet
                 }
                 else
                 {
-                    this.cellFormula = t.Text;
+                    this.CellFormula = t.Text;
                     Formula.solve(this);
                 }
             }

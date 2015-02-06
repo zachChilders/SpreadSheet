@@ -22,7 +22,7 @@ namespace TinySpreadsheet
 
         public static bool isEmpty(this Stack s)
         {
-            return (s.Count > 0);
+            return (s.Count == 0);
         }
     }
 }
