@@ -30,21 +30,44 @@ namespace TinySpreadsheet
         {
             StringBuilder output = new StringBuilder();
             Stack stack = new Stack();
-            foreach (char c in infix)
+            for (int i = 0; i < infix.Length; i++)
             {
-                if (char.IsDigit(c))  //It's either a digit
+
+                int topPrio = 0;
+                if (!stack.isEmpty())
                 {
-                    stack.Push(c);
+                    topPrio = priority((char)stack.Peek());
                 }
-                else if (stack.Count > 2) //
+                int currPrio = priority(infix[i]);
+                if (topPrio < priority(infix[i])) //Low Priority
                 {
-                    output.Append(stack.Pop());
-                    output.Append(stack.Pop());
-                    output.Append(c);
+                    stack.Push(infix[i]);
                 }
-                else if (stack.isEmpty())
+                else if (infix[i] == '(')
                 {
-                    stack.Push(c);
+                    //Copy the Parenthesed equation
+                    StringBuilder tmp = new StringBuilder();
+                    for (int t = i; infix[t] != ')'; t++)
+                    {
+                        tmp.Append(infix[t]);
+                        i += t;
+                    }
+                    //postFix it and add it to our current string
+                    output.Append(postFix(tmp.ToString()));
+                    
+                }
+                else if (topPrio >= currPrio)
+                {
+                    char c = (char)stack.Pop();
+                    while (priority(c) < currPrio)
+                    {
+                        output.Append(c);
+                        c = (char)stack.Pop();
+                    }
+                }
+                else
+                {
+                    stack.Push(infix[i]);
                 }
             
             }
@@ -54,9 +77,27 @@ namespace TinySpreadsheet
                 output.Append(stack.Pop());
             }
             String result = output.ToString();
+            Console.WriteLine(result);
             output.Clear();
             return result;
         }
 
+        private static int priority(char op)
+        {
+            switch(op)
+            {
+                case '(':
+                case ')':
+                    return 4;
+                case '*':
+                case '/':
+                    return 3;
+                case '+':
+                case '-':
+                    return 2;
+                default:
+                    return 1;
+            }
+        }
     }
 }
