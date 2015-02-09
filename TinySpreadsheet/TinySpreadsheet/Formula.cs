@@ -9,6 +9,7 @@ namespace TinySpreadsheet
 {
     static class Formula
     {
+        private static Regex rgx = new Regex(@"^(\(*(\d+[\+\/\-\*])*\d+\)*)([\+\/\-\*](\(*(\d+[\+\/\-\*])*\d+\)*))*$");    //Valid Formula regex check
 
         public static void solve(Cell c)
         {
@@ -18,58 +19,62 @@ namespace TinySpreadsheet
 
         private static void evaluate(Cell c)
         {
-            Regex rgx = new Regex(@"^(\(*(\d+[\+\/\-\*])*\d+\)*)([\+\/\-\*](\(*(\d+[\+\/\-\*])*\d+\)*))*$");    //Valid Formula regex check
             if (rgx.IsMatch(c.CellFormula))
             {
+                Console.WriteLine(c.CellFormula);
                 string pfix = postFix(c.CellFormula);
-                Console.WriteLine(pfix);        //Do something with formula
-            }   
+            }
         }
 
         private static string postFix(String infix)
         {
+
             StringBuilder output = new StringBuilder();
             Stack stack = new Stack();
             for (int i = 0; i < infix.Length; i++)
             {
-
                 int topPrio = 0;
+                int currPrio = priority(infix[i]);
+
                 if (!stack.isEmpty())
                 {
                     topPrio = priority((char)stack.Peek());
                 }
-                int currPrio = priority(infix[i]);
-                if (topPrio < priority(infix[i])) //Low Priority
+
+                if (currPrio == 1) // A digit or Cell
                 {
-                    stack.Push(infix[i]);
+                    output.Append(infix[i]);
                 }
-                else if (infix[i] == '(')
+                else if (infix[i] == '(') //Handle parentheses with recursion
                 {
+                    i++; //We want the NEXT character, not this left banana.
                     //Copy the Parenthesed equation
                     StringBuilder tmp = new StringBuilder();
-                    for (int t = i; infix[t] != ')'; t++)
+                    for (int t = i; infix[t] != ')'; t++, i++)
                     {
                         tmp.Append(infix[t]);
-                        i += t;
                     }
                     //postFix it and add it to our current string
                     output.Append(postFix(tmp.ToString()));
-                    
+
                 }
-                else if (topPrio >= currPrio)
+                else if (topPrio >= currPrio) //Higher priority operator
                 {
-                    char c = (char)stack.Pop();
-                    while (priority(c) < currPrio)
+                    while (topPrio >= currPrio && !(stack.isEmpty()))
                     {
-                        output.Append(c);
-                        c = (char)stack.Pop();
+                        output.Append(stack.Pop());
+                        if (!stack.isEmpty())
+                        {
+                            topPrio = priority((char)stack.Peek());
+                        }
                     }
+                    stack.Push(infix[i]);
                 }
-                else
+                else //Normal priority operator, move along.
                 {
                     stack.Push(infix[i]);
                 }
-            
+
             }
 
             while (!stack.isEmpty())
@@ -77,14 +82,13 @@ namespace TinySpreadsheet
                 output.Append(stack.Pop());
             }
             String result = output.ToString();
-            Console.WriteLine(result);
             output.Clear();
             return result;
         }
 
         private static int priority(char op)
         {
-            switch(op)
+            switch (op)
             {
                 case '(':
                 case ')':
