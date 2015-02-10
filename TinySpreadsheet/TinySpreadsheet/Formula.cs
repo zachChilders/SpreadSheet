@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,19 +12,61 @@ namespace TinySpreadsheet
     {
         private static Regex rgx = new Regex(@"^(\(*(\d+[\+\/\-\*])*\d+\)*)([\+\/\-\*](\(*(\d+[\+\/\-\*])*\d+\)*))*$");    //Valid Formula regex check
 
-        public static void solve(Cell c)
+        public static Double solve(Cell c)
         {
-            //currentCell = c;
-            evaluate(c);
+            String cellFormula = c.CellFormula.Replace(" ", "");
+            if (rgx.IsMatch(cellFormula))
+            {
+                string pfix = postFix(cellFormula);
+                return evaluate(pfix);
+            }
+            return Double.NaN;
         }
 
-        private static void evaluate(Cell c)
+        private static Double evaluate(String postFixed)
         {
-            if (rgx.IsMatch(c.CellFormula))
+            Stack<String> eval = new Stack<String>();
+            foreach(char c in postFixed)
             {
-                Console.WriteLine(c.CellFormula);
-                string pfix = postFix(c.CellFormula);
+                double num1;
+                double num2;
+                double result;
+                switch(c)
+                {
+
+                    case '*':
+                        num1 = Double.Parse(eval.Pop().ToString());
+                        num2 = Double.Parse(eval.Pop().ToString());
+                        result = num1 * num2;
+                        eval.Push(result.ToString());
+                        break;
+                    case '/':
+                        num1 = Double.Parse(eval.Pop().ToString());
+                        num2 = Double.Parse(eval.Pop().ToString());
+                        if (num2 != 0)
+                        {
+                            result = num1 / num2;
+                            eval.Push(result.ToString());
+                        }
+                        break;
+                    case '+':
+                        num1 = Double.Parse(eval.Pop().ToString());
+                        num2 = Double.Parse(eval.Pop().ToString());
+                        result = num1 + num2;
+                        eval.Push(result.ToString());
+                        break;
+                    case '-':
+                        num1 = Double.Parse(eval.Pop().ToString());
+                        num2 = Double.Parse(eval.Pop().ToString());
+                        result = num1 - num2;
+                        eval.Push(result.ToString());
+                        break;
+                    default:
+                        eval.Push(c.ToString());
+                        break;
+                }
             }
+            return Double.Parse(eval.Pop());
         }
 
         private static string postFix(String infix)

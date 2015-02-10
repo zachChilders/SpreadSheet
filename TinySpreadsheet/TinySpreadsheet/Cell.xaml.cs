@@ -114,7 +114,7 @@ namespace TinySpreadsheet
                 else
                 {
                     this.CellFormula = t.Text;
-                    Formula.solve(this);
+                    t.Text = Formula.solve(this).ToString();
                 }
             }
 
