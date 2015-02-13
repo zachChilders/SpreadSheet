@@ -25,7 +25,11 @@ namespace TinySpreadsheet
             get;
             set;
         }
-        public String cellDisplay;
+        public String cellDisplay
+        {
+            get;
+            set;
+        }
 
         //Dependency graph!
 

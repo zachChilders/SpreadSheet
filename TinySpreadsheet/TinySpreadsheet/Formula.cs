@@ -17,7 +17,7 @@ namespace TinySpreadsheet
             String cellFormula = c.CellFormula.Replace(" ", "");
             if (rgx.IsMatch(cellFormula))
             {
-                string pfix = postFix(cellFormula);
+                String pfix = postFix(cellFormula);
                 return evaluate(pfix);
             }
             return Double.NaN;
@@ -69,7 +69,7 @@ namespace TinySpreadsheet
             return Double.Parse(eval.Pop());
         }
 
-        private static string postFix(String infix)
+        private static String postFix(String infix)
         {
 
             StringBuilder output = new StringBuilder();
