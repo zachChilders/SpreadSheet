@@ -17,7 +17,7 @@ namespace TinySpreadsheet
             String cellFormula = c.CellFormula.Replace(" ", "");
             if (rgx.IsMatch(cellFormula))
             {
-                String pfix = postFix(cellFormula);
+                String pfix = postFix(cellFormula); //This should be tokenized somewhere.
                 return evaluate(pfix);
             }
             return Double.NaN;
@@ -73,7 +73,7 @@ namespace TinySpreadsheet
             return Double.Parse(eval.Pop());
         }
 
-        private static String postFix(String infix)
+        private static String postFix(String[] infix)
         {
 
             StringBuilder output = new StringBuilder();
@@ -85,23 +85,24 @@ namespace TinySpreadsheet
 
                 if (!stack.isEmpty())
                 {
-                    topPrio = priority((char)stack.Peek());
+                    topPrio = priority((String)stack.Peek());
                 }
 
                 if (currPrio == 1) // A digit or Cell
                 {
                     output.Append(infix[i]);
                 }
-                else if (infix[i] == '(') //Handle parentheses with recursion
+                else if (infix[i] == "(") //Handle parentheses with recursion
                 {
                     i++; //We want the NEXT character, not this left banana.
                     //Copy the Parenthesed equation
                     StringBuilder tmp = new StringBuilder();
-                    for (int t = i; infix[t] != ')'; t++, i++)
+                    for (int t = i; infix[t] != ")"; t++, i++)
                     {
                         tmp.Append(infix[t]);
                     }
                     //postFix it and add it to our current string
+                    //tmp.ToString() needs to be tokenized again before sending off
                     output.Append(postFix(tmp.ToString()));
 
                 }
@@ -112,7 +113,7 @@ namespace TinySpreadsheet
                         output.Append(stack.Pop());
                         if (!stack.isEmpty())
                         {
-                            topPrio = priority((char)stack.Peek());
+                            topPrio = priority((String)stack.Peek());
                         }
                     }
                     stack.Push(infix[i]);
@@ -133,18 +134,18 @@ namespace TinySpreadsheet
             return result;
         }
 
-        private static int priority(char op)
+        private static int priority(String op)
         {
             switch (op)
             {
-                case '(':
-                case ')':
+                case "(":
+                case ")":
                     return 4;
-                case '*':
-                case '/':
+                case "*":
+                case "/":
                     return 3;
-                case '+':
-                case '-':
+                case "+":
+                case "-":
                     return 2;
                 default:
                     return 1;
