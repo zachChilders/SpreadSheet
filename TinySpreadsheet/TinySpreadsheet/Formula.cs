@@ -26,12 +26,12 @@ namespace TinySpreadsheet
         private static Double evaluate(String postFixed)
         {
             Stack<String> eval = new Stack<String>();
-            foreach(char c in postFixed)
+            foreach (char c in postFixed)
             {
                 double num1;
                 double num2;
                 double result;
-                switch(c)
+                switch (c)
                 {
 
                     case '*':
@@ -47,6 +47,10 @@ namespace TinySpreadsheet
                         {
                             result = num1 / num2;
                             eval.Push(result.ToString());
+                        }
+                        else
+                        {
+                            return Double.NaN;
                         }
                         break;
                     case '+':
