@@ -12,7 +12,7 @@ namespace TinySpreadsheet.Tokenize
 
         public static Queue<FormulaToken> Tokenize(String formula)
         {
-
+            return null;
         }
 
         public static DependencyMap GetDependencies(String formula)

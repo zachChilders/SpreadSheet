@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TinySpreadsheet.Tokenize
 {
-    public class FormulaToken : 
+    public class FormulaToken
     {
         public FormulaToken(String token, Tokenizer.TokenType type)
         {
