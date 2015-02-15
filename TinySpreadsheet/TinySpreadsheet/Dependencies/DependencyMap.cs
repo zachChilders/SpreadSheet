@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace TinySpreadsheet.Dependency
+namespace TinySpreadsheet.Dependencies
 {
     /// <summary>
     /// A map of Dependencies describing cells and their relationships as dependencies.
@@ -14,9 +14,12 @@ namespace TinySpreadsheet.Dependency
     {
         private Action subscribeCallback;
 
-        public DependencyMap()
+        public DependencyMap(Cell owner)
         {
             Dependencies = new OrderedDictionary();
+            Owner = owner;
+            subscribeCallback = null;
+            ErrorCallback = null;
         }
 
         /// <summary>
@@ -33,7 +36,14 @@ namespace TinySpreadsheet.Dependency
         /// <summary>
         /// Gets or sets the callback used for when dependencies change their values.
         /// </summary>
-        public Action SubscribeCallback { get; set; } //Needs implementing
+        public Action SubscribeCallback 
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set;
+        }
 
         /// <summary>
         /// Gets or sets the callback for what happens when an error occurs somewhere
@@ -43,12 +53,12 @@ namespace TinySpreadsheet.Dependency
         //Our methods
         public void Unsubscribe()
         {
-
+            throw new NotImplementedException();
         }
 
         private bool Subscribe()
         {
-            return false;
+            throw new NotImplementedException();
         }
     }
 }

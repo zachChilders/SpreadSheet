@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TinySpreadsheet.Dependencies;
 
 namespace TinySpreadsheet
 {
@@ -20,6 +21,8 @@ namespace TinySpreadsheet
     public partial class Cell : UserControl
     {
         ListBox listParent;
+
+        public DependencyMap Dependencies { get; private set; }
 
         public String CellFormula{
             get;
