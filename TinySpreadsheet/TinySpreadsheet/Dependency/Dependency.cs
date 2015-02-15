@@ -7,8 +7,6 @@ namespace TinySpreadsheet.Dependency
 {
     public class Dependency
     {
-        Tuple<Cell, bool> dependency;
-
         /// <summary>
         /// Instantiates a new dependency with a given Cell and bool.
         /// </summary>
@@ -16,29 +14,18 @@ namespace TinySpreadsheet.Dependency
         /// <param name="direct">The type of dependency indicating whether it's direct or indirect.</param>
         public Dependency(Cell c, bool direct)
         {
-            dependency = new Tuple<Cell, bool>(c, direct);
+            Cell = c;
+            IsDirect = direct;
         }
 
         /// <summary>
         /// Gets the cell associated with this dependency.
         /// </summary>
-        public Cell Cell
-        {
-            get
-            {
-                return dependency.Item1;
-            }
-        }
+        public Cell Cell { get; private set; }
 
         /// <summary>
         /// Gets whether this is a direct dependency or not.
         /// </summary>
-        public bool IsDirect
-        {
-            get
-            {
-                return dependency.Item2;
-            }
-        }
+        public bool IsDirect { get; private set; }
     }
 }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using TinySpreadsheet.Dependency;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Tokenize
 {
     public static class Tokenizer
     {
         public enum TokenType { CELL, OP, NUM, BANANA };
 
-        public static Queue<Tuple<String, Tokenizer.TokenType>> Tokenize(String formula)
+        public static Queue<FormulaToken> Tokenize(String formula)
         {
 
         }
