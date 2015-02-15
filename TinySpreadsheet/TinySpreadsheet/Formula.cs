@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using TinySpreadsheet.Tokenize;
 
 
 namespace TinySpreadsheet
@@ -14,9 +15,10 @@ namespace TinySpreadsheet
 
         public static Double solve(Cell c)
         {
-            String cellFormula = c.CellFormula.Replace(" ", "");
-            if (rgx.IsMatch(cellFormula))
+            String cellFormulaString = c.CellFormula.Replace(" ", "");
+            if (rgx.IsMatch(cellFormulaString))
             {
+                Queue<FormulaToken> cellFormula = Tokenizer.Tokenize(cellFormulaString);
                 String pfix = postFix(cellFormula); //This should be tokenized somewhere.
                 return evaluate(pfix);
             }
@@ -73,7 +75,7 @@ namespace TinySpreadsheet
             return Double.Parse(eval.Pop());
         }
 
-        private static String postFix(String[] infix)
+        private static String postFix(Queue<FormulaToken> infix)
         {
 
             StringBuilder output = new StringBuilder();
