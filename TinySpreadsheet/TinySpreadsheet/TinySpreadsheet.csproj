@@ -51,6 +51,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dependency\Dependency.cs" />
+    <Compile Include="Dependency\DependencyMap.cs" />
     <Compile Include="Tokenizer.cs" />
     <Page Include="Cell.xaml">
       <SubType>Designer</SubType>
