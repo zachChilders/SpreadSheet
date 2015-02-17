@@ -9,10 +9,55 @@ namespace TinySpreadsheet.Tokenize
     public static class Tokenizer
     {
         public enum TokenType { CELL, OP, NUM, BANANA };
+        private static FormulaToken getOP(char c){
+            switch(c){
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                    return new FormulaToken(c.ToString(), TokenType.OP);
+                    break;
+                case '(':
+                case ')':
+                    return new FormulaToken(c.ToString(), TokenType.BANANA);
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+                    
+        }
+        public static FormulaToken getNotOP(String s){
+            double d;
+            if( double.TryParse(s,out d))
+            {
+                return new FormulaToken(s, TokenType.NUM);
+            }
+            else
+            {
+                return new FormulaToken(s, TokenType.CELL);
+            }
+            
+        }
 
         public static Queue<FormulaToken> Tokenize(String formula)
         {
-            throw new NotImplementedException();
+            Queue<FormulaToken> TokenQueue = new Queue<FormulaToken>(); 
+            StringBuilder num = new StringBuilder();
+            foreach (char c in formula)
+            {
+                FormulaToken thisop;
+                if((thisop = getOP(c)) != null)
+                {
+                    if (num != null)
+                    {
+                        TokenQueue.Enqueue(getNotOP(num.ToString()));                    
+                    }
+                    TokenQueue.Enqueue(thisop);
+                }
+            }
+            return TokenQueue;
+            
         }
 
         /// <summary>
