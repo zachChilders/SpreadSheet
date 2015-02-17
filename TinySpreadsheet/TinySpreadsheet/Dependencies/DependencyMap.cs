@@ -42,7 +42,7 @@ namespace TinySpreadsheet.Dependencies
             {
                 throw new NotImplementedException();
             }
-            set;
+            set{}
         }
 
         /// <summary>

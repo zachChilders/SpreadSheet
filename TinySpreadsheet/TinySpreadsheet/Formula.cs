@@ -80,32 +80,33 @@ namespace TinySpreadsheet
 
             StringBuilder output = new StringBuilder();
             Stack stack = new Stack();
-            for (int i = 0; i < infix.Length; i++)
-            {
-                int topPrio = 0;
-                int currPrio = priority(infix[i]);
 
+            int topPrio = 0;
+            while (infix.Count > 0)
+            {
+                FormulaToken currentToken = infix.Dequeue();
+                int currPrio = priority(currentToken);
                 if (!stack.isEmpty())
                 {
-                    topPrio = priority((String)stack.Peek());
+                    topPrio = priority((FormulaToken)stack.Peek());
                 }
 
                 if (currPrio == 1) // A digit or Cell
                 {
-                    output.Append(infix[i]);
+                    output.Append(currentToken);
                 }
-                else if (infix[i] == "(") //Handle parentheses with recursion
+                else if (currentToken.Token == "(") //Handle parentheses with recursion
                 {
-                    i++; //We want the NEXT character, not this left banana.
+                    //i++; //We want the NEXT character, not this left banana.
+                    currentToken = infix.Dequeue();
                     //Copy the Parenthesed equation
-                    StringBuilder tmp = new StringBuilder();
-                    for (int t = i; infix[t] != ")"; t++, i++)
+                    Queue<FormulaToken> tmp = new Queue<FormulaToken>();
+                    while (currentToken.Token != ")")
                     {
-                        tmp.Append(infix[t]);
+                        tmp.Enqueue(currentToken);
+                        currentToken = infix.Dequeue();
                     }
-                    //postFix it and add it to our current string
-                    //tmp.ToString() needs to be tokenized again before sending off
-                    output.Append(postFix(tmp.ToString()));
+                    output.Append(postFix(tmp));
 
                 }
                 else if (topPrio >= currPrio) //Higher priority operator
@@ -115,14 +116,14 @@ namespace TinySpreadsheet
                         output.Append(stack.Pop());
                         if (!stack.isEmpty())
                         {
-                            topPrio = priority((String)stack.Peek());
+                            topPrio = priority((FormulaToken)stack.Peek());
                         }
                     }
-                    stack.Push(infix[i]);
+                    stack.Push(currentToken);
                 }
                 else //Normal priority operator, move along.
                 {
-                    stack.Push(infix[i]);
+                    stack.Push(currentToken);
                 }
 
             }
@@ -136,9 +137,9 @@ namespace TinySpreadsheet
             return result;
         }
 
-        private static int priority(String op)
+        private static int priority(FormulaToken op)
         {
-            switch (op)
+            switch (op.Token)
             {
                 case "(":
                 case ")":
