@@ -19,35 +19,36 @@ namespace TinySpreadsheet
             if (rgx.IsMatch(cellFormulaString))
             {
                 Queue<FormulaToken> cellFormula = Tokenizer.Tokenize(cellFormulaString);
-                String pfix = postFix(cellFormula); //This should be tokenized somewhere.
+                Queue<FormulaToken> pfix = postFix(cellFormula); //This should be tokenized somewhere.
                 return evaluate(pfix);
             }
             return Double.NaN;
         }
 
-        private static Double evaluate(String postFixed)
+        private static Double evaluate(Queue<FormulaToken> postFixed)
         {
             Stack<String> eval = new Stack<String>();
-            foreach (char c in postFixed)
+            while (postFixed.Count > 0)
             {
                 double num1;
                 double num2;
                 double result;
-                switch (c)
+                FormulaToken currentToken = postFixed.Dequeue();
+                switch (currentToken.Token)
                 {
 
-                    case '*':
+                    case "*":
                         num1 = Double.Parse(eval.Pop().ToString());
                         num2 = Double.Parse(eval.Pop().ToString());
-                        result = num1 * num2;
+                        result = num2 * num1;
                         eval.Push(result.ToString());
                         break;
-                    case '/':
+                    case "/":
                         num1 = Double.Parse(eval.Pop().ToString());
                         num2 = Double.Parse(eval.Pop().ToString());
                         if (num2 != 0)
                         {
-                            result = num1 / num2;
+                            result = num2 / num1;
                             eval.Push(result.ToString());
                         }
                         else
@@ -55,49 +56,49 @@ namespace TinySpreadsheet
                             return Double.NaN;
                         }
                         break;
-                    case '+':
+                    case "+":
                         num1 = Double.Parse(eval.Pop().ToString());
                         num2 = Double.Parse(eval.Pop().ToString());
-                        result = num1 + num2;
+                        result = num2 + num1;
                         eval.Push(result.ToString());
                         break;
-                    case '-':
+                    case "-":
                         num1 = Double.Parse(eval.Pop().ToString());
                         num2 = Double.Parse(eval.Pop().ToString());
-                        result = num1 - num2;
+                        result = num2 - num1;
                         eval.Push(result.ToString());
                         break;
                     default:
-                        eval.Push(c.ToString());
+                        eval.Push(currentToken.Token);
                         break;
                 }
             }
             return Double.Parse(eval.Pop());
         }
 
-        private static String postFix(Queue<FormulaToken> infix)
+        private static Queue<FormulaToken> postFix(Queue<FormulaToken> infix)
         {
-              
-            StringBuilder output = new StringBuilder();
-            Stack stack = new Stack();
+            Queue<FormulaToken> output = new Queue<FormulaToken>();
+            Stack<FormulaToken> stack = new Stack<FormulaToken>();
 
             int topPrio = 0;
             while (infix.Count > 0)
             {
+                Console.WriteLine(output.ToString());
                 FormulaToken currentToken = infix.Dequeue();
                 int currPrio = priority(currentToken);
                 if (!stack.isEmpty())
                 {
-                    topPrio = priority((FormulaToken)stack.Peek());
+                    topPrio = priority(stack.Peek());
                 }
 
                 if (currPrio == 1) // A digit or Cell
                 {
-                    output.Append(currentToken);
+                    output.Enqueue(currentToken);
                 }
                 else if (currentToken.Token == "(") //Handle parentheses with recursion
                 {
-                    //i++; //We want the NEXT character, not this left banana.
+                    //We want the NEXT character, not this left banana.
                     currentToken = infix.Dequeue();
                     //Copy the Parenthesed equation
                     Queue<FormulaToken> tmp = new Queue<FormulaToken>();
@@ -107,16 +108,15 @@ namespace TinySpreadsheet
                         currentToken = infix.Dequeue();
                     }
                     output.Append(postFix(tmp));
-
                 }
                 else if (topPrio >= currPrio) //Higher priority operator
                 {
                     while (topPrio >= currPrio && !(stack.isEmpty()))
                     {
-                        output.Append(stack.Pop());
+                        output.Enqueue(stack.Pop());
                         if (!stack.isEmpty())
                         {
-                            topPrio = priority((FormulaToken)stack.Peek());
+                            topPrio = priority(stack.Peek());
                         }
                     }
                     stack.Push(currentToken);
@@ -130,11 +130,9 @@ namespace TinySpreadsheet
 
             while (!stack.isEmpty())
             {
-                output.Append(stack.Pop());
+                output.Enqueue(stack.Pop());
             }
-            String result = output.ToString();
-            output.Clear();
-            return result;
+            return output;
         }
 
         private static int priority(FormulaToken op)
