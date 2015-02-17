@@ -77,7 +77,7 @@ namespace TinySpreadsheet
 
         private static String postFix(Queue<FormulaToken> infix)
         {
-
+              
             StringBuilder output = new StringBuilder();
             Stack stack = new Stack();
             for (int i = 0; i < infix.Length; i++)
