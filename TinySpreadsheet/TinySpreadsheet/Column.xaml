@@ -5,17 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ListBox x:Name="CellColumn" HorizontalAlignment="Left" SelectionMode="Extended">
-        <ListBox.Resources>
-            <Style TargetType="ListBoxItem">
-    <Style.Resources>
-        <!--SelectedItem with focus-->
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#3399FF" Opacity="1"/>
-        <!--SelectedItem without focus-->
-                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#3399FF" Opacity="1"/>
-    </Style.Resources>
-</Style>
-        </ListBox.Resources>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <ListBox x:Name="CellColumn" HorizontalAlignment="Left" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
     </ListBox>
 
 
