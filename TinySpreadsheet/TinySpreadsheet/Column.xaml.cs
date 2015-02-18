@@ -19,6 +19,8 @@ namespace TinySpreadsheet
     /// </summary>
     public partial class Column : UserControl
     {
+        public List<Cell> cells = new List<Cell>();
+
         public Column()
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace TinySpreadsheet
                 Cell c = new Cell();
 
                 CellColumn.Items.Add(c);
+                cells.Add(c);
             }
         }
     }

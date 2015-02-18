@@ -19,13 +19,18 @@ namespace TinySpreadsheet
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public Dictionary<String, Column> Columns = new Dictionary<String,Column>();
+
         public MainWindow()
         {
             InitializeComponent();
             
-            for(int j = 0; j < 30; j++)
+            for(int j = 0; j < 26; j++)
             {
-                RowStack.Children.Add(new Column());
+                Column c = new Column();
+                RowStack.Children.Add(c);
+                Columns.Add(('A'+ j).ToString(), c);  //A needs to be determined on the fly
             }
 
         }
