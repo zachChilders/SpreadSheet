@@ -19,8 +19,7 @@ namespace TinySpreadsheet
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        public Dictionary<String, Column> Columns = new Dictionary<String,Column>();
+        public static Dictionary<String, Column> Columns = new Dictionary<String,Column>();
 
         public MainWindow()
         {
@@ -28,9 +27,10 @@ namespace TinySpreadsheet
             
             for(int j = 0; j < 26; j++)
             {
-                Column c = new Column();
+                String name = ((char)('A' + j)).ToString();
+                Column c = new Column() { Name = name };
                 RowStack.Children.Add(c);
-                Columns.Add(('A'+ j).ToString(), c);  //A needs to be determined on the fly
+                Columns.Add(name, c);  //A needs to be determined on the fly
             }
 
         }

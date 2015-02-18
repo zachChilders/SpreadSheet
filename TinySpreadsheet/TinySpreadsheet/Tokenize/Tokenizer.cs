@@ -16,14 +16,11 @@ namespace TinySpreadsheet.Tokenize
                 case '*':
                 case '/':
                     return new FormulaToken(c.ToString(), TokenType.OP);
-                    break;
                 case '(':
                 case ')':
                     return new FormulaToken(c.ToString(), TokenType.BANANA);
-                    break;
                 default:
                     return null;
-                    break;
             }
                     
         }
@@ -85,8 +82,7 @@ namespace TinySpreadsheet.Tokenize
                 if (t.Type == TokenType.CELL)
                 {
                     //Find the cell reference from map of Columns with index
-                    //dependencies.Add(new Dependency(referencedCell, true));
-                    throw new NotImplementedException();
+                    dependencies.Add(new Dependency(ExtractCell(t.Token), true));
                 }
             }
 
@@ -101,6 +97,33 @@ namespace TinySpreadsheet.Tokenize
             }
 
             return dependencies;
+        }
+
+        /// <summary>
+        /// Extracts a cell using the static column map.
+        /// </summary>
+        /// <param name="cellName">The name of the cell for identification.</param>
+        /// <returns>The referenced cell.</returns>
+        private static Cell ExtractCell(String cellName)
+        {
+            StringBuilder column = new StringBuilder();
+            StringBuilder row = new StringBuilder();
+
+            //Go through each character and append to the appropriate StringBuilder
+            foreach(char c in cellName)
+            {
+                if ((c >= 'A' && c <= 'Z') && (c >= 'a' && c <= 'z'))
+                    column.Append(c);
+                else
+                    row.Append(c);
+            }
+
+            //Get the index of the cell in the column.
+            int index;
+            if (!Int32.TryParse(row.ToString(), out index))
+                throw new Exception("Not a cell");
+
+            return MainWindow.Columns[column.ToString()].cells[index];
         }
 
     }
