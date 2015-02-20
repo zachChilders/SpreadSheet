@@ -27,7 +27,6 @@ namespace TinySpreadsheet.Tokenize
             }
                     
         }
-     
         public static FormulaToken getNotOP(String s){
             double d;
             if( double.TryParse(s,out d))
@@ -48,23 +47,15 @@ namespace TinySpreadsheet.Tokenize
             foreach (char c in formula)
             {
                 FormulaToken thisop;
-
-                if ((thisop = getOP(c)) != null)
+                if((thisop = getOP(c)) != null)
                 {
                     if (num != null)
                     {
-                        TokenQueue.Enqueue(getNotOP(num.ToString()));
-                        num.Clear();
+                        TokenQueue.Enqueue(getNotOP(num.ToString()));                    
                     }
                     TokenQueue.Enqueue(thisop);
                 }
-                else
-                    num.Append(c);
             }
-
-            if (num.Length > 0)
-                TokenQueue.Enqueue(getNotOP(num.ToString()));
-
             return TokenQueue;
             
         }
