@@ -9,8 +9,10 @@ namespace TinySpreadsheet.Tokenize
     public static class Tokenizer
     {
         public enum TokenType { CELL, OP, NUM, BANANA };
-        private static FormulaToken getOP(char c){
-            switch(c){
+        private static FormulaToken getOP(char c)
+        {
+            switch (c)
+            {
                 case '+':
                 case '-':
                 case '*':
@@ -22,12 +24,13 @@ namespace TinySpreadsheet.Tokenize
                 default:
                     return null;
             }
-                    
+
         }
-     
-        public static FormulaToken getNotOP(String s){
+
+        public static FormulaToken getNotOP(String s)
+        {
             double d;
-            if( double.TryParse(s,out d))
+            if (double.TryParse(s, out d))
             {
                 return new FormulaToken(s, TokenType.NUM);
             }
@@ -35,12 +38,12 @@ namespace TinySpreadsheet.Tokenize
             {
                 return new FormulaToken(s, TokenType.CELL);
             }
-            
+
         }
 
         public static Queue<FormulaToken> Tokenize(String formula)
         {
-            Queue<FormulaToken> TokenQueue = new Queue<FormulaToken>(); 
+            Queue<FormulaToken> TokenQueue = new Queue<FormulaToken>();
             StringBuilder num = new StringBuilder();
             foreach (char c in formula)
             {
@@ -63,7 +66,7 @@ namespace TinySpreadsheet.Tokenize
                 TokenQueue.Enqueue(getNotOP(num.ToString()));
 
             return TokenQueue;
-            
+
         }
 
         /// <summary>
@@ -86,13 +89,14 @@ namespace TinySpreadsheet.Tokenize
                 }
             }
 
-            //For each dependency in dependencies, add their dependencies to ours.
+            //For each direct dependency in dependencies, add their dependencies to ours as indirect.
             int count = dependencies.Count;
             for (int i = 0; i < count; i++)
             {
-                foreach(Dependency d in dependencies[i].Cell.Dependencies)
+                foreach (Dependency d in dependencies[i].Cell.Dependencies)
                 {
-                    dependencies.Add(d);
+                    //Overwrites or adds a new Cell. By overwriting it to indirect, we can reduce the number of potential calls for Change.
+                    dependencies[d.Cell.Name] = new Dependency(d.Cell, false);
                 }
             }
 
@@ -110,7 +114,7 @@ namespace TinySpreadsheet.Tokenize
             StringBuilder row = new StringBuilder();
 
             //Go through each character and append to the appropriate StringBuilder
-            foreach(char c in cellName)
+            foreach (char c in cellName)
             {
                 if ((c >= 'A' && c <= 'Z') && (c >= 'a' && c <= 'z'))
                     column.Append(c);

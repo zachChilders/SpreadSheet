@@ -12,14 +12,19 @@ namespace TinySpreadsheet.Dependencies
     /// </summary>
     public partial class DependencyMap
     {
-        private Action subscribeCallback;
+        private Action<Cell> subscribeCallback;
 
-        public DependencyMap(Cell owner)
+        public DependencyMap(Cell owner, Action<Cell> subscribe = null, Action<Cell> errorCallback = null)
         {
             Dependencies = new OrderedDictionary();
             Owner = owner;
-            subscribeCallback = null;
-            ErrorCallback = null;
+            subscribeCallback = subscribe;
+            ErrorCallback = errorCallback;
+        }
+
+        public ~DependencyMap()
+        {
+            Unsubscribe();
         }
 
         /// <summary>
@@ -36,29 +41,72 @@ namespace TinySpreadsheet.Dependencies
         /// <summary>
         /// Gets or sets the callback used for when dependencies change their values.
         /// </summary>
-        public Action SubscribeCallback 
+        public Action<Cell> SubscribeCallback 
         {
             get
             {
-                throw new NotImplementedException();
+                return subscribeCallback;
             }
-            set{}
+            set
+            {
+                Subscribe(value);
+            }
         }
 
         /// <summary>
         /// Gets or sets the callback for what happens when an error occurs somewhere
         /// </summary>
-        public Action ErrorCallback { get; set; }
+        public Action<Cell> ErrorCallback { get; set; }
 
         //Our methods
         public void Unsubscribe()
         {
-            throw new NotImplementedException();
+            if (subscribeCallback == null)
+                return;
+
+            foreach(Dependency d in Dependencies)
+            {
+                if (d.IsDirect)
+                    d.Cell.Changed -= subscribeCallback;
+            }
+
+            subscribeCallback = null;
         }
 
-        private bool Subscribe()
+        /// <summary>
+        /// Subscribes a given method to any changes in dependencies.
+        /// </summary>
+        /// <param name="subscribe">A method that takes in a Cell as an argument.</param>
+        /// <returns></returns>
+        private bool Subscribe(Action<Cell> subscribe)
         {
-            throw new NotImplementedException();
+            if (subscribeCallback == null)
+                subscribeCallback = subscribe;
+            else
+            {
+                //Unsubscribe to start fresh.
+                Unsubscribe();
+
+                //We have all dependencies, so if the owner is in it, there's a problem.
+                if(Dependencies.Contains(Owner.Name))
+                {
+                    ErrorCallback(Owner);
+                    return false;
+                }
+
+                subscribeCallback = subscribe;
+
+                //Subscribe to all direct dependencies.
+                foreach(Dependency d in Dependencies)
+                {
+                    if (!d.IsDirect)
+                        break;
+
+                    d.Cell.Changed += subscribeCallback;
+                }
+            }
+
+            return true;
         }
     }
 }
