@@ -12,17 +12,38 @@ namespace TinySpreadsheet
     static class Formula
     {
         private static Regex rgx = new Regex(@"^(\(*(\d+[\+\/\-\*])*\d+\)*)([\+\/\-\*](\(*(\d+[\+\/\-\*])*\d+\)*))*$");    //Valid Formula regex check
+        private static Regex alphaNum = new Regex(@"^[A-Za-z]+[0-9]+$");
 
         public static Double solve(Cell c)
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
-            if (rgx.IsMatch(cellFormulaString))
-            {
+            //if (rgx.IsMatch(cellFormulaString))
+            //{
                 Queue<FormulaToken> cellFormula = Tokenizer.Tokenize(cellFormulaString);
                 Queue<FormulaToken> pfix = postFix(cellFormula); //This should be tokenized somewhere.
                 return evaluate(pfix);
+            //}
+            //return Double.NaN;
+        }
+
+        public static String ResolveDependencies(Cell current)
+        {
+            StringBuilder expandedFormula = new StringBuilder();
+            Queue<FormulaToken> tokens = Tokenizer.Tokenize(current.CellFormula);
+
+            foreach (FormulaToken token in tokens)
+            {
+                if (alphaNum.IsMatch(token.Token))
+                {
+                    expandedFormula.Append(GetCell(ResolveDependencies(token.Token))); //Go resolve this token first.
+                }
+                else
+                {
+                    expandedFormula.Append(token.Token);
+                }
             }
-            return Double.NaN;
+
+            return expandedFormula.ToString();
         }
 
         private static Double evaluate(Queue<FormulaToken> postFixed)
@@ -152,5 +173,6 @@ namespace TinySpreadsheet
                     return 1;
             }
         }
+
     }
 }

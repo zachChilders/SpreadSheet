@@ -32,5 +32,17 @@ namespace TinySpreadsheet
                 cells.Add(c);
             }
         }
+
+        public Cell this[int index]
+        {
+            get
+            {
+                return cells[index];
+            }
+            set
+            {
+                cells[index] = value;
+            }
+        }
     }
 }

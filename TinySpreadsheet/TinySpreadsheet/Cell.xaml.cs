@@ -34,7 +34,6 @@ namespace TinySpreadsheet
             set;
         }
 
-        //Dependency graph!
 
         public Cell()
         {

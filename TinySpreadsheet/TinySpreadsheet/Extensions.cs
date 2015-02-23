@@ -9,13 +9,6 @@ namespace TinySpreadsheet
 {
     static class Extensions
     {
-
-         /// <summary>
-        ///     Clears the contents of the string builder.
-        /// </summary>
-        /// <param name="value">
-        ///     The <see cref="StringBuilder"/> to clear.
-        /// </param>
         public static void Clear(this StringBuilder value)
         {
             value.Length = 0;
@@ -33,6 +26,16 @@ namespace TinySpreadsheet
             {
                 q.Enqueue(qIn.Dequeue());
             }
+        }
+
+        public static string Slice(this string source, int start, int end)
+        {
+            if (end < 0) // Keep this for negative end support
+            {
+                end = source.Length + end;
+            }
+            int len = end - start;               // Calculate length
+            return source.Substring(start, len); // Return Substring of length
         }
     }
 }
