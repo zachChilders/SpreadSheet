@@ -11,7 +11,7 @@ namespace TinySpreadsheet
 {
     static class Formula
     {
-        private static Regex rgx = new Regex(@"^(\(*(\d+[\+\/\-\*])*\d+\)*)([\+\/\-\*](\(*(\d+[\+\/\-\*])*\d+\)*))*$");    //Valid Formula regex check
+        private static Regex rgx = new Regex(@"^((-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
         private static Regex alphaNum = new Regex(@"^[A-Za-z]+[0-9]+$");
 
         public static Double solve(Cell c)
