@@ -51,6 +51,34 @@ namespace TinySpreadsheet
 
         }
 
+        FrameworkElement GetParent(Type t)
+        {
+            FrameworkElement parent = this;
+
+            while ((parent = parent.Parent as FrameworkElement) != null && parent.GetType() != t) ;
+
+            return parent;
+        }
+
+        //Custom event
+        /// <summary>
+        /// Triggered when a change to the value of this Cell occurs.
+        /// </summary>
+        public event Action<Cell> Changed;
+        protected virtual void IChanged()
+        {
+            if (Changed != null)
+                Changed(this);
+        }
+
+
+        //Event subscriptions
+        void DependencyChanged(Cell sender)
+        {
+            throw new NotImplementedException("DependencyChanged not implemented.");
+            IChanged();
+        }
+
         void CellText_GotFocus(object sender, RoutedEventArgs e)
         {
             if (listParent == null)
@@ -82,15 +110,6 @@ namespace TinySpreadsheet
 
             listParent.SelectedItems.Remove(this);
             HighlightCleanup();
-        }
-
-        FrameworkElement GetParent(Type t)
-        {
-            FrameworkElement parent = this;
-
-            while ((parent = parent.Parent as FrameworkElement) != null && parent.GetType() != t) ;
-
-            return parent;
         }
 
         void HighlightCleanup()
