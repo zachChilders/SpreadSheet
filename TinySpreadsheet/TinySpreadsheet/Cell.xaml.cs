@@ -98,9 +98,9 @@ namespace TinySpreadsheet
             if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                 HighlightCleanup();
 
-            this.CellFormula = t.Text;
-            cellDisplay = Formula.solve(this).ToString();
-            t.Text = cellDisplay;
+            //this.CellFormula = t.Text;
+            //cellDisplay = Formula.solve(this).ToString();
+            //t.Text = cellDisplay;
         }
 
         void Cell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
