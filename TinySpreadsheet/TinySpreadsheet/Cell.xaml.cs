@@ -99,6 +99,8 @@ namespace TinySpreadsheet
                 HighlightCleanup();
 
             this.CellFormula = t.Text;
+            cellDisplay = Formula.solve(this).ToString();
+            t.Text = cellDisplay;
         }
 
         void Cell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
