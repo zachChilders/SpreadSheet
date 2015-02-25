@@ -22,7 +22,7 @@ namespace TinySpreadsheet.Dependencies
             ErrorCallback = errorCallback;
         }
 
-        public ~DependencyMap()
+        ~DependencyMap()
         {
             Unsubscribe();
         }

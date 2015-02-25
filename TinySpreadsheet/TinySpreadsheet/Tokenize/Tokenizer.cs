@@ -108,7 +108,7 @@ namespace TinySpreadsheet.Tokenize
         /// </summary>
         /// <param name="cellName">The name of the cell for identification.</param>
         /// <returns>The referenced cell.</returns>
-        private static Cell ExtractCell(String cellName)
+        public static Cell ExtractCell(String cellName)
         {
             StringBuilder column = new StringBuilder();
             StringBuilder row = new StringBuilder();
@@ -116,7 +116,7 @@ namespace TinySpreadsheet.Tokenize
             //Go through each character and append to the appropriate StringBuilder
             foreach (char c in cellName)
             {
-                if ((c >= 'A' && c <= 'Z') && (c >= 'a' && c <= 'z'))
+                if (Char.IsLetter(c))
                     column.Append(c);
                 else
                     row.Append(c);
@@ -127,7 +127,7 @@ namespace TinySpreadsheet.Tokenize
             if (!Int32.TryParse(row.ToString(), out index))
                 throw new Exception("Not a cell");
 
-            return MainWindow.Columns[column.ToString()].cells[index];
+            return MainWindow.Columns[column.ToString()][index];
         }
 
     }

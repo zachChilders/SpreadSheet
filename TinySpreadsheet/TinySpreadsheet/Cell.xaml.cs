@@ -139,7 +139,8 @@ namespace TinySpreadsheet
                 else
                 {
                     this.CellFormula = t.Text;
-                    t.Text = Formula.solve(this).ToString();
+                    cellDisplay = Formula.solve(this).ToString();
+                    t.Text = cellDisplay;
                 }
             }
 

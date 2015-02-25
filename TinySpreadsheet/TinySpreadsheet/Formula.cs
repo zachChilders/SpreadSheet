@@ -17,33 +17,32 @@ namespace TinySpreadsheet
         public static Double solve(Cell c)
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
-            //if (rgx.IsMatch(cellFormulaString))
-            //{
-                Queue<FormulaToken> cellFormula = Tokenizer.Tokenize(cellFormulaString);
+            if (rgx.IsMatch(cellFormulaString))
+            {
+                Queue<FormulaToken> cellFormula = ResolveDependencies(Tokenizer.Tokenize(cellFormulaString));
                 Queue<FormulaToken> pfix = postFix(cellFormula); //This should be tokenized somewhere.
                 return evaluate(pfix);
-            //}
-            //return Double.NaN;
+            }
+            return Double.NaN;
         }
 
-        public static String ResolveDependencies(Cell current)
+        public static Queue<FormulaToken> ResolveDependencies(Queue<FormulaToken> tokens)
         {
-            StringBuilder expandedFormula = new StringBuilder();
-            Queue<FormulaToken> tokens = Tokenizer.Tokenize(current.CellFormula);
-
-            foreach (FormulaToken token in tokens)
+            Queue<FormulaToken> outTokens = new Queue<FormulaToken>();
+            while(tokens.Count > 0)
             {
-                if (alphaNum.IsMatch(token.Token))
+                FormulaToken token = tokens.Dequeue();
+                if (alphaNum.IsMatch(token.Token)) //If it's a cell, replace with that cells formula
                 {
-                    expandedFormula.Append(GetCell(ResolveDependencies(token.Token))); //Go resolve this token first.
+                    outTokens.Enqueue(new FormulaToken(Tokenizer.ExtractCell(token.Token).cellDisplay, Tokenizer.TokenType.NUM));
                 }
                 else
                 {
-                    expandedFormula.Append(token.Token);
+                    outTokens.Enqueue(token);
                 }
             }
 
-            return expandedFormula.ToString();
+            return outTokens;
         }
 
         private static Double evaluate(Queue<FormulaToken> postFixed)

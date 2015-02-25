@@ -21,17 +21,6 @@ namespace TinySpreadsheet
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String,Column>();
 
-        public Cell GetCell(String coordinate)
-        {
-            StringBuilder alpha = new StringBuilder();
-            int alphaIndex = 0;
-            while (Char.IsLetter(coordinate[alphaIndex]))
-            {
-              alphaIndex++;
-            }
-            return Columns[coordinate.Slice(0,alphaIndex)][Int32.Parse(coordinate.Slice(alphaIndex, coordinate.Length))];
-        }
-
         public MainWindow()
         {
             InitializeComponent();
