@@ -85,7 +85,7 @@ namespace TinySpreadsheet.Tokenize
                 if (t.Type == TokenType.CELL)
                 {
                     //Find the cell reference from map of Columns with index
-                    dependencies.Add(new Dependency(ExtractCell(t.Token), true));
+                    dependencies.Add(new Dependency(ExtractCell(t.Token.Replace("-","")), true));
                 }
             }
 
