@@ -34,7 +34,16 @@ namespace TinySpreadsheet
                 FormulaToken token = tokens.Dequeue();
                 if (alphaNum.IsMatch(token.Token)) //If it's a cell, replace with that cells formula
                 {
-                    outTokens.Enqueue(new FormulaToken(Tokenizer.ExtractCell(token.Token).cellDisplay, Tokenizer.TokenType.NUM));
+                    if (token.Token[0] == '-')
+                    {
+                        Double cellContents = Double.Parse(Tokenizer.ExtractCell(token.Token).cellDisplay);
+                        cellContents *= -1;
+                        outTokens.Enqueue(new FormulaToken(cellContents.ToString(), Tokenizer.TokenType.NUM));
+                    }
+                    else
+                    {
+                        outTokens.Enqueue(new FormulaToken(Tokenizer.ExtractCell(token.Token).cellDisplay, Tokenizer.TokenType.NUM));
+                    }
                 }
                 else
                 {

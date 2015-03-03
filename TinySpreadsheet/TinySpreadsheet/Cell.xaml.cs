@@ -24,16 +24,17 @@ namespace TinySpreadsheet
 
         public DependencyMap Dependencies { get; private set; }
 
-        public String CellFormula{
-            get;
-            set;
-        }
-        public String cellDisplay
+        public String CellFormula
         {
             get;
             set;
         }
 
+        public String cellDisplay
+        {
+            get;
+            set;
+        }
 
         public Cell()
         {
@@ -71,12 +72,12 @@ namespace TinySpreadsheet
                 Changed(this);
         }
 
-
         //Event subscriptions
         void DependencyChanged(Cell sender)
         {
             throw new NotImplementedException("DependencyChanged not implemented.");
             IChanged();
+            
         }
 
         void CellText_GotFocus(object sender, RoutedEventArgs e)
@@ -98,6 +99,7 @@ namespace TinySpreadsheet
             if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                 HighlightCleanup();
 
+            ////Save cell state when we lose focuss
             //this.CellFormula = t.Text;
             //cellDisplay = Formula.solve(this).ToString();
             //t.Text = cellDisplay;
