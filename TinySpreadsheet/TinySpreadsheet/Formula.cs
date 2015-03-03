@@ -36,7 +36,7 @@ namespace TinySpreadsheet
                 {
                     if (token.Token[0] == '-')
                     {
-                        Double cellContents = Double.Parse(Tokenizer.ExtractCell(token.Token).cellDisplay);
+                        Double cellContents = Double.Parse(Tokenizer.ExtractCell(token.Token.Substring(1)).cellDisplay);
                         cellContents *= -1;
                         outTokens.Enqueue(new FormulaToken(cellContents.ToString(), Tokenizer.TokenType.NUM));
                     }
