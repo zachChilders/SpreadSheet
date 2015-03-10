@@ -8,7 +8,7 @@ namespace TinySpreadsheet.Tokenize
 {
     public static class Tokenizer
     {
-        public enum TokenType { CELL, OP, NUM, BANANA };
+        public enum TokenType { CELL, OP, NUM, LBANANA, RBANANA };
         private static FormulaToken getOP(char c)
         {
             switch (c)
@@ -19,8 +19,9 @@ namespace TinySpreadsheet.Tokenize
                 case '/':
                     return new FormulaToken(c.ToString(), TokenType.OP);
                 case '(':
+                    return new FormulaToken(c.ToString(), TokenType.LBANANA);
                 case ')':
-                    return new FormulaToken(c.ToString(), TokenType.BANANA);
+                    return new FormulaToken(c.ToString(), TokenType.RBANANA);
                 default:
                     return null;
             }
@@ -40,19 +41,48 @@ namespace TinySpreadsheet.Tokenize
             }
 
         }
+        public static bool isminus(FormulaToken token)
+        {
+            if (token.Token == "-")
+                return true;
+            else return false;
+        }
+        public static Queue<FormulaToken> DistributeNeg(String inBanana)
+        {
+            FormulaToken thistoken;
+            // check for leading negative
+            for ( int i = 0; i < inBanana.Length; i++)
+            {
+                char c = inBanana[i];
+                char prevchar = inBanana[i];
+                if (isminus(getOP(c)) )  // && is num or cell
+                    //make negative
+                
+            }
+            // check for negative after operator
+            // check left banana
+                //
+                //distribute negative within banana
 
+                return s;
+        }
         public static Queue<FormulaToken> Tokenize(String formula)
         {
             Queue<FormulaToken> TokenQueue = new Queue<FormulaToken>();
             StringBuilder num = new StringBuilder();
-            foreach (char c in formula)
+            bool lastOP = false;
+            bool isNegative = false;
+            for (int i = 0; i < formula.Length; i++ )
             {
+                char c = formula[i];
+
                 FormulaToken thisop;
 
                 if ((thisop = getOP(c)) != null)
                 {
-                    if (num != null)
+                    if (num.Length > 0)
                     {
+                        num.Insert(0, (isNegative ? "-" : ""));
                         TokenQueue.Enqueue(getNotOP(num.ToString()));
                         num.Clear();
                     }
