@@ -9,6 +9,12 @@ namespace TinySpreadsheet.Tokenize
     public static class Tokenizer
     {
         public enum TokenType { CELL, OP, NUM, LBANANA, RBANANA };
+
+        /// <summary>
+        /// Determines if the given character is an operator.
+        /// </summary>
+        /// <param name="c">The character to be evaluated.</param>
+        /// <returns>A FormulaToken of the given character. If c is not an operator, null is returned.</returns>
         private static FormulaToken getOP(char c)
         {
             switch (c)
@@ -28,6 +34,11 @@ namespace TinySpreadsheet.Tokenize
 
         }
 
+        /// <summary>
+        /// Creates a FormulaToken from a given string.
+        /// </summary>
+        /// <param name="s">String containing non-operators.</param>
+        /// <returns>A FormulaToken of type NUM if s is a number, or type CELL if not a number.</returns>
         public static FormulaToken getNotOP(String s)
         {
             double d;
@@ -41,12 +52,16 @@ namespace TinySpreadsheet.Tokenize
             }
 
         }
+
+        //Incomplete
         public static bool isminus(FormulaToken token)
         {
             if (token.Token == "-")
                 return true;
             else return false;
         }
+
+        //Incomplete
         public static Queue<FormulaToken> DistributeNeg(String inBanana)
         {
             FormulaToken thistoken;
@@ -66,6 +81,12 @@ namespace TinySpreadsheet.Tokenize
 
                 return s;
         }
+
+        /// <summary>
+        /// Creates a Queue of FormulaTokens from a given formula string.
+        /// </summary>
+        /// <param name="formula">A string with a valid basic mathematical formula.</param>
+        /// <returns>A Queue of FormulaTokens in the order they appear in the given formula string.</returns>
         public static Queue<FormulaToken> Tokenize(String formula)
         {
             Queue<FormulaToken> TokenQueue = new Queue<FormulaToken>();

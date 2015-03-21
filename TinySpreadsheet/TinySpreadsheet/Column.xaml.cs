@@ -15,12 +15,15 @@ using System.Windows.Shapes;
 namespace TinySpreadsheet
 {
     /// <summary>
-    /// Interaction logic for Column.xaml
+    /// A simple UI class that holds a list of Cells.
     /// </summary>
     public partial class Column : UserControl
     {
         public List<Cell> cells = new List<Cell>();
 
+        /// <summary>
+        /// A simple constructor initializing 30 cells. Temporary.
+        /// </summary>
         public Column()
         {
             InitializeComponent();

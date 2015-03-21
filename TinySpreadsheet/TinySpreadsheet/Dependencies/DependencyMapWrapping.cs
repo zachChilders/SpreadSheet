@@ -5,6 +5,9 @@ using System.Text;
 
 namespace TinySpreadsheet.Dependencies
 {
+    /// <summary>
+    /// The portion of DependencyMap wrapped around OrderedDictionary functionality.
+    /// </summary>
     partial class DependencyMap : IEnumerable<Dependency>
     {
         public int Count
@@ -16,6 +19,11 @@ namespace TinySpreadsheet.Dependencies
         }
 
         //Allows us to easily use the class with square brackets
+        /// <summary>
+        /// Returns the cell with the given Cell name.
+        /// </summary>
+        /// <param name="cellName">The column-row name of the Cell in the desired Dependency.</param>
+        /// <returns>A Dependency that contains a reference to the desired Cell.</returns>
         public Dependency this[String cellName]
         {
             get
@@ -29,6 +37,11 @@ namespace TinySpreadsheet.Dependencies
             }
         }
 
+        /// <summary>
+        /// Gets the Dependency at the given index.
+        /// </summary>
+        /// <param name="index">The index of the Dependency.</param>
+        /// <returns>The Dependency at the given index.</returns>
         public Dependency this[int index]
         {
             get

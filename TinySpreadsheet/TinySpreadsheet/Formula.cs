@@ -9,11 +9,20 @@ using TinySpreadsheet.Tokenize;
 
 namespace TinySpreadsheet
 {
+    /// <summary>
+    /// A static class for validating and evaluating cell inputs.
+    /// </summary>
     static class Formula
     {
         private static Regex rgx = new Regex(@"^((-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
         private static Regex alphaNum = new Regex(@"^[A-Za-z]+[0-9]+$");
 
+        /// <summary>
+        /// Attempts to evaluate a cell using its current input. 
+        /// </summary>
+        /// <param name="c">The Cell to be evaluated.</param>
+        /// <returns>A Double representing the solved value.</returns>
+        /// <remarks>A Double is returned as a value representation of the input. If the input cannot be recognized as something that can be evaluated to a number, Double.NaN is returned.</remarks>
         public static Double solve(Cell c)
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
@@ -26,6 +35,11 @@ namespace TinySpreadsheet
             return Double.NaN;
         }
 
+        /// <summary>
+        /// Converts any cell references inside a given FormulaToken queue to their respective numerical values.
+        /// </summary>
+        /// <param name="tokens">A queue of FormulaTokens.</param>
+        /// <returns>A new queue of FormulaTokens with Cells substituted with their values.</returns>
         public static Queue<FormulaToken> ResolveDependencies(Queue<FormulaToken> tokens)
         {
             Queue<FormulaToken> outTokens = new Queue<FormulaToken>();
@@ -54,6 +68,11 @@ namespace TinySpreadsheet
             return outTokens;
         }
 
+        /// <summary>
+        /// Attempts to evaluate a postfixed queue of FormulaTokens. It's expected that Formula.postFix() was used.
+        /// </summary>
+        /// <param name="postFixed">Postfixed queue of FormulaToken.</param>
+        /// <returns>A Double representing the solved value of the given formula.</returns>
         private static Double evaluate(Queue<FormulaToken> postFixed)
         {
             Stack<String> eval = new Stack<String>();
@@ -105,6 +124,11 @@ namespace TinySpreadsheet
             return Double.Parse(eval.Pop());
         }
 
+        /// <summary>
+        /// Rearranges a given queue of FormulaTokens to be in the postfix format.
+        /// </summary>
+        /// <param name="infix">A queue of infixed FormulaTokens.</param>
+        /// <returns>A postfixed version of the input.</returns>
         private static Queue<FormulaToken> postFix(Queue<FormulaToken> infix)
         {
             Queue<FormulaToken> output = new Queue<FormulaToken>();
@@ -164,6 +188,11 @@ namespace TinySpreadsheet
             return output;
         }
 
+        /// <summary>
+        /// Determines the priority of a given FormulaToken for postfixing purposes.
+        /// </summary>
+        /// <param name="op">The FormulaToken to be prioritized.</param>
+        /// <returns>An integer representation of priority for the given token.</returns>
         private static int priority(FormulaToken op)
         {
             switch (op.Token)

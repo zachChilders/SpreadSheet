@@ -25,6 +25,7 @@ namespace TinySpreadsheet
         {
             InitializeComponent();
             
+            //Temporary creation of columns
             for(int j = 0; j < 26; j++)
             {
                 String name = ((char)('A' + j)).ToString();

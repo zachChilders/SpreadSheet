@@ -14,6 +14,12 @@ namespace TinySpreadsheet.Dependencies
     {
         private Action<Cell> subscribeCallback;
 
+        /// <summary>
+        /// Creates a new DependencyMap with a given Cell owner.
+        /// </summary>
+        /// <param name="owner">A Cell to be seen as the owner of this map.</param>
+        /// <param name="subscribe">Optional. The method used to subscribe to dependencies when they change in value.</param>
+        /// <param name="errorCallback">Optional. The method called if an error occurs when resolving dependency subscription.</param>
         public DependencyMap(Cell owner, Action<Cell> subscribe = null, Action<Cell> errorCallback = null)
         {
             Dependencies = new OrderedDictionary();

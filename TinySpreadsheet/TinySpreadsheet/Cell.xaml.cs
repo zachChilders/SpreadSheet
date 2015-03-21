@@ -16,25 +16,27 @@ using TinySpreadsheet.Dependencies;
 namespace TinySpreadsheet
 {
     /// <summary>
-    /// Interaction logic for Cell.xaml
+    /// A cell setup for UI with Spreadsheet interaction logic built in.
     /// </summary>
     public partial class Cell : UserControl
     {
+        //
         ListBox listParent;
 
+        /// <summary>
+        /// Gets the DependencyMap held by this Cell.
+        /// </summary>
         public DependencyMap Dependencies { get; private set; }
 
-        public String CellFormula
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// Gets or sets this Cell's formula used for evaluation. Setting triggers a Changed event.
+        /// </summary>
+        public String CellFormula { get; set; }
 
-        public String cellDisplay
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// Gets or sets the display text for this Cell. This is typically the evaluated CellFormula.
+        /// </summary>
+        public String cellDisplay { get; set; }
 
         public Cell()
         {
@@ -52,6 +54,11 @@ namespace TinySpreadsheet
 
         }
 
+        /// <summary>
+        /// Attempts to get the most immediate parent of this Cell of a given type.
+        /// </summary>
+        /// <param name="t">The type of the parent being searched for.</param>
+        /// <returns>The parent with the given type. If no parent of the given type exists, null is returned.</returns>
         FrameworkElement GetParent(Type t)
         {
             FrameworkElement parent = this;
@@ -77,7 +84,7 @@ namespace TinySpreadsheet
         {
             throw new NotImplementedException("DependencyChanged not implemented.");
             IChanged();
-            
+
         }
 
         void CellText_GotFocus(object sender, RoutedEventArgs e)
@@ -116,6 +123,9 @@ namespace TinySpreadsheet
             HighlightCleanup();
         }
 
+        /// <summary>
+        /// Clears all highlighted cells except for any that are focused.
+        /// </summary>
         void HighlightCleanup()
         {
             List<Cell> cells = new List<Cell>();
