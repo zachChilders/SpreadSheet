@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Add method" Url="html/dbf8eae6-1cb1-57d6-90b9-f221157c0de2.htm" />
+  <HelpKINode Title="alphaNum field" Url="html/8c6d6748-0ce6-8621-fe78-a7ab8f8e4b87.htm" />
+  <HelpKINode Title="App class">
+    <HelpKINode Title="App Class" Url="html/edd0f19b-b3e7-60a1-835b-f780583110d6.htm" />
+    <HelpKINode Title="about App class" Url="html/edd0f19b-b3e7-60a1-835b-f780583110d6.htm" />
+    <HelpKINode Title="constructor" Url="html/3adba9fb-34ab-0ce3-d48d-90ac572d3c37.htm" />
+    <HelpKINode Title="methods" Url="html/d728628c-2bb1-f929-5cfc-60376ec2c226.htm" />
+  </HelpKINode>
+  <HelpKINode Title="App.App constructor" Url="html/3adba9fb-34ab-0ce3-d48d-90ac572d3c37.htm" />
+  <HelpKINode Title="App.InitializeComponent method" Url="html/eabf206a-d5e3-6090-7798-ecbfaacff34f.htm" />
+  <HelpKINode Title="App.Main method" Url="html/bf0e28b2-4959-f23f-0307-654c9877d553.htm" />
+  <HelpKINode Title="Append method" Url="html/cb9ace91-fbcc-e1ca-03b9-90e4455649cd.htm" />
+  <HelpKINode Title="Cell class">
+    <HelpKINode Title="Cell Class" Url="html/78a5dad1-503c-8c2f-36e1-42cbf521c756.htm" />
+    <HelpKINode Title="about Cell class" Url="html/78a5dad1-503c-8c2f-36e1-42cbf521c756.htm" />
+    <HelpKINode Title="constructor" Url="html/4e72e91f-30c6-b2a0-f69c-e71f740695db.htm" />
+    <HelpKINode Title="events" Url="html/a4469199-ad79-3126-22ea-0db2768013e6.htm" />
+    <HelpKINode Title="fields" Url="html/77cb2fb4-19b2-35e6-55b9-26b1d8948a4e.htm" />
+    <HelpKINode Title="methods" Url="html/61299f7d-317f-ed1d-3c5f-d667efccee7e.htm" />
+    <HelpKINode Title="properties" Url="html/a3c4b046-28df-be67-b1ea-7dc8966a440e.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CELL enumeration member" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="Cell property" Url="html/9fa57422-5dc8-f594-44a9-ab754911fe29.htm" />
+  <HelpKINode Title="Cell.Cell constructor" Url="html/4e72e91f-30c6-b2a0-f69c-e71f740695db.htm" />
+  <HelpKINode Title="Cell.cellDisplay property" Url="html/5283a879-a943-9489-ba24-1d1cffaec1a1.htm" />
+  <HelpKINode Title="Cell.CellFormula property" Url="html/702c0d9a-ff6b-894e-c6ca-e244b0c15651.htm" />
+  <HelpKINode Title="Cell.CellText field" Url="html/8dd05f1c-e1e9-4ccc-66d9-56554c4f0755.htm" />
+  <HelpKINode Title="Cell.CellText_GotFocus method" Url="html/b203e296-254d-961b-60fc-bff07d0418b7.htm" />
+  <HelpKINode Title="Cell.CellText_KeyDown method" Url="html/efb6ed1e-2b50-d516-18aa-5769283249a4.htm" />
+  <HelpKINode Title="Cell.CellText_LostFocus method" Url="html/ea47b93d-9d66-fbc4-e9a7-c44d3f5a5ce6.htm" />
+  <HelpKINode Title="Cell.Cell_MouseDoubleClick method" Url="html/ba94fa66-188e-fe53-c6af-68c488c55727.htm" />
+  <HelpKINode Title="Cell.Changed event" Url="html/890036e4-b137-9376-ebd7-f06473d1f830.htm" />
+  <HelpKINode Title="Cell.Changed field" Url="html/b01440b2-a653-c31e-307c-4edc867f9fcf.htm" />
+  <HelpKINode Title="Cell.Dependencies property" Url="html/89a807c4-b864-4752-d8f0-4ed5864da8f8.htm" />
+  <HelpKINode Title="Cell.DependencyChanged method" Url="html/dbcedad6-862a-dad8-1343-ac4005c5e815.htm" />
+  <HelpKINode Title="Cell.GetParent method" Url="html/38880d1b-7d6d-31d6-d1a7-3c33e5e78678.htm" />
+  <HelpKINode Title="Cell.HighlightCleanup method" Url="html/3159272f-cd94-0523-1284-3eb03aa05d9c.htm" />
+  <HelpKINode Title="Cell.IChanged method" Url="html/8d5ce9aa-2331-d017-79b1-9b8cfee74070.htm" />
+  <HelpKINode Title="Cell.InitializeComponent method" Url="html/419cf647-7c20-0f10-27ef-e27f00a121af.htm" />
+  <HelpKINode Title="Cell.listParent field" Url="html/04648ab2-961d-86c1-305c-a18d49ab1774.htm" />
+  <HelpKINode Title="Cell._contentLoaded field" Url="html/72e0865e-2e9b-97d3-0c1c-cc08f464d02d.htm" />
+  <HelpKINode Title="CellColumn field" Url="html/a070495c-092f-76f3-81e8-e66035a06011.htm" />
+  <HelpKINode Title="cellDisplay property" Url="html/5283a879-a943-9489-ba24-1d1cffaec1a1.htm" />
+  <HelpKINode Title="CellFormula property" Url="html/702c0d9a-ff6b-894e-c6ca-e244b0c15651.htm" />
+  <HelpKINode Title="cells field" Url="html/21f581c1-9d73-8a72-24a9-cb1dcc08c32c.htm" />
+  <HelpKINode Title="CellText field" Url="html/8dd05f1c-e1e9-4ccc-66d9-56554c4f0755.htm" />
+  <HelpKINode Title="CellText_GotFocus method" Url="html/b203e296-254d-961b-60fc-bff07d0418b7.htm" />
+  <HelpKINode Title="CellText_KeyDown method" Url="html/efb6ed1e-2b50-d516-18aa-5769283249a4.htm" />
+  <HelpKINode Title="CellText_LostFocus method" Url="html/ea47b93d-9d66-fbc4-e9a7-c44d3f5a5ce6.htm" />
+  <HelpKINode Title="Cell_MouseDoubleClick method" Url="html/ba94fa66-188e-fe53-c6af-68c488c55727.htm" />
+  <HelpKINode Title="Changed event" Url="html/890036e4-b137-9376-ebd7-f06473d1f830.htm" />
+  <HelpKINode Title="Changed field" Url="html/b01440b2-a653-c31e-307c-4edc867f9fcf.htm" />
+  <HelpKINode Title="Clear method" Url="html/d34297d8-0977-a49e-376e-2224a985e876.htm" />
+  <HelpKINode Title="Column class">
+    <HelpKINode Title="Column Class" Url="html/ae282d03-1d37-609c-0735-4e9055e5e123.htm" />
+    <HelpKINode Title="about Column class" Url="html/ae282d03-1d37-609c-0735-4e9055e5e123.htm" />
+    <HelpKINode Title="constructor" Url="html/96e87207-8b69-c81c-53f8-bf3aa6892c22.htm" />
+    <HelpKINode Title="fields" Url="html/70113436-357c-f2ef-7ee8-34aac2c902cd.htm" />
+    <HelpKINode Title="methods" Url="html/32a560f3-8903-f645-cea3-42bb406367f8.htm" />
+    <HelpKINode Title="properties" Url="html/74176fc7-8ae8-39a4-f8cc-0c79f1d69b0f.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Column.CellColumn field" Url="html/a070495c-092f-76f3-81e8-e66035a06011.htm" />
+  <HelpKINode Title="Column.cells field" Url="html/21f581c1-9d73-8a72-24a9-cb1dcc08c32c.htm" />
+  <HelpKINode Title="Column.Column constructor" Url="html/96e87207-8b69-c81c-53f8-bf3aa6892c22.htm" />
+  <HelpKINode Title="Column.InitializeComponent method" Url="html/3ba35ee6-a71c-b429-d881-8660d1aab4d5.htm" />
+  <HelpKINode Title="Column.Item property" Url="html/3293d6d9-a90e-db0f-5e08-16e2dac4a503.htm" />
+  <HelpKINode Title="Column._contentLoaded field" Url="html/898ca678-e83e-251d-cdef-41676131e4e5.htm" />
+  <HelpKINode Title="Columns field" Url="html/2d9e7298-3123-f722-bf39-d6e952f6c859.htm" />
+  <HelpKINode Title="Count property" Url="html/c2c51f88-f550-146b-041f-1b9ce0c352b0.htm" />
+  <HelpKINode Title="Dependencies property">
+    <HelpKINode Title="Cell.Dependencies Property " Url="html/89a807c4-b864-4752-d8f0-4ed5864da8f8.htm" />
+    <HelpKINode Title="DependencyMap.Dependencies Property " Url="html/17ac134f-45e3-8390-e620-9a45f2beae72.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dependency class">
+    <HelpKINode Title="Dependency Class" Url="html/26162b15-c433-9ae7-03b6-4c1c5fdc793f.htm" />
+    <HelpKINode Title="about Dependency class" Url="html/26162b15-c433-9ae7-03b6-4c1c5fdc793f.htm" />
+    <HelpKINode Title="constructor" Url="html/8e771057-022f-1cc4-7af9-f01a8d492750.htm" />
+    <HelpKINode Title="properties" Url="html/12124943-d868-8c29-63d4-1e45b310fd53.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dependency.Cell property" Url="html/9fa57422-5dc8-f594-44a9-ab754911fe29.htm" />
+  <HelpKINode Title="Dependency.Dependency constructor" Url="html/8e771057-022f-1cc4-7af9-f01a8d492750.htm" />
+  <HelpKINode Title="Dependency.IsDirect property" Url="html/146681d4-28fe-9732-9990-b3f246a82db4.htm" />
+  <HelpKINode Title="DependencyChanged method" Url="html/dbcedad6-862a-dad8-1343-ac4005c5e815.htm" />
+  <HelpKINode Title="DependencyMap class">
+    <HelpKINode Title="DependencyMap Class" Url="html/a4915e1d-d670-35cd-50a4-b5f8f08217c6.htm" />
+    <HelpKINode Title="about DependencyMap class" Url="html/a4915e1d-d670-35cd-50a4-b5f8f08217c6.htm" />
+    <HelpKINode Title="constructor" Url="html/4601dc91-7019-ed76-5c1f-7630ed7f9102.htm" />
+    <HelpKINode Title="fields" Url="html/e686b1c2-aa4c-a0e2-d7dc-055d355be603.htm" />
+    <HelpKINode Title="methods" Url="html/ac3076e6-ed88-0d17-abba-f2200bee8271.htm" />
+    <HelpKINode Title="properties" Url="html/2622644e-8c14-6255-fe37-f89ad8d55cdf.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DependencyMap.Add method" Url="html/dbf8eae6-1cb1-57d6-90b9-f221157c0de2.htm" />
+  <HelpKINode Title="DependencyMap.Count property" Url="html/c2c51f88-f550-146b-041f-1b9ce0c352b0.htm" />
+  <HelpKINode Title="DependencyMap.Dependencies property" Url="html/17ac134f-45e3-8390-e620-9a45f2beae72.htm" />
+  <HelpKINode Title="DependencyMap.DependencyMap constructor" Url="html/4601dc91-7019-ed76-5c1f-7630ed7f9102.htm" />
+  <HelpKINode Title="DependencyMap.ErrorCallback property" Url="html/68d54552-9e54-f111-be1c-6c0740ec2151.htm" />
+  <HelpKINode Title="DependencyMap.Finalize method" Url="html/a7beb6fa-725c-f26e-b66a-0d4fe0e0fccb.htm" />
+  <HelpKINode Title="DependencyMap.Insert method" Url="html/95238be5-9ea5-ed83-5cce-f17fd8fbcb93.htm" />
+  <HelpKINode Title="DependencyMap.Item property" Url="html/80312a0c-31c6-4a3b-1b52-9e73eaa762c9.htm" />
+  <HelpKINode Title="DependencyMap.Owner property" Url="html/9c98d7fd-eed8-df42-9982-c232fcf0baaa.htm" />
+  <HelpKINode Title="DependencyMap.Remove method" Url="html/616ad57f-a7eb-8491-d6da-32bb2effee51.htm" />
+  <HelpKINode Title="DependencyMap.RemoveAt method" Url="html/76ae9712-24bf-2d36-665a-78d88569289b.htm" />
+  <HelpKINode Title="DependencyMap.Subscribe method" Url="html/2dd05b76-b7a2-ad31-d4fe-c7feaa73b6bd.htm" />
+  <HelpKINode Title="DependencyMap.subscribeCallback field" Url="html/fba2a5a7-adc1-61ca-4e04-a4e899a3de91.htm" />
+  <HelpKINode Title="DependencyMap.SubscribeCallback property" Url="html/00401564-5c90-e160-0670-383948c07bec.htm" />
+  <HelpKINode Title="DependencyMap.Unsubscribe method" Url="html/c5be182d-c386-a17a-4207-6de4f7c9244b.htm" />
+  <HelpKINode Title="ErrorCallback property" Url="html/68d54552-9e54-f111-be1c-6c0740ec2151.htm" />
+  <HelpKINode Title="evaluate method" Url="html/357f19db-c1e5-a8d3-201b-a22e343d6cbd.htm" />
+  <HelpKINode Title="Extensions class">
+    <HelpKINode Title="Extensions Class" Url="html/d2e1def6-8e09-ac63-cbb3-2720a8dd2281.htm" />
+    <HelpKINode Title="about Extensions class" Url="html/d2e1def6-8e09-ac63-cbb3-2720a8dd2281.htm" />
+    <HelpKINode Title="methods" Url="html/b1176e2f-edb4-391d-8782-4298f50d0821.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Extensions.Append method" Url="html/cb9ace91-fbcc-e1ca-03b9-90e4455649cd.htm" />
+  <HelpKINode Title="Extensions.Clear method" Url="html/d34297d8-0977-a49e-376e-2224a985e876.htm" />
+  <HelpKINode Title="Extensions.isEmpty method" Url="html/57cb961e-7f4e-a9ae-0ab0-9f37c48a624c.htm" />
+  <HelpKINode Title="Extensions.Slice method" Url="html/74bfd711-1ce2-ee28-0775-f176684a02f3.htm" />
+  <HelpKINode Title="ExtractCell method" Url="html/0ad62037-f494-6aeb-4707-cd32994b95ad.htm" />
+  <HelpKINode Title="Finalize method" Url="html/a7beb6fa-725c-f26e-b66a-0d4fe0e0fccb.htm" />
+  <HelpKINode Title="Formula class">
+    <HelpKINode Title="Formula Class" Url="html/8abb95fe-1d85-9b38-c9fc-f635d2f4b192.htm" />
+    <HelpKINode Title="about Formula class" Url="html/8abb95fe-1d85-9b38-c9fc-f635d2f4b192.htm" />
+    <HelpKINode Title="constructor" Url="html/4aa3934d-b044-af23-648f-7f7eac826e94.htm" />
+    <HelpKINode Title="fields" Url="html/feeb0b96-47ff-5b84-a507-b2e0860e41f4.htm" />
+    <HelpKINode Title="methods" Url="html/a4642707-d56e-3a3e-3906-969b6b2bd8dc.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Formula.alphaNum field" Url="html/8c6d6748-0ce6-8621-fe78-a7ab8f8e4b87.htm" />
+  <HelpKINode Title="Formula.evaluate method" Url="html/357f19db-c1e5-a8d3-201b-a22e343d6cbd.htm" />
+  <HelpKINode Title="Formula.Formula constructor" Url="html/4aa3934d-b044-af23-648f-7f7eac826e94.htm" />
+  <HelpKINode Title="Formula.postFix method" Url="html/32f98a9e-a4c8-7ec7-4843-bdd68bcb2761.htm" />
+  <HelpKINode Title="Formula.priority method" Url="html/50034f16-d8e9-22de-be97-fe50aa390e4a.htm" />
+  <HelpKINode Title="Formula.ResolveDependencies method" Url="html/47266826-a3bd-bded-634f-776d82a7636c.htm" />
+  <HelpKINode Title="Formula.rgx field" Url="html/28270240-3733-0bf5-a224-74efcbab8b8a.htm" />
+  <HelpKINode Title="Formula.solve method" Url="html/71dd274a-9a60-2252-fc5e-0c1a9e380596.htm" />
+  <HelpKINode Title="FormulaToken class">
+    <HelpKINode Title="FormulaToken Class" Url="html/2fca9bd7-9880-2019-2eda-dcd57ebc8fce.htm" />
+    <HelpKINode Title="about FormulaToken class" Url="html/2fca9bd7-9880-2019-2eda-dcd57ebc8fce.htm" />
+    <HelpKINode Title="constructor" Url="html/b2de41a0-5c8a-a22e-faf3-d7f9447863f8.htm" />
+    <HelpKINode Title="properties" Url="html/76f900f6-4f2f-e0d5-dbc7-cbf9a91ba5e9.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FormulaToken.FormulaToken constructor" Url="html/b2de41a0-5c8a-a22e-faf3-d7f9447863f8.htm" />
+  <HelpKINode Title="FormulaToken.Token property" Url="html/f79db247-0b41-173b-0f28-b2edade16d6b.htm" />
+  <HelpKINode Title="FormulaToken.Type property" Url="html/4c2f3b60-8ea9-70a0-1708-c2d129af7f87.htm" />
+  <HelpKINode Title="GetDependencies method" Url="html/2a299977-11b0-172e-c43f-77c62d08525d.htm" />
+  <HelpKINode Title="getNotOP method" Url="html/dc6a8fae-2bf7-787d-aa48-c1c90371d548.htm" />
+  <HelpKINode Title="getOP method" Url="html/025c88f5-af5c-0b4e-2988-c1b0038767c4.htm" />
+  <HelpKINode Title="GetParent method" Url="html/38880d1b-7d6d-31d6-d1a7-3c33e5e78678.htm" />
+  <HelpKINode Title="HighlightCleanup method" Url="html/3159272f-cd94-0523-1284-3eb03aa05d9c.htm" />
+  <HelpKINode Title="IChanged method" Url="html/8d5ce9aa-2331-d017-79b1-9b8cfee74070.htm" />
+  <HelpKINode Title="InitializeComponent method">
+    <HelpKINode Title="App.InitializeComponent Method " Url="html/eabf206a-d5e3-6090-7798-ecbfaacff34f.htm" />
+    <HelpKINode Title="Cell.InitializeComponent Method " Url="html/419cf647-7c20-0f10-27ef-e27f00a121af.htm" />
+    <HelpKINode Title="Column.InitializeComponent Method " Url="html/3ba35ee6-a71c-b429-d881-8660d1aab4d5.htm" />
+    <HelpKINode Title="MainWindow.InitializeComponent Method " Url="html/ecda336f-64f9-65af-e135-63ebf92dc258.htm" />
+    <HelpKINode Title="styles.InitializeComponent Method " Url="html/7f48497e-831d-5438-6a20-83403a845e2e.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Insert method" Url="html/95238be5-9ea5-ed83-5cce-f17fd8fbcb93.htm" />
+  <HelpKINode Title="IsDirect property" Url="html/146681d4-28fe-9732-9990-b3f246a82db4.htm" />
+  <HelpKINode Title="isEmpty method" Url="html/57cb961e-7f4e-a9ae-0ab0-9f37c48a624c.htm" />
+  <HelpKINode Title="isminus method" Url="html/9bf233f1-f5b8-c2a5-2256-bfdc7d15c570.htm" />
+  <HelpKINode Title="Item property">
+    <HelpKINode Title="Column.Item Property " Url="html/3293d6d9-a90e-db0f-5e08-16e2dac4a503.htm" />
+    <HelpKINode Title="DependencyMap.Item Property " Url="html/80312a0c-31c6-4a3b-1b52-9e73eaa762c9.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LBANANA enumeration member" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="listParent field" Url="html/04648ab2-961d-86c1-305c-a18d49ab1774.htm" />
+  <HelpKINode Title="Main method" Url="html/bf0e28b2-4959-f23f-0307-654c9877d553.htm" />
+  <HelpKINode Title="MainWindow class">
+    <HelpKINode Title="MainWindow Class" Url="html/db2bafe0-5de2-763c-8ce2-f7c8da1b0b50.htm" />
+    <HelpKINode Title="about MainWindow class" Url="html/db2bafe0-5de2-763c-8ce2-f7c8da1b0b50.htm" />
+    <HelpKINode Title="constructor" Url="html/ecb815fc-4251-6cd5-2130-a041aed4e34d.htm" />
+    <HelpKINode Title="constructor" Url="html/bfcfd152-4673-30c8-d5b9-9c833bf2cafa.htm" />
+    <HelpKINode Title="fields" Url="html/09043f2b-6628-eb54-71d4-814e618a6308.htm" />
+    <HelpKINode Title="methods" Url="html/44c0c8e5-d0ea-41c2-05ac-a2f27c848247.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MainWindow.Columns field" Url="html/2d9e7298-3123-f722-bf39-d6e952f6c859.htm" />
+  <HelpKINode Title="MainWindow.InitializeComponent method" Url="html/ecda336f-64f9-65af-e135-63ebf92dc258.htm" />
+  <HelpKINode Title="MainWindow.MainWindow constructor">
+    <HelpKINode Title="MainWindow Constructor " Url="html/ecb815fc-4251-6cd5-2130-a041aed4e34d.htm" />
+    <HelpKINode Title="MainWindow Constructor " Url="html/bfcfd152-4673-30c8-d5b9-9c833bf2cafa.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MainWindow.RowStack field" Url="html/40188f3a-1459-a74e-900c-30ba0757e16f.htm" />
+  <HelpKINode Title="MainWindow._contentLoaded field" Url="html/9eb7619e-7693-59de-ee1f-dcf5cc159232.htm" />
+  <HelpKINode Title="NUM enumeration member" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="OP enumeration member" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="Owner property" Url="html/9c98d7fd-eed8-df42-9982-c232fcf0baaa.htm" />
+  <HelpKINode Title="postFix method" Url="html/32f98a9e-a4c8-7ec7-4843-bdd68bcb2761.htm" />
+  <HelpKINode Title="priority method" Url="html/50034f16-d8e9-22de-be97-fe50aa390e4a.htm" />
+  <HelpKINode Title="RBANANA enumeration member" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="Remove method" Url="html/616ad57f-a7eb-8491-d6da-32bb2effee51.htm" />
+  <HelpKINode Title="RemoveAt method" Url="html/76ae9712-24bf-2d36-665a-78d88569289b.htm" />
+  <HelpKINode Title="ResolveDependencies method" Url="html/47266826-a3bd-bded-634f-776d82a7636c.htm" />
+  <HelpKINode Title="rgx field" Url="html/28270240-3733-0bf5-a224-74efcbab8b8a.htm" />
+  <HelpKINode Title="RowStack field" Url="html/40188f3a-1459-a74e-900c-30ba0757e16f.htm" />
+  <HelpKINode Title="Slice method" Url="html/74bfd711-1ce2-ee28-0775-f176684a02f3.htm" />
+  <HelpKINode Title="solve method" Url="html/71dd274a-9a60-2252-fc5e-0c1a9e380596.htm" />
+  <HelpKINode Title="styles class">
+    <HelpKINode Title="styles Class" Url="html/fb07979d-6036-f5bf-a27f-f047333bb3be.htm" />
+    <HelpKINode Title="about styles class" Url="html/fb07979d-6036-f5bf-a27f-f047333bb3be.htm" />
+    <HelpKINode Title="constructor" Url="html/6a540e1f-0a5e-e581-a0b7-751d9595dafd.htm" />
+    <HelpKINode Title="fields" Url="html/bbb1e90f-403a-b916-53e8-de985f222b68.htm" />
+    <HelpKINode Title="methods" Url="html/d3d9fc9b-073a-99aa-f295-d6c567841243.htm" />
+  </HelpKINode>
+  <HelpKINode Title="styles.InitializeComponent method" Url="html/7f48497e-831d-5438-6a20-83403a845e2e.htm" />
+  <HelpKINode Title="styles.styles constructor" Url="html/6a540e1f-0a5e-e581-a0b7-751d9595dafd.htm" />
+  <HelpKINode Title="styles._contentLoaded field" Url="html/0c8c4b3a-76a6-5655-9ae8-305bdf4c9723.htm" />
+  <HelpKINode Title="Subscribe method" Url="html/2dd05b76-b7a2-ad31-d4fe-c7feaa73b6bd.htm" />
+  <HelpKINode Title="subscribeCallback field" Url="html/fba2a5a7-adc1-61ca-4e04-a4e899a3de91.htm" />
+  <HelpKINode Title="SubscribeCallback property" Url="html/00401564-5c90-e160-0670-383948c07bec.htm" />
+  <HelpKINode Title="TinySpreadsheet namespace" Url="html/2984d30d-133f-7bf0-15e2-571db5a17afb.htm" />
+  <HelpKINode Title="TinySpreadsheet.App class" Url="html/edd0f19b-b3e7-60a1-835b-f780583110d6.htm" />
+  <HelpKINode Title="TinySpreadsheet.Cell class" Url="html/78a5dad1-503c-8c2f-36e1-42cbf521c756.htm" />
+  <HelpKINode Title="TinySpreadsheet.Column class" Url="html/ae282d03-1d37-609c-0735-4e9055e5e123.htm" />
+  <HelpKINode Title="TinySpreadsheet.Dependencies namespace" Url="html/e627fbd4-c149-d62e-48d1-239a6cbfdd14.htm" />
+  <HelpKINode Title="TinySpreadsheet.Dependencies.Dependency class" Url="html/26162b15-c433-9ae7-03b6-4c1c5fdc793f.htm" />
+  <HelpKINode Title="TinySpreadsheet.Dependencies.DependencyMap class" Url="html/a4915e1d-d670-35cd-50a4-b5f8f08217c6.htm" />
+  <HelpKINode Title="TinySpreadsheet.Extensions class" Url="html/d2e1def6-8e09-ac63-cbb3-2720a8dd2281.htm" />
+  <HelpKINode Title="TinySpreadsheet.Formula class" Url="html/8abb95fe-1d85-9b38-c9fc-f635d2f4b192.htm" />
+  <HelpKINode Title="TinySpreadsheet.MainWindow class" Url="html/db2bafe0-5de2-763c-8ce2-f7c8da1b0b50.htm" />
+  <HelpKINode Title="TinySpreadsheet.styles class" Url="html/fb07979d-6036-f5bf-a27f-f047333bb3be.htm" />
+  <HelpKINode Title="TinySpreadsheet.Tokenize namespace" Url="html/1ddfe3a0-a614-102b-3399-034dc5bc6af6.htm" />
+  <HelpKINode Title="TinySpreadsheet.Tokenize.FormulaToken class" Url="html/2fca9bd7-9880-2019-2eda-dcd57ebc8fce.htm" />
+  <HelpKINode Title="TinySpreadsheet.Tokenize.Tokenizer class" Url="html/b8a538b0-77c3-8135-128c-aef6913b1e61.htm" />
+  <HelpKINode Title="TinySpreadsheet.Tokenize.Tokenizer.TokenType enumeration" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="Token property" Url="html/f79db247-0b41-173b-0f28-b2edade16d6b.htm" />
+  <HelpKINode Title="Tokenize method" Url="html/f6b5eddc-23ca-babb-8d4d-25f1753f4e55.htm" />
+  <HelpKINode Title="Tokenizer class">
+    <HelpKINode Title="Tokenizer Class" Url="html/b8a538b0-77c3-8135-128c-aef6913b1e61.htm" />
+    <HelpKINode Title="about Tokenizer class" Url="html/b8a538b0-77c3-8135-128c-aef6913b1e61.htm" />
+    <HelpKINode Title="methods" Url="html/bf9c3014-ba88-661d-b3eb-6839caa2bb1d.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Tokenizer.ExtractCell method" Url="html/0ad62037-f494-6aeb-4707-cd32994b95ad.htm" />
+  <HelpKINode Title="Tokenizer.GetDependencies method" Url="html/2a299977-11b0-172e-c43f-77c62d08525d.htm" />
+  <HelpKINode Title="Tokenizer.getNotOP method" Url="html/dc6a8fae-2bf7-787d-aa48-c1c90371d548.htm" />
+  <HelpKINode Title="Tokenizer.getOP method" Url="html/025c88f5-af5c-0b4e-2988-c1b0038767c4.htm" />
+  <HelpKINode Title="Tokenizer.isminus method" Url="html/9bf233f1-f5b8-c2a5-2256-bfdc7d15c570.htm" />
+  <HelpKINode Title="Tokenizer.Tokenize method" Url="html/f6b5eddc-23ca-babb-8d4d-25f1753f4e55.htm" />
+  <HelpKINode Title="Tokenizer.TokenType enumeration" Url="html/c0f27c5b-6e04-1262-5498-e4ff760b14d9.htm" />
+  <HelpKINode Title="Type property" Url="html/4c2f3b60-8ea9-70a0-1708-c2d129af7f87.htm" />
+  <HelpKINode Title="Unsubscribe method" Url="html/c5be182d-c386-a17a-4207-6de4f7c9244b.htm" />
+  <HelpKINode Title="_contentLoaded field">
+    <HelpKINode Title="Cell._contentLoaded Field" Url="html/72e0865e-2e9b-97d3-0c1c-cc08f464d02d.htm" />
+    <HelpKINode Title="Column._contentLoaded Field" Url="html/898ca678-e83e-251d-cdef-41676131e4e5.htm" />
+    <HelpKINode Title="MainWindow._contentLoaded Field" Url="html/9eb7619e-7693-59de-ee1f-dcf5cc159232.htm" />
+    <HelpKINode Title="styles._contentLoaded Field" Url="html/0c8c4b3a-76a6-5655-9ae8-305bdf4c9723.htm" />
+  </HelpKINode>
+</HelpKI>
