@@ -27,7 +27,7 @@ namespace TinySpreadsheet
         public Column()
         {
             InitializeComponent();
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 60; i++)
             {
                 Cell c = new Cell();
 
@@ -46,6 +46,13 @@ namespace TinySpreadsheet
             {
                 cells[index] = value;
             }
+        }
+
+        public void AddRow()
+        {
+            Cell c = new Cell();
+            CellColumn.Items.Add(c);
+            cells.Add(c);
         }
     }
 }

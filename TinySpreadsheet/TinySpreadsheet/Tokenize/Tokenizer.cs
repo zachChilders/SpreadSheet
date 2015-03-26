@@ -61,26 +61,26 @@ namespace TinySpreadsheet.Tokenize
             else return false;
         }
 
-        //Incomplete
-        public static Queue<FormulaToken> DistributeNeg(String inBanana)
-        {
-            FormulaToken thistoken;
-            // check for leading negative
-            for ( int i = 0; i < inBanana.Length; i++)
-            {
-                char c = inBanana[i];
-                char prevchar = inBanana[i];
-                if (isminus(getOP(c)) )  // && is num or cell
-                    //make negative
+        ////Incomplete
+        //public static Queue<FormulaToken> DistributeNeg(String inBanana)
+        //{
+        //    FormulaToken thistoken;
+        //    // check for leading negative
+        //    for ( int i = 0; i < inBanana.Length; i++)
+        //    {
+        //        char c = inBanana[i];
+        //        char prevchar = inBanana[i];
+        //        if (isminus(getOP(c)) )  // && is num or cell
+        //            //make negative
                 
-            }
-            // check for negative after operator
-            // check left banana
-                //
-                //distribute negative within banana
+        //    }
+        //    // check for negative after operator
+        //    // check left banana
+        //        //
+        //        //distribute negative within banana
 
-                return s;
-        }
+        //        return s;
+        //}
 
         /// <summary>
         /// Creates a Queue of FormulaTokens from a given formula string.

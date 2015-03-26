@@ -64,6 +64,11 @@ namespace TinySpreadsheet.Dependencies
         /// </summary>
         public Action<Cell> ErrorCallback { get; set; }
 
+        void Foo(Cell c)
+        {
+            Console.Write(c.CellText);
+        }
+
         //Our methods
         public void Unsubscribe()
         {
