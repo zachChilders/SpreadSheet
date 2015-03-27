@@ -15,7 +15,6 @@ namespace TinySpreadsheet
     static class Formula
     {
         private static Regex rgx = new Regex(@"^((-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
-        private static Regex alphaNum = new Regex(@"^[A-Za-z]+[0-9]+$");
 
         /// <summary>
         /// Attempts to evaluate a cell using its current input. 
@@ -26,13 +25,13 @@ namespace TinySpreadsheet
         public static Double solve(Cell c)
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
-            if (rgx.IsMatch(cellFormulaString))
+            if (!rgx.IsMatch(cellFormulaString))
             {
-                Queue<FormulaToken> cellFormula = ResolveDependencies(Tokenizer.Tokenize(cellFormulaString));
-                Queue<FormulaToken> pfix = postFix(cellFormula); //This should be tokenized somewhere.
-                return evaluate(pfix);
+                return Double.NaN;
             }
-            return Double.NaN;
+            Queue<FormulaToken> cellFormula = ResolveDependencies(Tokenizer.Tokenize(cellFormulaString));
+            Queue<FormulaToken> pfix = postFix(cellFormula); //This should be tokenized somewhere.
+            return evaluate(pfix);
         }
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace TinySpreadsheet
             while(tokens.Count > 0)
             {
                 FormulaToken token = tokens.Dequeue();
-                if (alphaNum.IsMatch(token.Token)) //If it's a cell, replace with that cells formula
+                if (token.Type == Tokenizer.TokenType.CELL) //If it's a cell, replace with that cells formula
                 {
                     if (token.Token[0] == '-')
                     {
