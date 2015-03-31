@@ -20,75 +20,22 @@ namespace TinySpreadsheet
     /// </summary>
     public partial class MainWindow : Window, ISerializable
     {
-        public static Dictionary<String, Column> Columns = new Dictionary<String,Column>();
-
+       
         public MainWindow()
         {
             InitializeComponent();
             CreateVerticalPage();
         }
 
+        /// <summary>
+        /// Deserialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public MainWindow(SerializationInfo info, StreamingContext context)
         {
             Columns = (Dictionary<String, Column>) info.GetValue("columns", typeof(Dictionary<String, Column>));
         }
-
-        /// <summary>
-        /// Creates 26 new columns.
-        /// </summary>
-        private void CreateVerticalPage()
-        {
-            for (int j = 0; j < 26; j++)
-            {
-                String name = GenerateName();//Name needs to be determined on the fly.
-                Column c = new Column() { Name = name };
-                RowStack.Children.Add(c);
-                Columns.Add(name, c);
-
-                Console.WriteLine(name);
-            }
-        }
-
-        /// <summary>
-        /// Generates a new row in every column
-        /// </summary>
-        private void CreateNewRow()
-        {
-            foreach(var c in Columns)
-            {
-                c.Value.AddRow();
-            }
-        }
-
-        /// <summary>
-        /// Let's never speak of this again.
-        /// </summary>
-        /// <returns></returns>
-        private static String GenerateName()
-        {
-            int index = Columns.Count + 1;
-
-            const int ColumnBase = 26;
-            const int DigitMax = 7; // ceil(log26(Int32.Max))
-            const string Digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-            if (index <= 0)
-                throw new IndexOutOfRangeException("index must be a positive number");
-
-            if (index <= ColumnBase)
-                return Digits[index - 1].ToString();
-
-            var sb = new StringBuilder().Append(' ', DigitMax);
-            var current = index;
-            var offset = DigitMax;
-            while (current > 0)
-            {
-                sb[--offset] = Digits[--current % ColumnBase];
-                current /= ColumnBase;
-            }
-            return sb.ToString(offset, DigitMax - offset);
-        }
-
 
         /// <summary>
         /// This locks up UI.  Fix it.
@@ -109,11 +56,14 @@ namespace TinySpreadsheet
             }
         }
 
-
+        /// <summary>
+        /// Serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("columns", Columns, typeof(Dictionary<String,Column>));
-            //info.AddValue();
         }
     }
 }

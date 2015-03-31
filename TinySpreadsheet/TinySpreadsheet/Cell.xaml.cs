@@ -24,7 +24,6 @@ namespace TinySpreadsheet
     [Serializable]
     public partial class Cell : UserControl, ISerializable
     {
-        //
         ListBox listParent;
 
         /// <summary>
@@ -35,12 +34,12 @@ namespace TinySpreadsheet
         /// <summary>
         /// Gets or sets this Cell's formula used for evaluation. Setting triggers a Changed event.
         /// </summary>
-        public String CellFormula { get; set; }
+        public String CellFormula { get; private set; }
 
         /// <summary>
         /// Gets or sets the display text for this Cell. This is typically the evaluated CellFormula.
         /// </summary>
-        public String cellDisplay { get; set; }
+        public String CellDisplay { get; private set; }
 
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace TinySpreadsheet
         {
             Dependencies = (DependencyMap) info.GetValue("dependencies", typeof (DependencyMap)); // This probably doesn't work
             CellFormula = (String)info.GetValue("formula", typeof(String));
-            cellDisplay = (String)info.GetValue("display", typeof(String));
+            CellDisplay = (String)info.GetValue("display", typeof(String));
         }
 
         /// <summary>
@@ -168,8 +167,8 @@ namespace TinySpreadsheet
                 else
                 {
                     this.CellFormula = t.Text;
-                    cellDisplay = Formula.solve(this).ToString();
-                    t.Text = cellDisplay;
+                    CellDisplay = Formula.Solve(this).ToString();
+                    t.Text = CellDisplay;
                 }
             }
 
@@ -179,7 +178,7 @@ namespace TinySpreadsheet
         {
             info.AddValue("dependencies", Dependencies, typeof(DependencyMap));
             info.AddValue("formula", CellFormula, typeof(String));
-            info.AddValue("display", cellDisplay, typeof(String));
+            info.AddValue("display", CellDisplay, typeof(String));
         }
 
         

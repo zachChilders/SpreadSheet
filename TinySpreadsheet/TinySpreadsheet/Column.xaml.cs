@@ -21,7 +21,7 @@ namespace TinySpreadsheet
     [Serializable]
     public partial class Column : UserControl, ISerializable
     {
-        public List<Cell> cells = new List<Cell>();
+        private readonly List<Cell> Cells = new List<Cell>();
 
         /// <summary>
         /// A simple constructor initializing 30 cells. Temporary.
@@ -34,37 +34,50 @@ namespace TinySpreadsheet
                 Cell c = new Cell();
 
                 CellColumn.Items.Add(c);
-                cells.Add(c);
+                Cells.Add(c);
             }
         }
 
+        /// <summary>
+        /// Indexer for columns
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Cell this[int index]
         {
             get
             {
-                return cells[index];
+                return Cells[index];
             }
             set
             {
-                cells[index] = value;
+                Cells[index] = value;
             }
         }
 
+        /// <summary>
+        /// Adds a cell to the column
+        /// </summary>
         public void AddRow()
         {
             Cell c = new Cell();
             CellColumn.Items.Add(c);
-            cells.Add(c);
+            Cells.Add(c);
         }
 
+        /// <summary>
+        /// Serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("cells", cells, typeof(List<Cell>));
+            info.AddValue("cells", Cells, typeof(List<Cell>));
         }
 
         public Column(SerializationInfo info, StreamingContext context)
         {
-            cells = (List<Cell>) info.GetValue("cells", typeof(List<Cell>));
+            Cells = (List<Cell>) info.GetValue("cells", typeof(List<Cell>));
         }
     }
 }

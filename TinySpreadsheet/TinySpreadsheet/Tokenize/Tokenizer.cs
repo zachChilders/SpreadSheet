@@ -15,7 +15,7 @@ namespace TinySpreadsheet.Tokenize
         /// </summary>
         /// <param name="c">The character to be evaluated.</param>
         /// <returns>A FormulaToken of the given character. If c is not an operator, null is returned.</returns>
-        private static FormulaToken getOP(char c)
+        private static FormulaToken GetOp(char c)
         {
             switch (c)
             {
@@ -39,7 +39,7 @@ namespace TinySpreadsheet.Tokenize
         /// </summary>
         /// <param name="s">String containing non-operators.</param>
         /// <returns>A FormulaToken of type NUM if s is a number, or type CELL if not a number.</returns>
-        public static FormulaToken getNotOP(String s)
+        private static FormulaToken GetNotOp(String s)
         {
             double d;
             if (double.TryParse(s, out d))
@@ -54,7 +54,7 @@ namespace TinySpreadsheet.Tokenize
         }
 
         ///Incomplete
-        public static bool isminus(FormulaToken token)
+        public static bool IsMinus(FormulaToken token)
         {
             if (token.Token == "-")
                 return true;
@@ -99,12 +99,12 @@ namespace TinySpreadsheet.Tokenize
 
                 FormulaToken thisop;
 
-                if ((thisop = getOP(c)) != null)
+                if ((thisop = GetOp(c)) != null)
                 {
                     if (num.Length > 0)
                     {
                         num.Insert(0, (isNegative ? "-" : ""));
-                        TokenQueue.Enqueue(getNotOP(num.ToString()));
+                        TokenQueue.Enqueue(GetNotOp(num.ToString()));
                         num.Clear();
                     }
                     TokenQueue.Enqueue(thisop);
@@ -114,7 +114,7 @@ namespace TinySpreadsheet.Tokenize
             }
 
             if (num.Length > 0)
-                TokenQueue.Enqueue(getNotOP(num.ToString()));
+                TokenQueue.Enqueue(GetNotOp(num.ToString()));
 
             return TokenQueue;
 

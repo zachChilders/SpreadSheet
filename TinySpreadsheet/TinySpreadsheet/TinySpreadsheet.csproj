@@ -61,6 +61,7 @@
     <Compile Include="Dependencies\Dependency.cs" />
     <Compile Include="Dependencies\DependencyMap.cs" />
     <Compile Include="Dependencies\DependencyMapWrapping.cs" />
+    <Compile Include="SpreadSheet.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />
     <Page Include="Cell.xaml">
