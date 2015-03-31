@@ -26,12 +26,7 @@
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
             <!-- Application Menu, located at the left-hand side (down arrow) -->
-            <Ribbon.ApplicationMenu>
-                <RibbonApplicationMenu KeyTip="F">
-                    <RibbonApplicationMenuItem Header="Options" ImageSource="Images\options.png" />
-                    <RibbonApplicationMenuItem Header="Exit" ImageSource="Images\quit.png" />
-                </RibbonApplicationMenu>
-            </Ribbon.ApplicationMenu>
+      
             <!-- Ribbon Tab #1: Home -->
             <RibbonTab Header="Home" KeyTip="H" >
                 <!-- Home/Clipboard group-->
@@ -42,14 +37,8 @@
                     </RibbonMenuButton>
                     <RibbonButton SmallImageSource="Images\cut.png" Label="Cut" KeyTip="X" />
                     <RibbonButton SmallImageSource="Images\copy.png" Label="Copy" KeyTip="C" />
-                    <RibbonButton SmallImageSource="Images\format_painter.png" Label="Format Painter" KeyTip="FP" />
                 </RibbonGroup>
-                <!-- Home/Colors group-->
-                <RibbonGroup x:Name="Color" Header="Colors">
-                    <RibbonRadioButton LargeImageSource="Images\red.png" Label="Red" KeyTip="R" IsChecked="True"/>
-                    <RibbonRadioButton LargeImageSource="Images\green.png" Label="Green" KeyTip="G"/>
-                    <RibbonRadioButton LargeImageSource="Images\blue.png" Label="Blue" KeyTip="B"/>
-                </RibbonGroup>
+
             </RibbonTab>
             <!-- Ribbon Tab #2: Launch -->
             <RibbonTab Header="Launch" KeyTip="L">
