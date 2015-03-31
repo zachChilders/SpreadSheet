@@ -10,7 +10,7 @@ namespace TinySpreadsheet.Dependencies
     /// <summary>
     /// A map of Dependencies describing cells and their relationships as dependencies.
     /// </summary>
-    public partial class DependencyMap
+    public partial class DependencyMap 
     {
         private Action<Cell> subscribeCallback;
 

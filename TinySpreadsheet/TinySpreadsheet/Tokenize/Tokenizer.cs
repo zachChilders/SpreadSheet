@@ -53,7 +53,7 @@ namespace TinySpreadsheet.Tokenize
 
         }
 
-        //Incomplete
+        ///Incomplete
         public static bool isminus(FormulaToken token)
         {
             if (token.Token == "-")
@@ -177,7 +177,7 @@ namespace TinySpreadsheet.Tokenize
             int index;
             if (!Int32.TryParse(row.ToString(), out index))
                 throw new Exception("Not a cell");
-
+            
             return MainWindow.Columns[column.ToString().ToUpper()][index - 1];
         }
 

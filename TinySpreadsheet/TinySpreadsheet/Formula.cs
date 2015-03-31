@@ -22,12 +22,12 @@ namespace TinySpreadsheet
         /// <param name="c">The Cell to be evaluated.</param>
         /// <returns>A Double representing the solved value.</returns>
         /// <remarks>A Double is returned as a value representation of the input. If the input cannot be recognized as something that can be evaluated to a number, Double.NaN is returned.</remarks>
-        public static Double solve(Cell c)
+        public static Double? solve(Cell c)
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
             if (!rgx.IsMatch(cellFormulaString))
             {
-                return Double.NaN;
+                return null;
             }
             Queue<FormulaToken> cellFormula = ResolveDependencies(Tokenizer.Tokenize(cellFormulaString));
             Queue<FormulaToken> pfix = postFix(cellFormula); //This should be tokenized somewhere.

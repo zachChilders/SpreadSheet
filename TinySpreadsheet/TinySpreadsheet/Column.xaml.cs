@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +18,8 @@ namespace TinySpreadsheet
     /// <summary>
     /// A simple UI class that holds a list of Cells.
     /// </summary>
-    public partial class Column : UserControl
+    [Serializable]
+    public partial class Column : UserControl, ISerializable
     {
         public List<Cell> cells = new List<Cell>();
 
@@ -53,6 +55,16 @@ namespace TinySpreadsheet
             Cell c = new Cell();
             CellColumn.Items.Add(c);
             cells.Add(c);
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("cells", cells, typeof(List<Cell>));
+        }
+
+        public Column(SerializationInfo info, StreamingContext context)
+        {
+            cells = (List<Cell>) info.GetValue("cells", typeof(List<Cell>));
         }
     }
 }

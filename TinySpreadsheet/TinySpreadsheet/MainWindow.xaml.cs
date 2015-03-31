@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,22 +18,19 @@ namespace TinySpreadsheet
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ISerializable
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String,Column>();
-
-        private static Column[] columns;
-
-        private static int numberOfColumns;
 
         public MainWindow()
         {
             InitializeComponent();
-            numberOfColumns = 0;
-            for (int i = 0; i < 5; i++)
-            {
-                CreateVerticalPage();
-            }
+            CreateVerticalPage();
+        }
+
+        public MainWindow(SerializationInfo info, StreamingContext context)
+        {
+            Columns = (Dictionary<String, Column>) info.GetValue("columns", typeof(Dictionary<String, Column>));
         }
 
         /// <summary>
@@ -47,11 +45,13 @@ namespace TinySpreadsheet
                 RowStack.Children.Add(c);
                 Columns.Add(name, c);
 
-                numberOfColumns++;
                 Console.WriteLine(name);
             }
         }
 
+        /// <summary>
+        /// Generates a new row in every column
+        /// </summary>
         private void CreateNewRow()
         {
             foreach(var c in Columns)
@@ -66,7 +66,7 @@ namespace TinySpreadsheet
         /// <returns></returns>
         private static String GenerateName()
         {
-            int index = numberOfColumns + 1;
+            int index = Columns.Count + 1;
 
             const int ColumnBase = 26;
             const int DigitMax = 7; // ceil(log26(Int32.Max))
@@ -110,5 +110,10 @@ namespace TinySpreadsheet
         }
 
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("columns", Columns, typeof(Dictionary<String,Column>));
+            //info.AddValue();
+        }
     }
 }

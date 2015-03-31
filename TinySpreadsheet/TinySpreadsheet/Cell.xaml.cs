@@ -12,13 +12,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TinySpreadsheet.Dependencies;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
 
 namespace TinySpreadsheet
 {
     /// <summary>
     /// A cell setup for UI with Spreadsheet interaction logic built in.
     /// </summary>
-    public partial class Cell : UserControl
+    [Serializable]
+    public partial class Cell : UserControl, ISerializable
     {
         //
         ListBox listParent;
@@ -38,6 +42,10 @@ namespace TinySpreadsheet
         /// </summary>
         public String cellDisplay { get; set; }
 
+
+        /// <summary>
+        /// Creates a new Cell
+        /// </summary>
         public Cell()
         {
             //GUI
@@ -52,6 +60,13 @@ namespace TinySpreadsheet
             //!GUI
             CellFormula = "";
 
+        }
+
+        public Cell(SerializationInfo info, StreamingContext context)
+        {
+            Dependencies = (DependencyMap) info.GetValue("dependencies", typeof (DependencyMap)); // This probably doesn't work
+            CellFormula = (String)info.GetValue("formula", typeof(String));
+            cellDisplay = (String)info.GetValue("display", typeof(String));
         }
 
         /// <summary>
@@ -160,5 +175,13 @@ namespace TinySpreadsheet
 
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("dependencies", Dependencies, typeof(DependencyMap));
+            info.AddValue("formula", CellFormula, typeof(String));
+            info.AddValue("display", cellDisplay, typeof(String));
+        }
+
+        
     }
 }
