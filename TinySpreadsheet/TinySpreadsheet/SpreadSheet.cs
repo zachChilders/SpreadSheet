@@ -5,10 +5,11 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Ribbon;
 
 namespace TinySpreadsheet
 {
-    public partial class MainWindow: Window, ISerializable
+    public partial class MainWindow: RibbonWindow, ISerializable
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
 

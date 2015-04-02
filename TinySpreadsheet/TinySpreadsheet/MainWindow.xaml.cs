@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Ribbon;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -18,7 +19,7 @@ namespace TinySpreadsheet
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ISerializable
+    public partial class MainWindow : RibbonWindow, ISerializable
     {
        
         public MainWindow()
