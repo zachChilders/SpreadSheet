@@ -81,6 +81,7 @@
     <Compile Include="SpreadSheet.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />
+    <Compile Include="Wolfram.cs" />
     <Page Include="Cell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

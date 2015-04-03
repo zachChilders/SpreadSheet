@@ -25,8 +25,11 @@ namespace TinySpreadsheet
        
         public MainWindow()
         {
-            InitializeComponent();
-            CreateVerticalPage();
+            Request r = new Request("4+5");
+            r.Execute();
+            Console.WriteLine(r.Result());
+            //InitializeComponent();
+            // CreateVerticalPage();
         }
 
         /// <summary>
