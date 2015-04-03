@@ -8,7 +8,7 @@ namespace TinySpreadsheet.Tokenize
 {
     public static class Tokenizer
     {
-        public enum TokenType { CELL, OP, NUM, LBANANA, RBANANA };
+        public enum TokenType { CELL, OP, NUM, LBANANA, RBANANA, MACRO };
 
         /// <summary>
         /// Determines if the given character is an operator.
@@ -72,7 +72,7 @@ namespace TinySpreadsheet.Tokenize
         //        char prevchar = inBanana[i];
         //        if (isminus(getOP(c)) )  // && is num or cell
         //            //make negative
-                
+
         //    }
         //    // check for negative after operator
         //    // check left banana
@@ -93,13 +93,23 @@ namespace TinySpreadsheet.Tokenize
             StringBuilder num = new StringBuilder();
             bool lastOP = false;
             bool isNegative = false;
-            for (int i = 0; i < formula.Length; i++ )
+            for (int i = 0; i < formula.Length; i++)
             {
                 char c = formula[i];
 
                 FormulaToken thisop;
-
-                if ((thisop = GetOp(c)) != null)
+                //If two letters are next to each other, it's probably a macro
+                if (IsMacro(ref formula, i))
+                {
+                    while (formula[i] != ')')
+                    {
+                        num.Append(formula[i]);
+                        i++;
+                    }
+                    TokenQueue.Enqueue(new FormulaToken(num.ToString(), TokenType.MACRO));
+                    num.Clear();
+                }
+                else if ((thisop = GetOp(c)) != null)
                 {
                     if (num.Length > 0)
                     {
@@ -136,7 +146,7 @@ namespace TinySpreadsheet.Tokenize
                 if (t.Type == TokenType.CELL)
                 {
                     //Find the cell reference from map of Columns with index
-                    dependencies.Add(new Dependency(ExtractCell(t.Token.Replace("-","")), true));
+                    dependencies.Add(new Dependency(ExtractCell(t.Token.Replace("-", "")), true));
                 }
             }
 
@@ -177,8 +187,35 @@ namespace TinySpreadsheet.Tokenize
             int index;
             if (!Int32.TryParse(row.ToString(), out index))
                 throw new Exception("Not a cell");
-            
+
             return MainWindow.Columns[column.ToString().ToUpper()][index - 1];
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="formula"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public static bool IsMacro(ref String formula, int i)
+        {
+            try
+            {
+                //If the given character is a letter followed by two  more letters and a (, it's likely a macro
+                //SUM(, AVG(
+                if (Char.IsLetter(formula[i]) && Char.IsLetter(formula[i + 1]) && Char.IsLetter(formula[i + 2]) &&
+                    (formula[i + 3] == '('))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                return false;
+            }
+
         }
 
     }

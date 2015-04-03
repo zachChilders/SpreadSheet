@@ -24,8 +24,6 @@ namespace TinySpreadsheet
                 Column c = new Column() { Name = name };
                 RowStack.Children.Add(c);
                 Columns.Add(name, c);
-
-                Console.WriteLine(name);
             }
         }
 
