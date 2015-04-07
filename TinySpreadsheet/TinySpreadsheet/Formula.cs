@@ -26,6 +26,7 @@ namespace TinySpreadsheet
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
             cellFormulaString = cellFormulaString.Replace("=", "");
+            c.CellFormula = cellFormulaString;
             if (!rgx.IsMatch(cellFormulaString))
             {
                 return null;

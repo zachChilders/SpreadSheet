@@ -35,7 +35,7 @@ namespace TinySpreadsheet
         /// <summary>
         /// Gets or sets this Cell's formula used for evaluation. Setting triggers a Changed event.
         /// </summary>
-        public String CellFormula { get; private set; }
+        public String CellFormula { get; set; }
 
         /// <summary>
         /// Gets or sets the display text for this Cell. This is typically the evaluated CellFormula.
