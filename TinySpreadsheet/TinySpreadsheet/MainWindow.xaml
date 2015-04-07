@@ -26,7 +26,11 @@
                     </RibbonQuickAccessToolBar>
                 </Ribbon.QuickAccessToolBar>
                 <!-- Application Menu, located at the left-hand side (down arrow) -->
-
+                <Ribbon.ApplicationMenu>
+                    <RibbonApplicationMenu>
+                        <RibbonButton SmallImageSource="Images\help.png" />
+                    </RibbonApplicationMenu>
+                </Ribbon.ApplicationMenu>
                 <!-- Ribbon Tab #1: Home -->
                 <RibbonTab Header="Home" KeyTip="H" >
                     <!-- Home/Clipboard group-->

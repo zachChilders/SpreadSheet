@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using TinySpreadsheet.Dependencies;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using TinySpreadsheet.Tokenize;
 
 
 namespace TinySpreadsheet
@@ -41,7 +42,6 @@ namespace TinySpreadsheet
         /// </summary>
         public String CellDisplay { get; private set; }
 
-
         /// <summary>
         /// Creates a new Cell
         /// </summary>
@@ -58,7 +58,6 @@ namespace TinySpreadsheet
 
             //!GUI
             CellFormula = "";
-
         }
 
         public Cell(SerializationInfo info, StreamingContext context)
@@ -169,6 +168,8 @@ namespace TinySpreadsheet
                     this.CellFormula = t.Text;
                     CellDisplay = Formula.Solve(this).ToString();
                     t.Text = CellDisplay;
+                    Dependencies = Tokenizer.GetDependencies(this);
+                    Dependencies.SubscribeCallback = DependencyChanged;
                 }
             }
 
