@@ -165,8 +165,12 @@ namespace TinySpreadsheet
                 }
                 else
                 {
-                    this.CellFormula = t.Text;
-                    CellDisplay = Formula.Solve(this).ToString();
+                    CellFormula = t.Text;
+                    if (CellFormula[0] == '=')
+                    {
+                        CellDisplay = Formula.Solve(this).ToString();
+                    }
+                    
                     t.Text = CellDisplay;
                     Dependencies = Tokenizer.GetDependencies(this);
                     Dependencies.SubscribeCallback = DependencyChanged;
