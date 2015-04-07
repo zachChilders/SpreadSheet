@@ -127,7 +127,7 @@ namespace TinySpreadsheet.Dependencies
             {
                 Dependency dependency = d.Value as Dependency;
                 if (!dependency.IsDirect)
-                    break;
+                    continue;
 
                 dependency.Cell.Changed += subscribeCallback;
             }
