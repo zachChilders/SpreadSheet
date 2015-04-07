@@ -58,6 +58,8 @@ namespace TinySpreadsheet
 
             //!GUI
             CellFormula = "";
+
+            Dependencies = new DependencyMap(this);
         }
 
         public Cell(SerializationInfo info, StreamingContext context)
