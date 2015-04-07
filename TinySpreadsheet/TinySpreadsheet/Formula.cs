@@ -25,6 +25,7 @@ namespace TinySpreadsheet
         public static Double? Solve(Cell c)
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
+            cellFormulaString = cellFormulaString.Slice(1, cellFormulaString.Length);
             if (!rgx.IsMatch(cellFormulaString))
             {
                 return null;
