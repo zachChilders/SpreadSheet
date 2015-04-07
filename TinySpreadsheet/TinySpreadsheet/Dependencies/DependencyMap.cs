@@ -76,15 +76,10 @@ namespace TinySpreadsheet.Dependencies
             set
             {
                 if (value == null)
-                    errorCallback = (cell) => { };
+                    errorCallback = (cell) => { Console.WriteLine("ErrorCallback"); };
                 else
                     errorCallback = value;
             }
-        }
-
-        void Foo(Cell c)
-        {
-            Console.Write(c.CellText);
         }
 
         //Our methods
