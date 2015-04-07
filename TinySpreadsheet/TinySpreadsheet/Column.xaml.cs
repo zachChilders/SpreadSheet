@@ -26,12 +26,12 @@ namespace TinySpreadsheet
         /// <summary>
         /// A simple constructor initializing 30 cells. Temporary.
         /// </summary>
-        public Column()
+        public Column(String name)
         {
             InitializeComponent();
             for (int i = 0; i < 60; i++)
             {
-                Cell c = new Cell();
+                Cell c = new Cell() { Name = name + i.ToString() }; //Make sure we name in addrow
 
                 CellColumn.Items.Add(c);
                 Cells.Add(c);

@@ -21,7 +21,7 @@ namespace TinySpreadsheet
             for (int j = 0; j < 26; j++)
             {
                 String name = GenerateName();//Name needs to be determined on the fly.
-                Column c = new Column() { Name = name };
+                Column c = new Column(name);
                 RowStack.Children.Add(c);
                 Columns.Add(name, c);
             }

@@ -170,6 +170,7 @@ namespace TinySpreadsheet
                     t.Text = CellDisplay;
                     Dependencies = Tokenizer.GetDependencies(this);
                     Dependencies.SubscribeCallback = DependencyChanged;
+                    IChanged();
                 }
             }
 

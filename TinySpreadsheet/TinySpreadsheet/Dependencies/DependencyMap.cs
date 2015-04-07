@@ -10,9 +10,11 @@ namespace TinySpreadsheet.Dependencies
     /// <summary>
     /// A map of Dependencies describing cells and their relationships as dependencies.
     /// </summary>
-    public partial class DependencyMap 
+    public partial class DependencyMap
     {
         private Action<Cell> subscribeCallback;
+        private Action<Cell> errorCallback;
+
 
         /// <summary>
         /// Creates a new DependencyMap with a given Cell owner.
@@ -47,7 +49,7 @@ namespace TinySpreadsheet.Dependencies
         /// <summary>
         /// Gets or sets the callback used for when dependencies change their values.
         /// </summary>
-        public Action<Cell> SubscribeCallback 
+        public Action<Cell> SubscribeCallback
         {
             get
             {
@@ -55,14 +57,30 @@ namespace TinySpreadsheet.Dependencies
             }
             set
             {
-                Subscribe(value);
+                if (value != null)
+                    Subscribe(value);
+                else
+                    Subscribe((cell) => { });
             }
         }
 
         /// <summary>
         /// Gets or sets the callback for what happens when an error occurs somewhere
         /// </summary>
-        public Action<Cell> ErrorCallback { get; set; }
+        public Action<Cell> ErrorCallback
+        {
+            get
+            {
+                return errorCallback;
+            }
+            set
+            {
+                if (value == null)
+                    errorCallback = (cell) => { };
+                else
+                    errorCallback = value;
+            }
+        }
 
         void Foo(Cell c)
         {
@@ -75,7 +93,7 @@ namespace TinySpreadsheet.Dependencies
             if (subscribeCallback == null)
                 return;
 
-            foreach(Dependency d in Dependencies)
+            foreach (Dependency d in Dependencies)
             {
                 if (d.IsDirect)
                     d.Cell.Changed -= subscribeCallback;
@@ -97,24 +115,25 @@ namespace TinySpreadsheet.Dependencies
             {
                 //Unsubscribe to start fresh.
                 Unsubscribe();
+            }
 
-                //We have all dependencies, so if the owner is in it, there's a problem.
-                if(Dependencies.Contains(Owner.Name))
-                {
-                    ErrorCallback(Owner);
-                    return false;
-                }
+            //We have all dependencies, so if the owner is in it, there's a problem.
+            if (Dependencies.Contains(Owner.Name))
+            {
+                ErrorCallback(Owner);
+                return false;
+            }
 
-                subscribeCallback = subscribe;
+            subscribeCallback = subscribe;
 
-                //Subscribe to all direct dependencies.
-                foreach(Dependency d in Dependencies)
-                {
-                    if (!d.IsDirect)
-                        break;
+            //Subscribe to all direct dependencies.
+            foreach (Object d in Dependencies)
+            {
+                Dependency dependency = d as Dependency;
+                if (!dependency.IsDirect)
+                    break;
 
-                    d.Cell.Changed += subscribeCallback;
-                }
+                dependency.Cell.Changed += subscribeCallback;
             }
 
             return true;

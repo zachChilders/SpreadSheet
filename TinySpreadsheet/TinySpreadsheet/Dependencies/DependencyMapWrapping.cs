@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace TinySpreadsheet.Dependencies
     /// <summary>
     /// The portion of DependencyMap wrapped around OrderedDictionary functionality.
     /// </summary>
-    partial class DependencyMap : IEnumerable<Dependency>
+    partial class DependencyMap : IEnumerable
     {
         public int Count
         {
@@ -114,10 +115,6 @@ namespace TinySpreadsheet.Dependencies
         }
 
         //Allows us to use this class in a foreach loop.
-        System.Collections.Generic.IEnumerator<Dependency> System.Collections.Generic.IEnumerable<Dependency>.GetEnumerator()
-        {
-            return Dependencies.Values.GetEnumerator();
-        }
 
         //Apparently this is still needed.
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
