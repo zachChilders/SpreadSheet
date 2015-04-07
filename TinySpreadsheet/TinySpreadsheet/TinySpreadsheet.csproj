@@ -78,6 +78,7 @@
     <Compile Include="Dependencies\DependencyMap.cs" />
     <Compile Include="Dependencies\DependencyMapWrapping.cs" />
     <Compile Include="Function.cs" />
+    <Compile Include="Momento.cs" />
     <Compile Include="SpreadSheet.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />

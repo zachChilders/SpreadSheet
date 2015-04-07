@@ -170,7 +170,10 @@ namespace TinySpreadsheet
                     {
                         CellDisplay = Formula.Solve(this).ToString();
                     }
-                    
+                    else
+                    {
+                        CellDisplay = t.Text;
+                    }
                     t.Text = CellDisplay;
                     Dependencies = Tokenizer.GetDependencies(this);
                     Dependencies.SubscribeCallback = DependencyChanged;

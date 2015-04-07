@@ -12,8 +12,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-
+   
     <ListBox x:Name="CellColumn" HorizontalAlignment="Left" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
+    <Label x:Name="ColumnName"></Label>
     </ListBox>
 
 
