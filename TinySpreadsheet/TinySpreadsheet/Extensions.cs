@@ -76,5 +76,18 @@ namespace TinySpreadsheet
             int len = end - start;               // Calculate length
             return source.Substring(start, len); // Return Substring of length
         }
+        /// <summary>
+        /// Power function that takes and returns integers.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static int POW(int a, int b)
+        {
+            int ans = 0;
+            for (int i = 0; i < b; i++)
+            { ans *= ans; }
+            return ans;
+        }
     }
 }

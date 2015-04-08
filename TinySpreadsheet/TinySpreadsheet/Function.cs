@@ -33,8 +33,55 @@ namespace TinySpreadsheet
         private static Queue<String> ExpandCellRange(String CellRange)
         {
             throw new NotImplementedException();
+
+            int split = GetSplit(CellRange);
+            if (split != -1)
+            {
+                String FirstCell = CellRange.Slice(0, split);
+                String LastCell = CellRange.Slice(split, CellRange.Length);
+                
+            }
+            else
+            {
+                System.Console.WriteLine("Format must be: A1:A5");
+            }
         }
-
-
+        private static int GetSplit(String CellRange)
+        {
+            int split = CellRange.IndexOf(':');
+            return split;
+        }
+        /// <summary>
+        /// getRowIndex(string)
+        /// Converts Cell row reference to an integer index. 
+        /// Example:
+        ///     A => (i)^1 = 1
+        ///     AA = (i)^2 + (i)^1= 27
+        ///     AAA = (i)^
+        /// The Function is recursive.
+        /// 
+        ///     
+        /// </summary>
+        /// <param name="Row"></param>
+        /// <returns></returns>
+        private static int getRowIndex(string Row)
+        {
+            int sum = 0;
+            int lenstr = Row.Length;
+            int i = (Row[0] - 'A' + 1);
+            if (Row[0] != null)
+            {
+                sum = (Extensions.POW(26, lenstr - 1) * i) + getRowIndex(Extensions.Slice(Row,1,lenstr));
+            }
+            return sum;
+        }
+        private static String getRows(string row)
+        {
+            throw new NotImplementedException();
+        }
+        private static string Slice(string Row, int p, double lenstr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
