@@ -58,6 +58,8 @@ namespace TinySpreadsheet
 
             //!GUI
             CellFormula = "";
+
+            Dependencies = new DependencyMap(this);
         }
 
         public Cell(SerializationInfo info, StreamingContext context)
@@ -95,7 +97,10 @@ namespace TinySpreadsheet
         //Event subscriptions
         void DependencyChanged(Cell sender)
         {
-            throw new NotImplementedException("DependencyChanged not implemented.");
+            //throw new NotImplementedException("DependencyChanged not implemented.");
+            CellDisplay = Formula.Solve(this).ToString();
+            CellText.Text = CellDisplay;
+
             IChanged();
 
         }
@@ -165,18 +170,23 @@ namespace TinySpreadsheet
                 }
                 else
                 {
+                    if (Dependencies != null)
+                        Dependencies.Unsubscribe();
+
                     CellFormula = t.Text;
                     if (CellFormula[0] == '=')
                     {
                         CellDisplay = Formula.Solve(this).ToString();
+
+                        Dependencies = Tokenizer.GetDependencies(this);
+                        Dependencies.SubscribeCallback = DependencyChanged;
                     }
                     else
                     {
                         CellDisplay = t.Text;
                     }
                     t.Text = CellDisplay;
-                    Dependencies = Tokenizer.GetDependencies(this);
-                    Dependencies.SubscribeCallback = DependencyChanged;
+
                     IChanged();
                 }
             }
