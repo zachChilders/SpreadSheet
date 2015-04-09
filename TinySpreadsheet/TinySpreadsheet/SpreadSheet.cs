@@ -39,32 +39,32 @@ namespace TinySpreadsheet
         }
 
         /// <summary>
-        /// Let's never speak of this again.
+        /// Generates a column name by converting the cell number to base 26.
         /// </summary>
         /// <returns></returns>
         private static String GenerateName()
         {
             int index = Columns.Count + 1;
 
-            const int ColumnBase = 26;
-            const int DigitMax = 7; // ceil(log26(Int32.Max))
-            const string Digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const int columnBase = 26;
+            const int digitMax = 7; // ceil(log26(Int32.Max))
+            const string digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
             if (index <= 0)
                 throw new IndexOutOfRangeException("index must be a positive number");
 
-            if (index <= ColumnBase)
-                return Digits[index - 1].ToString();
+            if (index <= columnBase)
+                return digits[index - 1].ToString();
 
-            var sb = new StringBuilder().Append(' ', DigitMax);
-            var current = index;
-            var offset = DigitMax;
+            StringBuilder sb = new StringBuilder().Append(' ', digitMax);
+            int current = index;
+            int offset = digitMax;
             while (current > 0)
             {
-                sb[--offset] = Digits[--current % ColumnBase];
-                current /= ColumnBase;
+                sb[--offset] = digits[--current % columnBase];
+                current /= columnBase;
             }
-            return sb.ToString(offset, DigitMax - offset);
+            return sb.ToString(offset, digitMax - offset);
         }
 
 

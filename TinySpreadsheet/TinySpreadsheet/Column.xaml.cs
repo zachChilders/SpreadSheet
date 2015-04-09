@@ -75,6 +75,11 @@ namespace TinySpreadsheet
             info.AddValue("cells", Cells, typeof(List<Cell>));
         }
 
+        /// <summary>
+        /// Column Deserialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public Column(SerializationInfo info, StreamingContext context)
         {
             Cells = (List<Cell>) info.GetValue("cells", typeof(List<Cell>));

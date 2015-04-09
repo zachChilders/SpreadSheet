@@ -25,7 +25,7 @@ namespace TinySpreadsheet
         /// Checks to see if the Stack is empty.
         /// </summary>
         /// <returns>True if empty. False if not empty.</returns>
-        public static bool isEmpty(this Stack<FormulaToken> s)
+        public static bool IsEmpty(this Stack<FormulaToken> s)
         {
             return (s.Count == 0);
         }
@@ -46,6 +46,7 @@ namespace TinySpreadsheet
         /// <summary>
         /// Creates a substring from the the string, given a start and end index.
         /// </summary>
+        /// <param name="source"></param>
         /// <param name="start">The starting character index in the string. Inclusive.</param>
         /// <param name="end">The ending character index in the string. Exclusive. Supports negatives.</param>
         /// <returns>The resulting substring from the fiven start and end.</returns>
@@ -67,7 +68,7 @@ namespace TinySpreadsheet
         /// </code>
         /// -1 in this example represents the index of '.', which is the last character in s. -2 would be 'd'.
         /// </example>
-        public static string Slice(this string source, int start, int end)
+        public static string Slice(this String source, int start, int end)
         {
             if (end < 0) // Keep this for negative end support
             {
@@ -91,14 +92,13 @@ namespace TinySpreadsheet
             {
                 return 1;
             }
-            else
+
+            for (int i = 1; i < b; i++)
             {
-                for (int i = 1; i < b; i++)
-                {
-                    ans *= a;
-                }
-                return ans;
+                ans *= a;
             }
+            return ans;
+
         }
     }
 }

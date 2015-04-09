@@ -62,6 +62,12 @@ namespace TinySpreadsheet
             Dependencies = new DependencyMap(this);
         }
 
+
+        /// <summary>
+        /// Deserialization Constructor
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public Cell(SerializationInfo info, StreamingContext context)
         {
             Dependencies = (DependencyMap) info.GetValue("dependencies", typeof (DependencyMap)); // This probably doesn't work
@@ -105,17 +111,27 @@ namespace TinySpreadsheet
 
         }
 
+        /// <summary>
+        /// Called when a cell is selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CellText_GotFocus(object sender, RoutedEventArgs e)
         {
             if (listParent == null)
                 listParent = GetParent(typeof(ListBox)) as ListBox;
             TextBox t = sender as TextBox;
 
-            listParent.SelectedItems.Add(this);
+            if (listParent != null) listParent.SelectedItems.Add(this);
             if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                 HighlightCleanup();
         }
 
+        /// <summary>
+        /// Called when a cell is no longer selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CellText_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -130,6 +146,11 @@ namespace TinySpreadsheet
             //t.Text = cellDisplay;
         }
 
+        /// <summary>
+        /// MouseListener.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Cell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -146,12 +167,7 @@ namespace TinySpreadsheet
         /// </summary>
         void HighlightCleanup()
         {
-            List<Cell> cells = new List<Cell>();
-            foreach (Cell cell in listParent.SelectedItems)
-            {
-                if (!cell.CellText.IsFocused)
-                    cells.Add(cell);
-            }
+            List<Cell> cells = listParent.SelectedItems.Cast<Cell>().Where(cell => !cell.CellText.IsFocused).ToList();
 
             foreach (Cell cell in cells)
             {
@@ -159,40 +175,48 @@ namespace TinySpreadsheet
             }
         }
 
+        /// <summary>
+        /// Key Listener for cells.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CellText_KeyDown(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
-            if (e.Key == Key.Enter)
+            if (e.Key != Key.Enter) return;
+
+            if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) != 0 || (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) != 0)
             {
-                if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) != 0 || (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) != 0)
+                if (t != null) t.Text += Environment.NewLine;
+            }
+            else
+            {
+                if (Dependencies != null)
+                    Dependencies.Unsubscribe();
+
+                CellFormula = t.Text;
+                if (CellFormula[0] == '=')
                 {
-                    t.Text += Environment.NewLine;
+                    CellDisplay = Formula.Solve(this).ToString();
+
+                    Dependencies = Tokenizer.GetDependencies(this);
+                    Dependencies.SubscribeCallback = DependencyChanged;
                 }
                 else
                 {
-                    if (Dependencies != null)
-                        Dependencies.Unsubscribe();
-
-                    CellFormula = t.Text;
-                    if (CellFormula[0] == '=')
-                    {
-                        CellDisplay = Formula.Solve(this).ToString();
-
-                        Dependencies = Tokenizer.GetDependencies(this);
-                        Dependencies.SubscribeCallback = DependencyChanged;
-                    }
-                    else
-                    {
-                        CellDisplay = t.Text;
-                    }
-                    t.Text = CellDisplay;
-
-                    IChanged();
+                    CellDisplay = t.Text;
                 }
-            }
+                t.Text = CellDisplay;
 
+                IChanged();
+            }
         }
 
+        /// <summary>
+        /// Cell Serialization.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("dependencies", Dependencies, typeof(DependencyMap));

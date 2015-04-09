@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using TinySpreadsheet.Dependencies;
@@ -8,6 +9,7 @@ namespace TinySpreadsheet.Tokenize
 {
     public static class Tokenizer
     {
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public enum TokenType { CELL, OP, NUM, LBANANA, RBANANA, MACRO };
 
         /// <summary>
@@ -42,23 +44,13 @@ namespace TinySpreadsheet.Tokenize
         private static FormulaToken GetNotOp(String s)
         {
             double d;
-            if (double.TryParse(s, out d))
-            {
-                return new FormulaToken(s, TokenType.NUM);
-            }
-            else
-            {
-                return new FormulaToken(s, TokenType.CELL);
-            }
-
+            return double.TryParse(s, out d) ? new FormulaToken(s, TokenType.NUM) : new FormulaToken(s, TokenType.CELL);
         }
 
         ///Incomplete
         public static bool IsMinus(FormulaToken token)
         {
-            if (token.Token == "-")
-                return true;
-            else return false;
+            return token.Token == "-";
         }
 
         ////Incomplete
@@ -89,7 +81,7 @@ namespace TinySpreadsheet.Tokenize
         /// <returns>A Queue of FormulaTokens in the order they appear in the given formula string.</returns>
         public static Queue<FormulaToken> Tokenize(String formula)
         {
-            Queue<FormulaToken> TokenQueue = new Queue<FormulaToken>();
+            Queue<FormulaToken> tokenQueue = new Queue<FormulaToken>();
             StringBuilder num = new StringBuilder();
             bool lastOP = false;
             bool isNegative = false;
@@ -106,7 +98,7 @@ namespace TinySpreadsheet.Tokenize
                         num.Append(formula[i]);
                         i++;
                     }
-                    TokenQueue.Enqueue(new FormulaToken(num.ToString(), TokenType.MACRO));
+                    tokenQueue.Enqueue(new FormulaToken(num.ToString(), TokenType.MACRO));
                     num.Clear();
                 }
                 else if ((thisop = GetOp(c)) != null)
@@ -114,19 +106,19 @@ namespace TinySpreadsheet.Tokenize
                     if (num.Length > 0)
                     {
                         num.Insert(0, (isNegative ? "-" : ""));
-                        TokenQueue.Enqueue(GetNotOp(num.ToString()));
+                        tokenQueue.Enqueue(GetNotOp(num.ToString()));
                         num.Clear();
                     }
-                    TokenQueue.Enqueue(thisop);
+                    tokenQueue.Enqueue(thisop);
                 }
                 else
                     num.Append(c);
             }
 
             if (num.Length > 0)
-                TokenQueue.Enqueue(GetNotOp(num.ToString()));
+                tokenQueue.Enqueue(GetNotOp(num.ToString()));
 
-            return TokenQueue;
+            return tokenQueue;
 
         }
 
@@ -203,13 +195,8 @@ namespace TinySpreadsheet.Tokenize
             {
                 //If the given character is a letter followed by two  more letters and a (, it's likely a macro
                 //SUM(, AVG(
-                if (Char.IsLetter(formula[i]) && Char.IsLetter(formula[i + 1]) && Char.IsLetter(formula[i + 2]) &&
-                    (formula[i + 3] == '('))
-                {
-                    return true;
-                }
-
-                return false;
+                return Char.IsLetter(formula[i]) && Char.IsLetter(formula[i + 1]) && Char.IsLetter(formula[i + 2]) &&
+                       (formula[i + 3] == '(');
             }
             catch (IndexOutOfRangeException e)
             {

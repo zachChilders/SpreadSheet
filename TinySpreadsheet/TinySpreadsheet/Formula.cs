@@ -14,7 +14,7 @@ namespace TinySpreadsheet
     /// </summary>
     static class Formula
     {
-        private static readonly Regex rgx = new Regex(@"^((-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
+        private static readonly Regex Rgx = new Regex(@"^((-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
 
         /// <summary>
         /// Attempts to evaluate a cell using its current input. 
@@ -27,7 +27,7 @@ namespace TinySpreadsheet
             String cellFormulaString = c.CellFormula.Replace(" ", "");
             cellFormulaString = cellFormulaString.Replace("=", "");
             c.CellFormula = cellFormulaString;
-            if (!rgx.IsMatch(cellFormulaString))
+            if (!Rgx.IsMatch(cellFormulaString))
             {
                 return null;
             }
@@ -82,6 +82,7 @@ namespace TinySpreadsheet
                 double num1;
                 double num2;
                 double result;
+                const double tolerance = 0.000000001;
                 FormulaToken currentToken = postFixed.Dequeue();
                 switch (currentToken.Token)
                 {
@@ -95,7 +96,8 @@ namespace TinySpreadsheet
                     case "/":
                         num1 = Double.Parse(eval.Pop().ToString());
                         num2 = Double.Parse(eval.Pop().ToString());
-                        if (num2 != 0)
+                        
+                        if (Math.Abs(num2) > tolerance)
                         {
                             result = num2 / num1;
                             eval.Push(result.ToString());
@@ -141,7 +143,7 @@ namespace TinySpreadsheet
                 Console.WriteLine(output.ToString());
                 FormulaToken currentToken = infix.Dequeue();
                 int currPrio = Priority(currentToken);
-                if (!stack.isEmpty())
+                if (!stack.IsEmpty())
                 {
                     topPrio = Priority(stack.Peek());
                 }
@@ -165,10 +167,10 @@ namespace TinySpreadsheet
                 }
                 else if (topPrio >= currPrio) //Higher priority operator
                 {
-                    while (topPrio >= currPrio && !(stack.isEmpty()))
+                    while (topPrio >= currPrio && !(stack.IsEmpty()))
                     {
                         output.Enqueue(stack.Pop());
-                        if (!stack.isEmpty())
+                        if (!stack.IsEmpty())
                         {
                             topPrio = Priority(stack.Peek());
                         }
@@ -182,7 +184,7 @@ namespace TinySpreadsheet
 
             }
 
-            while (!stack.isEmpty())
+            while (!stack.IsEmpty())
             {
                 output.Enqueue(stack.Pop());
             }

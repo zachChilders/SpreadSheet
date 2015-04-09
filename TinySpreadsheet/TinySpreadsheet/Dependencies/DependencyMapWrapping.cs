@@ -117,7 +117,7 @@ namespace TinySpreadsheet.Dependencies
         //Allows us to use this class in a foreach loop.
 
         //Apparently this is still needed.
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return Dependencies.Values.GetEnumerator();
         }

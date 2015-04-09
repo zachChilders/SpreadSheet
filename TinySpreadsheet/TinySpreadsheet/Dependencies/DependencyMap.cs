@@ -88,11 +88,9 @@ namespace TinySpreadsheet.Dependencies
             if (subscribeCallback == null)
                 return;
 
-            foreach (System.Collections.DictionaryEntry d in Dependencies)
+            foreach (Dependency dependency in Dependencies.Cast<DictionaryEntry>().Select(d => d.Value as Dependency).Where(dependency => dependency.IsDirect))
             {
-                Dependency dependency = d.Value as Dependency;
-                if (dependency.IsDirect)
-                    dependency.Cell.Changed -= subscribeCallback;
+                dependency.Cell.Changed -= subscribeCallback;
             }
 
             subscribeCallback = null;
@@ -123,12 +121,8 @@ namespace TinySpreadsheet.Dependencies
             subscribeCallback = subscribe;
 
             //Subscribe to all direct dependencies.
-            foreach (System.Collections.DictionaryEntry d in Dependencies)
+            foreach (Dependency dependency in Dependencies.Cast<DictionaryEntry>().Select(d => d.Value as Dependency).Where(dependency => dependency.IsDirect))
             {
-                Dependency dependency = d.Value as Dependency;
-                if (!dependency.IsDirect)
-                    continue;
-
                 dependency.Cell.Changed += subscribeCallback;
             }
 
