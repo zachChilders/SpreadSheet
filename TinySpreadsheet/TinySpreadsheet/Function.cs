@@ -9,36 +9,53 @@ namespace TinySpreadsheet
 {
     public static partial class Function
     {
-        private static Dictionary<String, Func<String, Queue<FormulaToken>>> LookupTable = new Dictionary<string, Func<string, Queue<FormulaToken>>>();
+        private static readonly Dictionary<String, Func<Queue<String>, Queue<FormulaToken>>> LookupTable = new Dictionary<String, Func<Queue<String>, Queue<FormulaToken>>>();
 
+        /// <summary>
+        /// Constructor builds a lookup table of functions.
+        /// </summary>
         static Function()
         {
             LookupTable.Add("AVG", Average); // This adds the Average function under AVG
         }
 
-        public static Queue<FormulaToken> Resolve(FormulaToken JRRToken)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jrrToken"></param>
+        /// <returns>Result of a given function</returns>
+        public static Double Resolve(FormulaToken jrrToken)
         {
             //Get first 3 letters
             //Lookup in dictionary
             //call on expanded cell range
-            LookupTable["AVG"](JRRToken.ToString()); // this calls the function from lookup table
+           // LookupTable["AVG"](jrrToken.ToString()); // this calls the function from lookup table
             throw new NotImplementedException();
         }
 
-        private static Queue<FormulaToken> Average(string s)
+        /// <summary>
+        /// Returns the average of a cell range.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static Queue<FormulaToken> Average(Queue<String> s)
         {
             throw new NotImplementedException();
         }
 
-        private static Queue<String> ExpandCellRange(String CellRange)
+        /// <summary>
+        /// Expands a string like "A1:A3" to A1, A2, A3
+        /// </summary>
+        /// <param name="cellRange"></param>
+        /// <returns>Every Cell in a given range</returns>
+        private static Queue<String> ExpandCellRange(String cellRange)
         {
             throw new NotImplementedException();
-
-            int split = GetSplit(CellRange);
+            int split = GetSplit(cellRange);
             if (split != -1)
             {
-                String FirstCell = Extensions.Slice(CellRange, 0, split);
-                String LastCell = Extensions.Slice(CellRange, split, CellRange.Length);
+                String firstCell = cellRange.Slice(0, split);
+                String lastCell = cellRange.Slice(split, cellRange.Length);
                 
             }
             else
@@ -46,11 +63,19 @@ namespace TinySpreadsheet
                 System.Console.WriteLine("Format must be: A1:A5");
             }
         }
-        private static int GetSplit(String CellRange)
+
+        /// <summary>
+        /// Finds first occurence of ":" in a given string.
+        /// </summary>
+        /// <param name="cellRange"></param>
+        /// <returns>The index of ":"</returns>
+        private static int GetSplit(String cellRange)
         {
-            int split = CellRange.IndexOf(':');
+            int split = cellRange.IndexOf(':');
             return split;
         }
+
+
         /// <summary>
         /// getRowIndex(string)
         /// Converts Cell row reference to an integer index. 
@@ -60,26 +85,31 @@ namespace TinySpreadsheet
         ///     getRowIndex("BC") will return 55
         /// 
         /// </summary>
-        /// <param name="Row"></param>
+        /// <param name="row"></param>
         /// <returns></returns>
-        private static int getRowIndex(string Row)
+        private static int GetRowIndex(String row)
         {
-            int lenstr = Row.Length;
-            int i;
+            int lenstr = row.Length;
             int sum = 0;
-            if (Row == "")
+            if (row == "")
             {
                 return sum;
             }
             else
             {
-                i = (Row[0] - 'A' + 1);
-                sum = (Extensions.POW(26, lenstr - 1) * i) + getRowIndex(Extensions.Slice(Row, 1, lenstr));
+                int i = (row[0] - 'A' + 1);
+                sum = (Extensions.Pow(26, lenstr - 1) * i) + GetRowIndex(row.Slice(1, lenstr));
                 return sum;
 
             }
         }
-        private static String getRows(string row)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        private static String GetRows(String row)
         {
             throw new NotImplementedException();
         }
