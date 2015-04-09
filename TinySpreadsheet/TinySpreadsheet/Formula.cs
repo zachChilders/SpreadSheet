@@ -42,6 +42,10 @@ namespace TinySpreadsheet
             {
                 return Double.NaN;
             }
+            catch(ArgumentNullException an)
+            {
+                return Double.NaN;
+            }
         }
 
         /// <summary>
