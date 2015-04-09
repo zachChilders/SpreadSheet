@@ -81,7 +81,7 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
-        public Column(SerializationInfo info, StreamingContext context)
+        protected Column(SerializationInfo info, StreamingContext context)
         {
             Cells = (List<Cell>) info.GetValue("cells", typeof(List<Cell>));
         }

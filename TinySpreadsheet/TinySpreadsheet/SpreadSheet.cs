@@ -9,7 +9,7 @@ using System.Windows.Controls.Ribbon;
 
 namespace TinySpreadsheet
 {
-    public partial class MainWindow: RibbonWindow, ISerializable
+    public partial class MainWindow
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
 

@@ -34,16 +34,6 @@ namespace TinySpreadsheet
         }
 
         /// <summary>
-        /// Returns the average of a cell range.
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        private static Queue<FormulaToken> Average(Queue<String> s)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Expands a string like "A1:A3" to A1, A2, A3
         /// </summary>
         /// <param name="cellRange"></param>
