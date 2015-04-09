@@ -84,10 +84,19 @@ namespace TinySpreadsheet
         /// <returns></returns>
         public static int POW(int a, int b)
         {
-            int ans = 0;
-            for (int i = 0; i < b; i++)
-            { ans *= ans; }
-            return ans;
+            int ans = a;
+            if (b == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                for (int i = 1; i < b; i++)
+                {
+                    ans *= a;
+                }
+                return ans;
+            }
         }
     }
 }

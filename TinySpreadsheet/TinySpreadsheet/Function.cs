@@ -37,8 +37,8 @@ namespace TinySpreadsheet
             int split = GetSplit(CellRange);
             if (split != -1)
             {
-                String FirstCell = CellRange.Slice(0, split);
-                String LastCell = CellRange.Slice(split, CellRange.Length);
+                String FirstCell = Extensions.Slice(CellRange, 0, split);
+                String LastCell = Extensions.Slice(CellRange, split, CellRange.Length);
                 
             }
             else
@@ -54,34 +54,35 @@ namespace TinySpreadsheet
         /// <summary>
         /// getRowIndex(string)
         /// Converts Cell row reference to an integer index. 
-        /// Example:
-        ///     A => (i)^1 = 1
-        ///     AA = (i)^2 + (i)^1= 27
-        ///     AAA = (i)^
-        /// The Function is recursive.
         /// 
-        ///     
+        /// Example:
+        ///     getRowIndex("AA") will return 27
+        ///     getRowIndex("BC") will return 55
+        /// 
         /// </summary>
         /// <param name="Row"></param>
         /// <returns></returns>
         private static int getRowIndex(string Row)
         {
-            int sum = 0;
             int lenstr = Row.Length;
-            int i = (Row[0] - 'A' + 1);
-            if (Row[0] != null)
+            int i;
+            int sum = 0;
+            if (Row == "")
             {
-                sum = (Extensions.POW(26, lenstr - 1) * i) + getRowIndex(Extensions.Slice(Row,1,lenstr));
+                return sum;
             }
-            return sum;
+            else
+            {
+                i = (Row[0] - 'A' + 1);
+                sum = (Extensions.POW(26, lenstr - 1) * i) + getRowIndex(Extensions.Slice(Row, 1, lenstr));
+                return sum;
+
+            }
         }
         private static String getRows(string row)
         {
             throw new NotImplementedException();
         }
-        private static string Slice(string Row, int p, double lenstr)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
