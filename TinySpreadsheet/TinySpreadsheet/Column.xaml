@@ -13,8 +13,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
    
-    <ListBox x:Name="CellColumn" HorizontalAlignment="Left" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
-    <Label x:Name="ColumnName"></Label>
+    <ListBox x:Name="CellColumn" Width="75" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
+        <Label x:Name="ColumnName" HorizontalContentAlignment="Center" BorderBrush="Gray" BorderThickness="1"></Label>
     </ListBox>
 
 

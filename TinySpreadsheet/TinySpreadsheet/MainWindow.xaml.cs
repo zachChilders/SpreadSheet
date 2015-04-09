@@ -52,15 +52,17 @@ namespace TinySpreadsheet
         private void ScrollViewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             ScrollViewer sv = sender as ScrollViewer;
-            if ((e.HorizontalOffset/e.ExtentWidth) > 0.75)
+            if ((sv.ScrollableWidth - sv.HorizontalOffset) < 1 && e.HorizontalChange != 0)
             {
                 CreateVerticalPage();
             }
 
-            if ((e.VerticalOffset/e.ExtentHeight) > 0.66)
+            if ((sv.ScrollableHeight - sv.VerticalOffset) < 1 && e.VerticalChange != 0)
             {
                 CreateNewRow();
             }
+            //Console.WriteLine()
+            e.Handled = true;
         }
 
         /// <summary>
@@ -71,6 +73,11 @@ namespace TinySpreadsheet
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("columns", Columns, typeof(Dictionary<String,Column>));
+        }
+
+        private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            SheetScroll.ScrollChanged += ScrollViewer_OnScrollChanged;
         }
     }
 }
