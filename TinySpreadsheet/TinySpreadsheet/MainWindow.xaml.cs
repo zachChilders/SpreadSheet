@@ -22,9 +22,13 @@ namespace TinySpreadsheet
     /// </summary>
     public partial class MainWindow : RibbonWindow, ISerializable
     {
+
+        public static MainWindow Instance;
        
         public MainWindow()
         {
+            Instance = this;
+
             InitializeComponent();
             CreateVerticalPage();
         }
@@ -44,6 +48,7 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// 
         private void ScrollViewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             ScrollViewer sv = sender as ScrollViewer;
