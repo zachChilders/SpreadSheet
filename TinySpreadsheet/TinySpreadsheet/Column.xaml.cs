@@ -29,10 +29,11 @@ namespace TinySpreadsheet
         public Column(String name)
         {
             InitializeComponent();
+
             for (int i = 0; i < 60; i++)
             {
                 Cell c = new Cell() { Name = name + i.ToString() }; //Make sure we name in addrow
-
+                ColumnName.Content = name;
                 CellColumn.Items.Add(c);
                 Cells.Add(c);
             }
