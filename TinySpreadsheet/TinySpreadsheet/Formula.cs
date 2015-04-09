@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -38,14 +39,12 @@ namespace TinySpreadsheet
             {
                 return Evaluate(pfix);
             }
-            catch(FormatException fe)
+            catch(Exception e)
             {
+                Debug.WriteLine(e.ToString());
                 return Double.NaN;
             }
-            catch(ArgumentNullException an)
-            {
-                return Double.NaN;
-            }
+          
         }
 
         /// <summary>
