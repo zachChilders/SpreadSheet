@@ -103,6 +103,7 @@ namespace TinySpreadsheet
         //Event subscriptions
         void DependencyChanged(Cell sender)
         {
+
             //throw new NotImplementedException("DependencyChanged not implemented.");
             CellDisplay = Formula.Solve(this).ToString();
             CellText.Text = CellDisplay;
