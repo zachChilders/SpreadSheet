@@ -55,9 +55,11 @@ namespace TinySpreadsheet
             CellText.LostFocus += CellText_LostFocus;
             CellText.GotFocus += CellText_GotFocus;
             CellText.KeyDown += CellText_KeyDown;
+            Focusable = true;
 
             //!GUI
             CellFormula = "";
+            CellDisplay = "";
 
             Dependencies = new DependencyMap(this);
         }
@@ -135,30 +137,33 @@ namespace TinySpreadsheet
         void CellText_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox t = sender as TextBox;
-            t.IsReadOnly = true;
 
             if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                 HighlightCleanup();
 
-            //Save cell state when we lose focus.
-            if (Dependencies != null)
-                Dependencies.Unsubscribe();
-
-            CellFormula = t.Text;
-            if ((CellFormula != "" )&& (CellFormula[0] == '='))
+            if (!t.IsReadOnly)
             {
-                CellDisplay = Formula.Solve(this).ToString();
+                //Save cell state when we lose focus.
+                if (Dependencies != null)
+                    Dependencies.Unsubscribe();
 
-                Dependencies = Tokenizer.GetDependencies(this);
-                Dependencies.SubscribeCallback = DependencyChanged;
-            }
-            else
-            {
-                CellDisplay = t.Text;
-            }
-            t.Text = CellDisplay;
+                CellFormula = t.Text;
+                if ((CellFormula != "") && (CellFormula[0] == '='))
+                {
+                    CellDisplay = Formula.Solve(this).ToString();
 
-            IChanged();
+                    Dependencies = Tokenizer.GetDependencies(this);
+                    Dependencies.SubscribeCallback = DependencyChanged;
+                }
+                else
+                {
+                    CellDisplay = t.Text;
+                }
+                t.Text = CellDisplay;
+
+                IChanged();
+            }
+            t.IsReadOnly = true;
            
         }
 
@@ -172,7 +177,10 @@ namespace TinySpreadsheet
             TextBox t = sender as TextBox;
             t.IsReadOnly = false;
             Keyboard.Focus(t);
-            t.Select(0, 0);
+
+            t.Text = CellFormula == CellDisplay ? CellFormula : "=" + CellFormula;
+
+            t.Select(t.Text.Length, 0);
 
             listParent.SelectedItems.Remove(this);
             HighlightCleanup();
@@ -205,7 +213,7 @@ namespace TinySpreadsheet
             {
                 if (t != null) t.Text += Environment.NewLine;
             }
-            else
+            else if(!t.IsReadOnly)
             {
                 if (Dependencies != null)
                     Dependencies.Unsubscribe();
@@ -225,6 +233,13 @@ namespace TinySpreadsheet
                 t.Text = CellDisplay;
 
                 IChanged();
+                t.IsReadOnly = true;
+
+                //Resets the carot
+                t.IsEnabled = false;
+                t.IsEnabled = true;
+                
+                listParent.SelectedItems.Add(this);
             }
         }
 
