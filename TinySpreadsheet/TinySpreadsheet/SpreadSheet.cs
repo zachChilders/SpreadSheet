@@ -33,8 +33,8 @@ namespace TinySpreadsheet
             foreach (KeyValuePair<string, Column> c in Columns)
             {
                 c.Value.AddRow();
-                RowCount++;
             }
+            RowCount++;
         }
 
         /// <summary>
