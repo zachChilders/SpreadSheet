@@ -40,7 +40,7 @@ namespace TinySpreadsheet
         /// <summary>
         /// Gets or sets the display text for this Cell. This is typically the evaluated CellFormula.
         /// </summary>
-        public String CellDisplay { get; private set; }
+        public String CellDisplay { get; set; }
 
         /// <summary>
         /// Creates a new Cell

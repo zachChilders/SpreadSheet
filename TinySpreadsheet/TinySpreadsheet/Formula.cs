@@ -32,6 +32,7 @@ namespace TinySpreadsheet
             {
                 return null;
             }
+
             Queue<FormulaToken> cellFormula = ResolveDependencies(Tokenizer.Tokenize(cellFormulaString));
             Queue<FormulaToken> pfix = PostFix(cellFormula); //This should be tokenized somewhere.
 

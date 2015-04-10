@@ -50,6 +50,8 @@ namespace TinySpreadsheet
         {
             get
             {
+                if (index < 0)
+                    return new Cell() { CellDisplay = "NaN" };
                 return cells[index];
             }
             set
