@@ -20,9 +20,12 @@
             <ColumnDefinition Width="Auto"/>
 
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="CellColumn" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
-            <Label x:Name="ColumnName" HorizontalContentAlignment="Center" BorderBrush="Gray" BorderThickness="1"></Label>
-        </ListBox>
+        <DockPanel>
+            <Label x:Name="ColumnName" DockPanel.Dock="Top" HorizontalContentAlignment="Center" BorderBrush="Gray" BorderThickness="1"></Label>
+            <ListBox x:Name="CellColumn" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Extended" Padding="-2" Margin="0,0,0,0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
+
+            </ListBox>
+        </DockPanel>
         <GridSplitter Grid.Column="1"
               HorizontalAlignment="Center"
               VerticalAlignment="Stretch"
