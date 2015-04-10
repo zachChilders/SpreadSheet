@@ -13,8 +13,8 @@
                 <!-- Quick Access Toolbar - located at the upper-left corner -->
                 <Ribbon.QuickAccessToolBar>
                     <RibbonQuickAccessToolBar>
-                        <RibbonButton x:Name ="Save" SmallImageSource="Images\save.png" />
-                        <RibbonSplitButton x:Name ="Undo" SmallImageSource="Images\undo.png" >
+                        <RibbonButton x:Name ="Save" SmallImageSource="Images\save.png" Click="Save_OnClick"/>
+                        <RibbonSplitButton x:Name ="Undo" SmallImageSource="Images\undo.png" Click="Undo_OnClick" >
                             <RibbonSplitMenuItem Header="Undo action #1" />
                             <RibbonSplitMenuItem Header="Undo action #2" />
                             <RibbonSplitMenuItem Header="Undo action #3" />

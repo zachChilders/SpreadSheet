@@ -100,6 +100,7 @@ namespace TinySpreadsheet
         {
             if (Changed != null)
                 Changed(this);
+            StateManager.SaveState();
         }
 
         //Event subscriptions

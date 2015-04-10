@@ -13,7 +13,7 @@ namespace TinySpreadsheet
     {
         private readonly MemoryStream state;
         private readonly IFormatter formatter;
-        private static readonly MainWindow SpreadSheet = MainWindow.Instance;
+        private static MainWindow SpreadSheet = MainWindow.Instance;
 
         /// <summary>
         /// The momento constructor takes a snapshot of our current spreadsheet,
@@ -32,7 +32,6 @@ namespace TinySpreadsheet
         public void Capture()
         {
             formatter.Serialize(state, SpreadSheet);
-            state.Close();
         }
 
         /// <summary>
@@ -51,6 +50,7 @@ namespace TinySpreadsheet
             using (FileStream fs = new FileStream("Spreadsheet.ts", FileMode.Create))
             {
                 state.WriteTo(fs);
+              //  state.Close();
             }
         }
 
@@ -62,6 +62,16 @@ namespace TinySpreadsheet
             using (FileStream fs = new FileStream("Spreadsheet.ts", FileMode.Open))
             {
                 fs.CopyTo(state);
+            }
+
+            try
+            {
+                state.Position = 0; //We have to read from beginning of the stream.
+                SpreadSheet = (MainWindow) formatter.Deserialize(state);
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Failed to deserialize: " + e.Message);
             }
         }
     }

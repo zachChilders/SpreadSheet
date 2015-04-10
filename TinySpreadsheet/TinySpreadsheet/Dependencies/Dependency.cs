@@ -5,6 +5,7 @@ using System.Text;
 
 namespace TinySpreadsheet.Dependencies
 {
+    [Serializable]
     public class Dependency
     {
         /// <summary>

@@ -9,6 +9,7 @@ using System.Windows.Controls.Ribbon;
 
 namespace TinySpreadsheet
 {
+    [Serializable]
     public partial class MainWindow
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
@@ -19,7 +20,7 @@ namespace TinySpreadsheet
         /// </summary>
         private void CreateNewColumn()
         {
-            String name = MainWindow.GenerateName();
+            String name = GenerateName();
             Column c = new Column(name);
             RowStack.Children.Add(c);
             Columns.Add(c.Name, c);
@@ -41,7 +42,7 @@ namespace TinySpreadsheet
         /// Generates a column name by converting the cell number to base 26.
         /// </summary>
         /// <returns></returns>
-        internal static String GenerateName()
+        private static String GenerateName()
         {
             int index = Columns.Count + 1;
 
@@ -64,6 +65,16 @@ namespace TinySpreadsheet
                 current /= columnBase;
             }
             return sb.ToString(offset, digitMax - offset);
+        }
+
+        private void Save_OnClick(object sender, RoutedEventArgs e)
+        {
+            StateManager.Save();
+        }
+
+        private void Undo_OnClick(object sender, RoutedEventArgs e)
+        {
+            StateManager.Load();
         }
     }
 }
