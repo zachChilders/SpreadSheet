@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace TinySpreadsheet
 {
+    /// <summary>
+    /// This manages our momento class, which allows save states.
+    /// We can Load, Save, Undo, and Redo from this class.  YAY.
+    /// </summary>
     public static class StateManager
     {
         private static readonly Stack<Momento> States = new Stack<Momento>();
@@ -15,7 +19,7 @@ namespace TinySpreadsheet
         /// <summary>
         /// Adds a momento to the internal stack
         /// </summary>
-        private static void Add()
+        public static void SaveState()
         {
             Momento m = new Momento();
             m.Capture();
@@ -26,18 +30,16 @@ namespace TinySpreadsheet
         /// Removes a momento from the stack.
         /// </summary>
         /// <returns></returns>
-        private static Momento Remove()
+        public static void RevertState()
         {
-            Momento newState = null;
             try
             {
-                newState = States.Pop();
+               States.Pop();
             }
             catch (InvalidOperationException ioe)
             {
-                Debug.WriteLine("Can't restore anymore.");
+                Debug.WriteLine("Can't revert anymore.");
             }
-            return newState;
         }
 
         /// <summary>
