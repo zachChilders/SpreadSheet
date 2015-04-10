@@ -32,7 +32,7 @@ namespace TinySpreadsheet
         /// </summary>
         private static void CreateNewRow()
         {
-            foreach (var c in Columns)
+            foreach (KeyValuePair<string, Column> c in Columns)
             {
                 c.Value.AddRow();
             }
