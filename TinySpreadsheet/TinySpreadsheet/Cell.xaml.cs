@@ -140,10 +140,26 @@ namespace TinySpreadsheet
             if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                 HighlightCleanup();
 
-            ////Save cell state when we lose focuss
-            //this.CellFormula = t.Text;
-            //cellDisplay = Formula.solve(this).ToString();
-            //t.Text = cellDisplay;
+            //Save cell state when we lose focus.
+            if (Dependencies != null)
+                Dependencies.Unsubscribe();
+
+            CellFormula = t.Text;
+            if ((CellFormula != "" )&& (CellFormula[0] == '='))
+            {
+                CellDisplay = Formula.Solve(this).ToString();
+
+                Dependencies = Tokenizer.GetDependencies(this);
+                Dependencies.SubscribeCallback = DependencyChanged;
+            }
+            else
+            {
+                CellDisplay = t.Text;
+            }
+            t.Text = CellDisplay;
+
+            IChanged();
+           
         }
 
         /// <summary>
