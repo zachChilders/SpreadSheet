@@ -12,17 +12,33 @@ namespace TinySpreadsheet
     public partial class MainWindow
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
-        public static int RowCount { get; private set; } 
+        internal static readonly LinkedList<Column> columnBuffer = new LinkedList<Column>();
+        public static readonly BufferManager bufferManager = new BufferManager();
+        public static int RowCount { get; private set; }
 
         /// <summary>
         /// Creates a new column.
         /// </summary>
         private void CreateNewColumn()
         {
-            String name = GenerateName();//Name needs to be determined on the fly.
-            Column c = new Column(name);
-            RowStack.Children.Add(c);
-            Columns.Add(name, c);
+            Column c;
+
+
+            if (columnBuffer.Count > 0 && columnBuffer.First.Value != null)
+            {
+                c = columnBuffer.First.Value;
+                columnBuffer.RemoveFirst();
+                c.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                String name = MainWindow.GenerateName();
+                c = new Column(name);
+                RowStack.Children.Add(c);
+
+            }
+
+            Columns.Add(c.Name, c);
         }
 
         /// <summary>
@@ -41,9 +57,9 @@ namespace TinySpreadsheet
         /// Generates a column name by converting the cell number to base 26.
         /// </summary>
         /// <returns></returns>
-        private static String GenerateName()
+        internal static String GenerateName()
         {
-            int index = Columns.Count + 1;
+            int index = Columns.Count + columnBuffer.Count + 1;
 
             const int columnBase = 26;
             const int digitMax = 7; // ceil(log26(Int32.Max))
