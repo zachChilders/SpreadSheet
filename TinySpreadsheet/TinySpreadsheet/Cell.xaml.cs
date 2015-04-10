@@ -211,7 +211,7 @@ namespace TinySpreadsheet
                     Dependencies.Unsubscribe();
 
                 CellFormula = t.Text;
-                if (CellFormula[0] == '=')
+                if ((CellFormula != "" ) && (CellFormula[0] == '='))
                 {
                     CellDisplay = Formula.Solve(this).ToString();
 
