@@ -54,7 +54,7 @@
                     </RibbonGroup>
                 </RibbonTab>
             </Ribbon>
-            <ScrollViewer x:Name="SheetScroll" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"  VerticalAlignment="Stretch">
+            <ScrollViewer x:Name="SheetScroll" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" PreviewMouseWheel="ListViewScrollViewer_PreviewMouseWheel">
                 <StackPanel x:Name="RowStack" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Top">
 
                 </StackPanel>

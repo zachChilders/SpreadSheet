@@ -89,5 +89,17 @@ namespace TinySpreadsheet
         {
             SheetScroll.ScrollChanged += ScrollViewer_OnScrollChanged;
         }
+
+        /// <summary>
+        /// Allows our main ScrollViewer to handle the mouse wheel.
+        /// </summary>
+        /// <param name="sender">The ScrollViewer</param>
+        /// <param name="e">The wheel event information.</param>
+        private void ListViewScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
     }
 }

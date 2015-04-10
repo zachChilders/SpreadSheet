@@ -65,9 +65,5 @@ namespace TinySpreadsheet
             }
             return sb.ToString(offset, digitMax - offset);
         }
-
-
-
-
     }
 }
