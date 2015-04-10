@@ -9,7 +9,7 @@ using System.Windows.Controls.Ribbon;
 
 namespace TinySpreadsheet
 {
-    public partial class MainWindow: RibbonWindow, ISerializable
+    public partial class MainWindow
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
 
@@ -32,7 +32,7 @@ namespace TinySpreadsheet
         /// </summary>
         private static void CreateNewRow()
         {
-            foreach (var c in Columns)
+            foreach (KeyValuePair<string, Column> c in Columns)
             {
                 c.Value.AddRow();
             }

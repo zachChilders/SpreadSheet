@@ -10,12 +10,12 @@ namespace TinySpreadsheet
 {
     public static class StateManager
     {
-        private static Stack<Momento> States = new Stack<Momento>();
+        private static readonly Stack<Momento> States = new Stack<Momento>();
 
         /// <summary>
         /// Adds a momento to the internal stack
         /// </summary>
-        private static void add()
+        private static void Add()
         {
             Momento m = new Momento();
             m.Capture();
@@ -26,7 +26,7 @@ namespace TinySpreadsheet
         /// Removes a momento from the stack.
         /// </summary>
         /// <returns></returns>
-        private static Momento remove()
+        private static Momento Remove()
         {
             Momento newState = null;
             try

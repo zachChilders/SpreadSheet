@@ -34,16 +34,6 @@ namespace TinySpreadsheet
         }
 
         /// <summary>
-        /// Returns the average of a cell range.
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        private static Queue<FormulaToken> Average(Queue<String> s)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Expands a string like "A1:A3" to A1, A2, A3
         /// </summary>
         /// <param name="cellRange"></param>
@@ -95,13 +85,9 @@ namespace TinySpreadsheet
             {
                 return sum;
             }
-            else
-            {
-                int i = (row[0] - 'A' + 1);
-                sum = (Extensions.Pow(26, lenstr - 1) * i) + GetRowIndex(row.Slice(1, lenstr));
-                return sum;
-
-            }
+            int i = (row[0] - 'A' + 1);
+            sum = (int) ((Math.Pow(26, lenstr - 1) * i) + GetRowIndex(row.Slice(1, lenstr)));
+            return sum;
         }
 
         /// <summary>
