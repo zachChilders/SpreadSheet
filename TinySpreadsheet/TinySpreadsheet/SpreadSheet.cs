@@ -12,19 +12,17 @@ namespace TinySpreadsheet
     public partial class MainWindow
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
+        public static int RowCount { get; private set; } 
 
         /// <summary>
-        /// Creates 26 new columns.
+        /// Creates a new column.
         /// </summary>
-        private void CreateVerticalPage()
+        private void CreateNewColumn()
         {
-            for (int j = 0; j < 26; j++)
-            {
-                String name = GenerateName();//Name needs to be determined on the fly.
-                Column c = new Column(name);
-                RowStack.Children.Add(c);
-                Columns.Add(name, c);
-            }
+            String name = GenerateName();//Name needs to be determined on the fly.
+            Column c = new Column(name);
+            RowStack.Children.Add(c);
+            Columns.Add(name, c);
         }
 
         /// <summary>
@@ -35,6 +33,7 @@ namespace TinySpreadsheet
             foreach (KeyValuePair<string, Column> c in Columns)
             {
                 c.Value.AddRow();
+                RowCount++;
             }
         }
 

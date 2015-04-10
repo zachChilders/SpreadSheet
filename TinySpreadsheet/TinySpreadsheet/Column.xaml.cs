@@ -30,7 +30,7 @@ namespace TinySpreadsheet
         {
             InitializeComponent();
 
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < MainWindow.RowCount; i++)
             {
                 Cell c = new Cell() { Name = name + i.ToString() }; //Make sure we name in addrow
                 ColumnName.Content = name;

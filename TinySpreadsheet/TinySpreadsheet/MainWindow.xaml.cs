@@ -29,7 +29,10 @@ namespace TinySpreadsheet
         {
             Instance = this;
             InitializeComponent();
-            CreateVerticalPage();
+
+            RowCount = 60;
+            for (int i = 0; i < 26; i++ )
+                CreateNewColumn();
         }
 
         /// <summary>
@@ -54,12 +57,14 @@ namespace TinySpreadsheet
             ScrollViewer sv = sender as ScrollViewer;
             if (sv != null && ((sv.ScrollableWidth - sv.HorizontalOffset) < 1 && Math.Abs(e.HorizontalChange) > tolerance))
             {
-                CreateVerticalPage();
+                CreateNewColumn();
+                sv.ScrollToHorizontalOffset(sv.HorizontalOffset + 75);
             }
 
             if (sv != null && ((sv.ScrollableHeight - sv.VerticalOffset) < 1 && Math.Abs(e.VerticalChange) > tolerance))
             {
                 CreateNewRow();
+                sv.ScrollToVerticalOffset(sv.VerticalOffset + 30);
             }
             //Console.WriteLine()
             e.Handled = true;
