@@ -12,10 +12,27 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-   
-    <ListBox x:Name="CellColumn" Width="75" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
-        <Label x:Name="ColumnName" HorizontalContentAlignment="Center" BorderBrush="Gray" BorderThickness="1"></Label>
-    </ListBox>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="CellColumn"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Extended" Padding="-2" Margin="0" BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle2}">
+
+            <Label x:Name="ColumnName" HorizontalContentAlignment="Center" BorderBrush="Gray" BorderThickness="1"></Label>
+        </ListBox>
+        <GridSplitter Grid.Column="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Stretch"
+              Background="Transparent"
+                      Margin="-2"
+              ShowsPreview="True"
+              Width="5"
+              />
+    </Grid>
 
 
 </UserControl>
