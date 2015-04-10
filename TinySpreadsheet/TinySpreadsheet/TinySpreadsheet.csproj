@@ -74,7 +74,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BufferManager.cs" />
     <Compile Include="Dependencies\Dependency.cs" />
     <Compile Include="Dependencies\DependencyMap.cs" />
     <Compile Include="Dependencies\DependencyMapWrapping.cs" />

@@ -30,8 +30,6 @@ namespace TinySpreadsheet
             Instance = this;
             InitializeComponent();
 
-            //bufferManager.Start();
-
             RowCount = 60;
             for (int i = 0; i < 26; i++ )
                 CreateNewColumn();
@@ -106,7 +104,6 @@ namespace TinySpreadsheet
 
         private void RibbonWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bufferManager.Work = false;
         }
     }
 }
