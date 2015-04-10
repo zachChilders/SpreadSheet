@@ -85,9 +85,13 @@ namespace TinySpreadsheet
             {
                 return sum;
             }
-            int i = (row[0] - 'A' + 1);
-            sum = (int) ((Math.Pow(26, lenstr - 1) * i) + GetRowIndex(row.Slice(1, lenstr)));
-            return sum;
+            else
+            {
+                int i = (row[0] - 'A' + 1);
+                sum = (int) ((Math.Pow(26, lenstr - 1) * i) + GetRowIndex(row.Slice(1, lenstr)));
+                return sum;
+
+            }
         }
 
         /// <summary>

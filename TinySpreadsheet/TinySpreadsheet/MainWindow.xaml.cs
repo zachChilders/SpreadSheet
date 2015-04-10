@@ -20,7 +20,7 @@ namespace TinySpreadsheet
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : RibbonWindow, ISerializable
+    public partial class MainWindow : ISerializable
     {
 
         public static MainWindow Instance;
@@ -28,7 +28,6 @@ namespace TinySpreadsheet
         public MainWindow()
         {
             Instance = this;
-
             InitializeComponent();
             CreateVerticalPage();
         }
@@ -51,13 +50,14 @@ namespace TinySpreadsheet
         /// 
         private void ScrollViewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
+            const double tolerance = 0.0000000001;
             ScrollViewer sv = sender as ScrollViewer;
-            if ((sv.ScrollableWidth - sv.HorizontalOffset) < 1 && e.HorizontalChange != 0)
+            if (sv != null && ((sv.ScrollableWidth - sv.HorizontalOffset) < 1 && Math.Abs(e.HorizontalChange) > tolerance))
             {
                 CreateVerticalPage();
             }
 
-            if ((sv.ScrollableHeight - sv.VerticalOffset) < 1 && e.VerticalChange != 0)
+            if (sv != null && ((sv.ScrollableHeight - sv.VerticalOffset) < 1 && Math.Abs(e.VerticalChange) > tolerance))
             {
                 CreateNewRow();
             }
@@ -75,6 +75,11 @@ namespace TinySpreadsheet
             info.AddValue("columns", Columns, typeof(Dictionary<String,Column>));
         }
 
+        /// <summary>
+        /// Ribbon is loaded.  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
         {
             SheetScroll.ScrollChanged += ScrollViewer_OnScrollChanged;
