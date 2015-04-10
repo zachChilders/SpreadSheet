@@ -30,6 +30,8 @@ namespace TinySpreadsheet
         {
             InitializeComponent();
 
+            Name = name;
+
             for (int i = 0; i < MainWindow.RowCount; i++)
             {
                 Cell c = new Cell() { Name = name + i.ToString() }; //Make sure we name in addrow
