@@ -31,8 +31,11 @@ namespace TinySpreadsheet
             InitializeComponent();
 
             RowCount = 60;
-            for (int i = 0; i < 26; i++ )
+            const int initialColumnCount = 26;
+            for (int i = 0; i < initialColumnCount; i++ )
                 CreateNewColumn();
+            rowMax.Push(0);
+            columnMax.Push("A");
         }
 
         /// <summary>

@@ -15,6 +15,9 @@ namespace TinySpreadsheet
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
         public static int RowCount { get; private set; }
 
+        public static Stack<int> rowMax = new Stack<int>();
+        public static Stack<String> columnMax = new Stack<string>(); 
+
         /// <summary>
         /// Creates a new column.
         /// </summary>

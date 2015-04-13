@@ -65,7 +65,7 @@ namespace TinySpreadsheet
         /// </summary>
         public void AddRow()
         {
-            Cell c = new Cell();
+            Cell c = new Cell(){Name = Name + cells.Count.ToString()};
             CellColumn.Items.Add(c);
             cells.Add(c);
         }

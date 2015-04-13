@@ -100,7 +100,8 @@ namespace TinySpreadsheet
         {
             if (Changed != null)
                 Changed(this);
-            StateManager.SaveState();
+            StateManager.SaveState(); //Save our current state
+            EvaluateMaxBounds(); //Check for maxes
         }
 
         //Event subscriptions
@@ -256,6 +257,46 @@ namespace TinySpreadsheet
             info.AddValue("display", CellDisplay, typeof(String));
         }
 
-        
+        /// <summary>
+        /// Checks if a cell is either the max row or max column,
+        /// and then updates spreadsheet if it is.
+        /// </summary>
+        private void EvaluateMaxBounds()
+        {
+            int i = 0;
+            char c = Name[i];
+            while (char.IsLetter(c))
+            {
+                c = Name[++i];
+            }
+
+            String column = Name.Slice(0, i);
+            int row = Int32.Parse(Name.Slice(i, Name.Length));
+            if (String.Compare(column, MainWindow.columnMax.Peek()) >= 0)
+            {
+                if (CellFormula != "") //If we have something in the cell, we found a new max.
+                {
+                    MainWindow.columnMax.Push(column);
+                }
+                else //If we don't have something in the cell, we deleted the old max.
+                {
+                    MainWindow.columnMax.Pop();
+                }
+            }
+
+            if (row >= MainWindow.rowMax.Peek()) //Row is greater than Max Row
+            {
+                if (CellFormula != "") //If we have something in the cell, we found a new max.
+                {
+                    MainWindow.rowMax.Push(row);
+                }
+                else //If we don't have something in the cell, we deleted the old max.
+                {
+                    MainWindow.rowMax.Pop();
+                }
+            }
+
+
+        }
     }
 }
