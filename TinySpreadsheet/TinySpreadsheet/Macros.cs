@@ -13,10 +13,61 @@ namespace TinySpreadsheet
         /// Returns the average of a cell range.
         /// </summary>
         /// <param name="s"></param>
-        /// <returns></returns>
-        private static Queue<FormulaToken> Average(Queue<String> s)
+        /// <returns>((A1 + A2 + A3)/3)</returns>
+        private static String Average(Queue<String> s)
         {
-            throw new NotImplementedException();
+            StringBuilder sum = new StringBuilder();
+            sum.Append("((");
+            foreach (Cell c in s.Select(Tokenizer.ExtractCell))
+            {
+                sum.Append(c.CellFormula);
+                sum.Append("+");
+            }
+            sum.Remove(sum.Length - 1, 1);
+            sum.Append(")/");
+            sum.Append(s.Count.ToString());
+            sum.Append(")");
+            return sum.ToString();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static String Sum(Queue<String> s)
+        {
+            StringBuilder sum = new StringBuilder();
+            sum.Append("(");
+            foreach (Cell c in s.Select(Tokenizer.ExtractCell))
+            {
+                sum.Append(c.CellFormula);
+                sum.Append("+");
+            }
+            sum.Remove(sum.Length - 1, 1);
+            sum.Append(")");
+            return sum.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static String Product(Queue<String> s)
+        {
+            StringBuilder sum = new StringBuilder();
+            sum.Append("(");
+            foreach (Cell c in s.Select(Tokenizer.ExtractCell))
+            {
+                sum.Append(c.CellFormula);
+                sum.Append("*");
+            }
+            sum.Remove(sum.Length - 1, 1);
+            sum.Append(")");
+            return sum.ToString();
+        }
+
+
     }
 }

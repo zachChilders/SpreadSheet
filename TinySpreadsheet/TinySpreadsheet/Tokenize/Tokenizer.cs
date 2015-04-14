@@ -137,7 +137,7 @@ namespace TinySpreadsheet.Tokenize
             {
                 if (t.Type == TokenType.CELL)
                 {
-                    //Find the cell reference from map of Columns with index
+                    //Find the cell reference from map of SpreadSheet with index
                     dependencies.Add(new Dependency(ExtractCell(t.Token.Replace("-", "")), true));
                 }
             }
@@ -180,7 +180,7 @@ namespace TinySpreadsheet.Tokenize
             if (!Int32.TryParse(row.ToString(), out index))
                 throw new Exception("Not a cell");
 
-            return MainWindow.Columns[column.ToString().ToUpper()][index - 1];
+            return MainWindow.SpreadSheet[column.ToString().ToUpper()][index - 1];
         }
 
         /// <summary>

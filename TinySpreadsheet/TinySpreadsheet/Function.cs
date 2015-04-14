@@ -9,7 +9,7 @@ namespace TinySpreadsheet
 {
     public static partial class Function
     {
-        private static readonly Dictionary<String, Func<Queue<String>, Queue<FormulaToken>>> LookupTable = new Dictionary<String, Func<Queue<String>, Queue<FormulaToken>>>();
+        private static readonly Dictionary<String, Func<Queue<String>, String>> LookupTable = new Dictionary<String, Func<Queue<String>,String>>();
 
         /// <summary>
         /// Constructor builds a lookup table of functions.
@@ -17,6 +17,8 @@ namespace TinySpreadsheet
         static Function()
         {
             LookupTable.Add("AVG", Average); // This adds the Average function under AVG
+            LookupTable.Add("SUM", Sum);
+            LookupTable.Add("MUL", Product);
         }
 
         /// <summary>

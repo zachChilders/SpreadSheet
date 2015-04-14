@@ -258,7 +258,7 @@ namespace TinySpreadsheet
 
             if (CellFormula != "") //If we have something in the cell, we found a new max.
             {
-                MainWindow.rowMax.Add(row);
+                MainWindow.rowMax.SortedInsert(row);
             }
             else //If we don't have something in the cell, we deleted the old max.
             {

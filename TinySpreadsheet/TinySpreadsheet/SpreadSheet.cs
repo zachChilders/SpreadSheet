@@ -12,7 +12,7 @@ namespace TinySpreadsheet
 {
     public partial class MainWindow
     {
-        public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
+        public static Dictionary<String, Column> SpreadSheet = new Dictionary<String, Column>();
         public static int RowCount { get; private set; }
 
         public static List<int> rowMax = new List<int>();
@@ -26,7 +26,7 @@ namespace TinySpreadsheet
             String name = GenerateName();
             Column c = new Column(name);
             RowStack.Children.Add(c);
-            Columns.Add(c.Name, c);
+            SpreadSheet.Add(c.Name, c);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace TinySpreadsheet
         /// </summary>
         private static void CreateNewRow()
         {
-            foreach (KeyValuePair<string, Column> c in Columns)
+            foreach (KeyValuePair<string, Column> c in SpreadSheet)
             {
                 c.Value.AddRow();
             }
@@ -47,7 +47,7 @@ namespace TinySpreadsheet
         /// <returns></returns>
         private static String GenerateName()
         {
-            int index = Columns.Count + 1;
+            int index = SpreadSheet.Count + 1;
 
             const int columnBase = 26;
             const int digitMax = 7; // ceil(log26(Int32.Max))
@@ -70,14 +70,22 @@ namespace TinySpreadsheet
             return sb.ToString(offset, digitMax - offset);
         }
 
+        /// <summary>
+        /// Gets the greatest relevant column
+        /// </summary>
+        /// <returns></returns>
         public String GetMaxColumn()
         {
-            return MainWindow.colMax[MainWindow.colMax.Count - 1];
+            return colMax[colMax.Count - 1];
         }
 
+        /// <summary>
+        /// Gets the greatest relevant row
+        /// </summary>
+        /// <returns></returns>
         public String GetMaxRow()
         {
-            return MainWindow.colMax[MainWindow.rowMax.Count - 1];
+            return colMax[rowMax.Count - 1];
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
