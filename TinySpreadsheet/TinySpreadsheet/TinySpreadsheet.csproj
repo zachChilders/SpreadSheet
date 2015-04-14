@@ -77,9 +77,8 @@
     <Compile Include="Dependencies\Dependency.cs" />
     <Compile Include="Dependencies\DependencyMap.cs" />
     <Compile Include="Dependencies\DependencyMapWrapping.cs" />
-    <Compile Include="..\..\..\..\..\Desktop\Spreadsheet\Function.cs">
-      <Link>Function.cs</Link>
-    </Compile>
+    <Compile Include="Function.cs" />
+    <Compile Include="Macros.cs" />
     <Compile Include="Momento.cs" />
     <Compile Include="SpreadSheet.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />

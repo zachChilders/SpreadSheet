@@ -52,6 +52,8 @@
                     <!-- Launch/Games group-->
                     <RibbonGroup x:Name="App" Header="Apps">
                     </RibbonGroup>
+
+                    <TextBox x:Name="FormulaBox" VerticalAlignment="Center" HorizontalAlignment="Left" Width="450"/>
                 </RibbonTab>
             </Ribbon>
             <ScrollViewer x:Name="SheetScroll" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" PreviewMouseWheel="ListViewScrollViewer_PreviewMouseWheel" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
