@@ -22,8 +22,7 @@ namespace TinySpreadsheet
     /// <summary>
     /// A cell setup for UI with Spreadsheet interaction logic built in.
     /// </summary>
-    [Serializable]
-    public partial class Cell : UserControl, ISerializable
+    public partial class Cell : UserControl
     {
         ListBox listParent;
 
@@ -62,19 +61,6 @@ namespace TinySpreadsheet
             CellDisplay = "";
 
             Dependencies = new DependencyMap(this);
-        }
-
-
-        /// <summary>
-        /// Deserialization Constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public Cell(SerializationInfo info, StreamingContext context)
-        {
-            Dependencies = (DependencyMap) info.GetValue("dependencies", typeof (DependencyMap)); // This probably doesn't work
-            CellFormula = (String)info.GetValue("formula", typeof(String));
-            CellDisplay = (String)info.GetValue("display", typeof(String));
         }
 
         /// <summary>
@@ -166,7 +152,7 @@ namespace TinySpreadsheet
                 IChanged();
             }
             t.IsReadOnly = true;
-           
+
         }
 
         /// <summary>
@@ -215,13 +201,13 @@ namespace TinySpreadsheet
             {
                 if (t != null) t.Text += Environment.NewLine;
             }
-            else if(!t.IsReadOnly)
+            else if (!t.IsReadOnly)
             {
                 if (Dependencies != null)
                     Dependencies.Unsubscribe();
 
                 CellFormula = t.Text;
-                if ((CellFormula != "" ) && (CellFormula[0] == '='))
+                if ((CellFormula != "") && (CellFormula[0] == '='))
                 {
                     CellDisplay = Formula.Solve(this).ToString();
 
@@ -240,21 +226,9 @@ namespace TinySpreadsheet
                 //Resets the carot
                 t.IsEnabled = false;
                 t.IsEnabled = true;
-                
+
                 listParent.SelectedItems.Add(this);
             }
-        }
-
-        /// <summary>
-        /// Cell Serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("dependencies", Dependencies, typeof(DependencyMap));
-            info.AddValue("formula", CellFormula, typeof(String));
-            info.AddValue("display", CellDisplay, typeof(String));
         }
 
         /// <summary>
@@ -272,30 +246,24 @@ namespace TinySpreadsheet
 
             String column = Name.Slice(0, i);
             int row = Int32.Parse(Name.Slice(i, Name.Length));
-            if (String.Compare(column, MainWindow.columnMax.Peek()) >= 0)
+
+            if (CellFormula != "") //If we have something in the cell, we found a new max.
             {
-                if (CellFormula != "") //If we have something in the cell, we found a new max.
-                {
-                    MainWindow.columnMax.Push(column);
-                }
-                else //If we don't have something in the cell, we deleted the old max.
-                {
-                    MainWindow.columnMax.Pop();
-                }
+                MainWindow.colMax.SortedInsert(column);
+            }
+            else //If we don't have something in the cell, we deleted the old max.
+            {
+                MainWindow.colMax.RemoveAt(MainWindow.colMax.Count - 1);
             }
 
-            if (row >= MainWindow.rowMax.Peek()) //Row is greater than Max Row
+            if (CellFormula != "") //If we have something in the cell, we found a new max.
             {
-                if (CellFormula != "") //If we have something in the cell, we found a new max.
-                {
-                    MainWindow.rowMax.Push(row);
-                }
-                else //If we don't have something in the cell, we deleted the old max.
-                {
-                    MainWindow.rowMax.Pop();
-                }
+                MainWindow.rowMax.Add(row);
             }
-
+            else //If we don't have something in the cell, we deleted the old max.
+            {
+                MainWindow.rowMax.RemoveAt(MainWindow.rowMax.Count - 1);
+            }
 
         }
     }

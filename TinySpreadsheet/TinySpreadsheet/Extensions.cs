@@ -78,6 +78,17 @@ namespace TinySpreadsheet
             return source.Substring(start, len); // Return Substring of length
         }
 
+        public static void SortedInsert(this List<String> l, String o)
+        {
+            l.Add(o);
+            l.Sort();
+        }
+
+        public static void SortedInsert(this List<int> l, int o)
+        {
+            l.Add(o);
+            l.Sort();
+        }
 
         /// <summary>
         /// Power function that takes and returns integers.

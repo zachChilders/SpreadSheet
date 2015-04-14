@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,14 +10,13 @@ using System.Windows.Controls.Ribbon;
 
 namespace TinySpreadsheet
 {
-    [Serializable]
     public partial class MainWindow
     {
         public static Dictionary<String, Column> Columns = new Dictionary<String, Column>();
         public static int RowCount { get; private set; }
 
-        public static Stack<int> rowMax = new Stack<int>();
-        public static Stack<String> columnMax = new Stack<string>(); 
+        public static List<int> rowMax = new List<int>();
+        public static List<String> colMax = new List<String>(); 
 
         /// <summary>
         /// Creates a new column.
@@ -68,6 +68,16 @@ namespace TinySpreadsheet
                 current /= columnBase;
             }
             return sb.ToString(offset, digitMax - offset);
+        }
+
+        public String GetMaxColumn()
+        {
+            return MainWindow.colMax[MainWindow.colMax.Count - 1];
+        }
+
+        public String GetMaxRow()
+        {
+            return MainWindow.colMax[MainWindow.rowMax.Count - 1];
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e)

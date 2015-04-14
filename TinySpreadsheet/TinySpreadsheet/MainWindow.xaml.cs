@@ -20,9 +20,8 @@ namespace TinySpreadsheet
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : ISerializable
+    public partial class MainWindow 
     {
-
         public static MainWindow Instance;
        
         public MainWindow()
@@ -34,18 +33,7 @@ namespace TinySpreadsheet
             const int initialColumnCount = 26;
             for (int i = 0; i < initialColumnCount; i++ )
                 CreateNewColumn();
-            rowMax.Push(0);
-            columnMax.Push("A");
-        }
-
-        /// <summary>
-        /// Deserialization
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public MainWindow(SerializationInfo info, StreamingContext context)
-        {
-            Columns = (Dictionary<String, Column>) info.GetValue("columns", typeof(Dictionary<String, Column>));
+            
         }
 
         /// <summary>
@@ -71,16 +59,6 @@ namespace TinySpreadsheet
             }
             //Console.WriteLine()
             e.Handled = true;
-        }
-
-        /// <summary>
-        /// Serialization
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("columns", Columns, typeof(Dictionary<String,Column>));
         }
 
         /// <summary>

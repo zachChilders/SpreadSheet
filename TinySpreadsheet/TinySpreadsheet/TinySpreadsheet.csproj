@@ -80,6 +80,7 @@
     <Compile Include="Function.cs" />
     <Compile Include="Macros.cs" />
     <Compile Include="Momento.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="SpreadSheet.cs" />
     <Compile Include="StateManager.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
