@@ -38,7 +38,7 @@ namespace TinySpreadsheet
             //Get first 3 letters
             //Lookup in dictionary
             //call on expanded cell range
-           // LookupTable["AVG"](jrrToken.ToString()); // this calls the function from lookup table
+            // LookupTable["AVG"](jrrToken.ToString()); // this calls the function from lookup table
             throw new NotImplementedException();
         }
 
@@ -49,29 +49,41 @@ namespace TinySpreadsheet
         /// <returns>Every Cell in a given range</returns>
         private static Queue<String> ExpandCellRange(String cellRange)
         {
-            throw new NotImplementedException();
-            int split = GetSplit(cellRange);
+            int split = cellRange.IndexOf(':');
             if (split != -1)
             {
-                String firstCell = cellRange.Slice(0, split);
-                String lastCell = cellRange.Slice(split, cellRange.Length);
-                
+                //split range into two cells
+                string firstCell = cellRange.Slice(0, split);
+                string lastCell = cellRange.Slice(split, cellRange.Length);
+
+                //get column and row values
+                int firstCol = getColumnIndex(getColumn(firstCell));
+                int lastCol = getColumnIndex(getColumn(lastCell));
+                int firstRow = getRow(firstCell);
+                int lastRow = getRow(lastCell);
+
+                Queue<String> Cells = new Queue<String>();
+                // insert  to queue
+                for (int i = firstCol; i <= lastCol; i++)
+                {
+                    for (int j = firstRow; j <= lastRow; j++)
+                    {
+                        String cell = MainWindow.GenerateName(i);
+                        String row = j.ToString();
+                        cell = cell + row;
+                        Cells.Enqueue(cell);
+                    }
+                }
+                return Cells;
+
             }
+
             else
             {
                 System.Console.WriteLine("Format must be: A1:A5");
+                return null;
             }
-        }
 
-        /// <summary>
-        /// Finds first occurence of ":" in a given string.
-        /// </summary>
-        /// <param name="cellRange"></param>
-        /// <returns>The index of ":"</returns>
-        private static int GetSplit(String cellRange)
-        {
-            int split = cellRange.IndexOf(':');
-            return split;
         }
 
 
@@ -82,22 +94,19 @@ namespace TinySpreadsheet
         /// Example:
         ///     getRowIndex("AA") will return 27
         ///     getRowIndex("BC") will return 55
-        /// 
         /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        private static int GetRowIndex(String row)
+        private static int getColumnIndex(String col)
         {
-            int lenstr = row.Length;
+            int lenstr = col.Length;
             int sum = 0;
-            if (row == "")
+            if (col == "")
             {
                 return sum;
             }
             else
             {
-                int i = (row[0] - 'A' + 1);
-                sum = (int) ((Math.Pow(26, lenstr - 1) * i) + GetRowIndex(row.Slice(1, lenstr)));
+                int i = (col[0] - 'A');
+                sum = (Extensions.Pow(26, lenstr - 1) * i) + getColumnIndex(col.Slice(1, lenstr));
                 return sum;
 
             }
@@ -108,10 +117,35 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        private static String GetRows(String row)
+        private static string getColumn(string cell)
         {
-            throw new NotImplementedException();
+            System.Text.StringBuilder column = new System.Text.StringBuilder();
+            foreach (char c in cell)
+            {
+                if (Char.IsLetter(cell[c]))
+                {
+                    column.Append(c);
+                }
+            }
+
+            return column.ToString();
         }
+
+        private static int getRow(string cell)
+        {
+            System.Text.StringBuilder row = new System.Text.StringBuilder();
+            foreach (char c in cell)
+            {
+                if (Char.IsNumber(cell[c]))
+                {
+                    row.Append(c);
+                }
+
+            }
+            int thisrow = int.Parse(row.ToString());
+            return thisrow;
+        }
+
 
     }
 }
