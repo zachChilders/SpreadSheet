@@ -23,7 +23,7 @@ namespace TinySpreadsheet
         /// </summary>
         private void CreateNewColumn()
         {
-            String name = GenerateName();
+            String name = GenerateName(SpreadSheet.Count + 1);
             Column c = new Column(name);
             RowStack.Children.Add(c);
             SpreadSheet.Add(c.Name, c);
@@ -45,9 +45,8 @@ namespace TinySpreadsheet
         /// Generates a column name by converting the cell number to base 26.
         /// </summary>
         /// <returns></returns>
-        private static String GenerateName()
+        internal static String GenerateName(int index)
         {
-            int index = SpreadSheet.Count + 1;
 
             const int columnBase = 26;
             const int digitMax = 7; // ceil(log26(Int32.Max))
@@ -90,12 +89,12 @@ namespace TinySpreadsheet
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
-            StateManager.Save();
+            //StateManager.Save();
         }
 
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {
-            StateManager.Load();
+            //StateManager.Load();
         }
     }
 }

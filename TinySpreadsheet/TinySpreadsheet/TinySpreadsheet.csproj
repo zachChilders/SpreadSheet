@@ -77,11 +77,11 @@
     <Compile Include="Dependencies\Dependency.cs" />
     <Compile Include="Dependencies\DependencyMap.cs" />
     <Compile Include="Dependencies\DependencyMapWrapping.cs" />
-    <Compile Include="Function.cs" />
-    <Compile Include="Macros.cs" />
+    <Compile Include="..\..\..\..\..\Desktop\Spreadsheet\Function.cs">
+      <Link>Function.cs</Link>
+    </Compile>
     <Compile Include="Momento.cs" />
     <Compile Include="SpreadSheet.cs" />
-    <Compile Include="StateManager.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />
     <Compile Include="Wolfram.cs" />
@@ -168,9 +168,6 @@
     <Resource Include="Images\redo.png" />
     <Resource Include="Images\save.png" />
     <Resource Include="Images\undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <SplashScreen Include="Images\ZH89D7a.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
