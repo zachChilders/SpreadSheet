@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="TinySpreadsheet.Row"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sprd="clr-namespace:TinySpreadsheet"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto"/>
+
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="RowStack">
+            <Label x:Name="ColumnName" DockPanel.Dock="Top" HorizontalContentAlignment="Center" BorderBrush="Gray" BorderThickness="1" Content=" " Margin="0,0,0,-1"></Label>
+        </StackPanel>
+        <GridSplitter Grid.Column="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Stretch"
+              Background="Transparent"
+                      Margin="-2"
+              ShowsPreview="True"
+              Width="5"
+              />
+    </Grid>
+</UserControl>

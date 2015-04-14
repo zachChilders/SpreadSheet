@@ -22,6 +22,11 @@ namespace TinySpreadsheet
     {
         private readonly List<Cell> cells = new List<Cell>();
 
+        public Column()
+        {
+            InitializeComponent();
+        }
+
         /// <summary>
         /// A simple constructor initializing 30 cells. Temporary.
         /// </summary>
