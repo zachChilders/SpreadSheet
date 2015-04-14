@@ -27,10 +27,11 @@ namespace TinySpreadsheet
         public MainWindow()
         {
             Instance = this;
-            InitializeComponent();
-
             RowCount = 60;
             const int initialColumnCount = 26;
+
+            InitializeComponent();
+
             for (int i = 0; i < initialColumnCount; i++ )
                 CreateNewColumn();
             

@@ -32,8 +32,9 @@ namespace TinySpreadsheet
         /// <summary>
         /// Generates a new row in every column
         /// </summary>
-        private static void CreateNewRow()
+        private void CreateNewRow()
         {
+            RowColumn.AddRow();
             foreach (KeyValuePair<string, Column> c in SpreadSheet)
             {
                 c.Value.AddRow();

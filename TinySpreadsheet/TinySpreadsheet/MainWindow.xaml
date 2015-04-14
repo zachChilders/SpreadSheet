@@ -1,7 +1,7 @@
 ﻿<RibbonWindow x:Class="TinySpreadsheet.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- 
+        xmlns:sprd="clr-namespace:TinySpreadsheet"
         Title="Tiny Spreadsheet" Height="Auto"  Width="Auto" WindowStartupLocation="CenterScreen" Loaded="RibbonWindow_Loaded" Closing="RibbonWindow_Closing">
     <Grid>
         <DockPanel>
@@ -58,7 +58,7 @@
             </Ribbon>
             <ScrollViewer x:Name="SheetScroll" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" PreviewMouseWheel="ListViewScrollViewer_PreviewMouseWheel" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
                 <StackPanel x:Name="RowStack" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Top">
-
+                    <sprd:Row x:Name="RowColumn"></sprd:Row>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
