@@ -86,7 +86,7 @@ namespace TinySpreadsheet
         {
             if (Changed != null)
                 Changed(this);
-            StateManager.SaveState(); //Save our current state
+           // StateManager.SaveState(); //Save our current state
             EvaluateMaxBounds(); //Check for maxes
         }
 

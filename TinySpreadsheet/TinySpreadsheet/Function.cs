@@ -19,6 +19,13 @@ namespace TinySpreadsheet
             LookupTable.Add("AVG", Average); // This adds the Average function under AVG
             LookupTable.Add("SUM", Sum);
             LookupTable.Add("MUL", Product);
+            LookupTable.Add("RND", Random);
+            LookupTable.Add("SIN", Sine);
+            LookupTable.Add("COS", Cosine);
+            LookupTable.Add("TAN", Tangent);
+            LookupTable.Add("LOG", Logarithm);
+            LookupTable.Add("SRT", SquareRoot);
+
         }
 
         /// <summary>

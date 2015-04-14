@@ -68,6 +68,61 @@ namespace TinySpreadsheet
             return sum.ToString();
         }
 
+        private static String Random(Queue<String> s)
+        {
+            if (s.Count != 0)
+            {
+                return "NaN";
+            }
+            Random r = new Random();
+            return r.Next().ToString();
+        }
+
+        private static String Sine(Queue<String> s)
+        {
+            if (s.Count != 1)
+            {
+                return "NaN";
+            }
+            return Math.Sin(Formula.Solve(Tokenizer.ExtractCell(s.Dequeue())).Value).ToString();///uhhhhh....
+        }
+
+        private static String Cosine(Queue<String> s)
+        {
+            if (s.Count != 1)
+            {
+                return "NaN";
+            }
+            return Math.Cos(Formula.Solve(Tokenizer.ExtractCell(s.Dequeue())).Value).ToString();///uhhhhh....
+        }
+
+        private static String Tangent(Queue<String> s)
+        {
+            if (s.Count != 1)
+            {
+                return "NaN";
+            }
+            return Math.Tan(Formula.Solve(Tokenizer.ExtractCell(s.Dequeue())).Value).ToString();///uhhhhh....
+        }
+
+        private static String Logarithm(Queue<String> s)
+        {
+            if (s.Count != 1)
+            {
+                return "NaN";
+            }
+            return Math.Log10(Formula.Solve(Tokenizer.ExtractCell(s.Dequeue())).Value).ToString();///uhhhhh....
+        }
+
+        private static String SquareRoot(Queue<String> s)
+        {
+            if (s.Count != 1)
+            {
+                return "NaN";
+            }
+            return Math.Sqrt(Formula.Solve(Tokenizer.ExtractCell(s.Dequeue())).Value).ToString();///uhhhhh....
+        }
+
 
     }
 }
