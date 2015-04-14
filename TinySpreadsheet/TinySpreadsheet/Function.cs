@@ -33,13 +33,14 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="jrrToken"></param>
         /// <returns>Result of a given function</returns>
-        public static Double Resolve(FormulaToken jrrToken)
+        public static Queue<FormulaToken> Resolve(FormulaToken jrrToken)
         {
-            //Get first 3 letters
-            //Lookup in dictionary
-            //call on expanded cell range
-            // LookupTable["AVG"](jrrToken.ToString()); // this calls the function from lookup table
-            throw new NotImplementedException();
+            String macro = jrrToken.Token.Substring(0, 3);
+            String cells = jrrToken.Token.Replace("(", "");
+            cells = cells.Replace(")", "");
+            cells = cells.Slice(3, cells.Length);
+            return Tokenizer.Tokenize(LookupTable[macro](ExpandCellRange(cells))); // this calls the function from lookup table
+            
         }
 
         /// <summary>
@@ -86,7 +87,6 @@ namespace TinySpreadsheet
 
         }
 
-
         /// <summary>
         /// getRowIndex(string)
         /// Converts Cell row reference to an integer index. 
@@ -105,7 +105,7 @@ namespace TinySpreadsheet
             }
             else
             {
-                int i = (col[0] - 'A');
+                int i = (col[0] - 'A' + 1);
                 sum = (Extensions.Pow(26, lenstr - 1) * i) + getColumnIndex(col.Slice(1, lenstr));
                 return sum;
 
@@ -122,7 +122,7 @@ namespace TinySpreadsheet
             System.Text.StringBuilder column = new System.Text.StringBuilder();
             foreach (char c in cell)
             {
-                if (Char.IsLetter(cell[c]))
+                if (Char.IsLetter(c))
                 {
                     column.Append(c);
                 }
@@ -136,7 +136,7 @@ namespace TinySpreadsheet
             System.Text.StringBuilder row = new System.Text.StringBuilder();
             foreach (char c in cell)
             {
-                if (Char.IsNumber(cell[c]))
+                if (Char.IsNumber(c))
                 {
                     row.Append(c);
                 }
