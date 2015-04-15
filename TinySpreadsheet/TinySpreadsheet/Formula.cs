@@ -15,7 +15,7 @@ namespace TinySpreadsheet
     /// </summary>
     static class Formula
     {
-        private static readonly Regex Rgx = new Regex(@"^([A-Z]{3}?(-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*\:])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
+        private static readonly Regex Rgx = new Regex(@"^(([A-Z]{3})?(-{0,1}\()*((\d|[A-Z]\d+)+[\+\/\-\*\:])*(-{0,1}\d|[A-Z]\d+)+\)*)([\+\/\-\*](\(*((\d|[A-Z]\d+)+[\+\/\-\*])*-{0,1}(\d|[A-Z]\d+)+\)*))*$");    //Valid Formula regex check
 
         /// <summary>
         /// Attempts to evaluate a cell using its current input. 
