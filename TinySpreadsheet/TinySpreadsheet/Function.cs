@@ -58,8 +58,8 @@ namespace TinySpreadsheet
                 string lastCell = cellRange.Slice(split, cellRange.Length);
 
                 //get column and row values
-                int firstCol = getColumnIndex(getColumn(firstCell));
-                int lastCol = getColumnIndex(getColumn(lastCell));
+                int firstCol = GetColumnIndex(GetColumn(firstCell));
+                int lastCol = GetColumnIndex(GetColumn(lastCell));
                 int firstRow = getRow(firstCell);
                 int lastRow = getRow(lastCell);
 
@@ -78,10 +78,9 @@ namespace TinySpreadsheet
                 return Cells;
 
             }
-
             else
             {
-                System.Console.WriteLine("Format must be: A1:A5");
+                Console.WriteLine("Format must be: A1:A5");
                 return null;
             }
 
@@ -95,7 +94,7 @@ namespace TinySpreadsheet
         ///     getRowIndex("AA") will return 27
         ///     getRowIndex("BC") will return 55
         /// </summary>
-        private static int getColumnIndex(String col)
+        private static int GetColumnIndex(String col)
         {
             int lenstr = col.Length;
             int sum = 0;
@@ -106,7 +105,7 @@ namespace TinySpreadsheet
             else
             {
                 int i = (col[0] - 'A' + 1);
-                sum = (Extensions.Pow(26, lenstr - 1) * i) + getColumnIndex(col.Slice(1, lenstr));
+                sum = (Extensions.Pow(26, lenstr - 1) * i) + GetColumnIndex(col.Slice(1, lenstr));
                 return sum;
 
             }
@@ -117,7 +116,7 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        private static string getColumn(string cell)
+        private static string GetColumn(string cell)
         {
             System.Text.StringBuilder column = new System.Text.StringBuilder();
             foreach (char c in cell)

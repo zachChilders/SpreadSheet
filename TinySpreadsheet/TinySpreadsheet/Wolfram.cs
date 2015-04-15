@@ -66,15 +66,12 @@ namespace TinySpreadsheet
         public String Result()
         {
             StringBuilder wolframResponse = new StringBuilder();
-            using (XmlReader reader = XmlReader.Create((new StringReader(responseXml))))
-            {
-                XmlWriterSettings ws = new XmlWriterSettings {Indent = true};
-                using (XmlWriter writer = XmlWriter.Create(wolframResponse, ws))
-                {
-                   
-                }
+            XmlDocument doc = new XmlDocument();
+            doc.Load(new StringReader(responseXml));
+            Console.WriteLine(responseXml);
+            XmlNodeList nodes = doc.DocumentElement.SelectNodes("");
 
-            }
+
             return wolframResponse.ToString();
         }
     }

@@ -42,7 +42,7 @@ namespace TinySpreadsheet
             }
             catch(Exception e)
             {
-                Debug.WriteLine(e.ToString());
+                Request wolf = new Request(cellFormulaString);
                 return Double.NaN;
             }
           
