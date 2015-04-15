@@ -36,6 +36,7 @@ namespace TinySpreadsheet
         /// </summary>
         public String CellFormula { get; set; }
 
+        public String OriginalFormula;
         /// <summary>
         /// Gets or sets the display text for this Cell. This is typically the evaluated CellFormula.
         /// </summary>
@@ -93,7 +94,6 @@ namespace TinySpreadsheet
         //Event subscriptions
         void DependencyChanged(Cell sender)
         {
-            //throw new NotImplementedException("DependencyChanged not implemented.");
             CellDisplay = Formula.Solve(this).ToString();
             CellText.Text = CellDisplay;
 
@@ -134,14 +134,22 @@ namespace TinySpreadsheet
                 //Save cell state when we lose focus.
                 if (Dependencies != null)
                     Dependencies.Unsubscribe();
-
+                OriginalFormula = t.Text;
                 CellFormula = t.Text;
                 if ((CellFormula != "") && (CellFormula[0] == '='))
                 {
                     CellDisplay = Formula.Solve(this).ToString();
 
-                    Dependencies = Tokenizer.GetDependencies(this);
-                    Dependencies.SubscribeCallback = DependencyChanged;
+                    if (!String.IsNullOrEmpty(CellDisplay))
+                    {
+                        Dependencies = Tokenizer.GetDependencies(this);
+                        Dependencies.SubscribeCallback = DependencyChanged;
+                    }
+                    else
+                    {
+                        CellDisplay = CellFormula;
+                    }
+
                 }
                 else
                 {
@@ -206,13 +214,20 @@ namespace TinySpreadsheet
                 if (Dependencies != null)
                     Dependencies.Unsubscribe();
 
+                OriginalFormula = t.Text;
                 CellFormula = t.Text;
                 if ((CellFormula != "") && (CellFormula[0] == '='))
                 {
                     CellDisplay = Formula.Solve(this).ToString();
-
-                    Dependencies = Tokenizer.GetDependencies(this);
-                    Dependencies.SubscribeCallback = DependencyChanged;
+                    if (!String.IsNullOrEmpty(CellDisplay))
+                    {
+                        Dependencies = Tokenizer.GetDependencies(this);
+                        Dependencies.SubscribeCallback = DependencyChanged;
+                    }
+                    else
+                    {
+                        CellDisplay = CellFormula;
+                    }
                 }
                 else
                 {
@@ -253,7 +268,8 @@ namespace TinySpreadsheet
             }
             else //If we don't have something in the cell, we deleted the old max.
             {
-                MainWindow.colMax.RemoveAt(MainWindow.colMax.Count - 1);
+                if (MainWindow.colMax.Count > 0)
+                    MainWindow.colMax.RemoveAt(MainWindow.colMax.Count - 1);
             }
 
             if (CellFormula != "") //If we have something in the cell, we found a new max.
@@ -262,7 +278,8 @@ namespace TinySpreadsheet
             }
             else //If we don't have something in the cell, we deleted the old max.
             {
-                MainWindow.rowMax.RemoveAt(MainWindow.rowMax.Count - 1);
+                if(MainWindow.colMax.Count > 0)
+                    MainWindow.rowMax.RemoveAt(MainWindow.rowMax.Count - 1);
             }
 
         }

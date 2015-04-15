@@ -30,11 +30,15 @@ namespace TinySpreadsheet
             c.CellFormula = cellFormulaString;
             if (!Rgx.IsMatch(cellFormulaString))
             {
-                return null;
+
+                Request wolf = new Request(c.OriginalFormula);
+                wolf.Execute();
+                c.CellFormula = wolf.Result();
+                return Double.NaN;
             }
 
             Queue<FormulaToken> cellFormula = ResolveDependencies(Tokenizer.Tokenize(cellFormulaString));
-            Queue<FormulaToken> pfix = PostFix(cellFormula); //This should be tokenized somewhere.
+            Queue<FormulaToken> pfix = PostFix(cellFormula); 
 
             try
             {
@@ -42,7 +46,6 @@ namespace TinySpreadsheet
             }
             catch(Exception e)
             {
-                Request wolf = new Request(cellFormulaString);
                 return Double.NaN;
             }
           

@@ -48,8 +48,11 @@ namespace TinySpreadsheet
                 if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
                 {
                     Stream recieveStream = response.GetResponseStream();
-                    StreamReader readStream = new StreamReader(recieveStream, Encoding.UTF8);
-                    responseXml = readStream.ReadToEnd();
+                    if (recieveStream != null)
+                    {
+                        StreamReader readStream = new StreamReader(recieveStream, Encoding.UTF8);
+                        responseXml = readStream.ReadToEnd();
+                    }
                 }
             }
             catch (Exception)
@@ -65,14 +68,15 @@ namespace TinySpreadsheet
         /// <returns></returns>
         public String Result()
         {
-            StringBuilder wolframResponse = new StringBuilder();
             XmlDocument doc = new XmlDocument();
             doc.Load(new StringReader(responseXml));
-            Console.WriteLine(responseXml);
-            XmlNodeList nodes = doc.DocumentElement.SelectNodes("");
+            if (doc.DocumentElement != null)
+            {
+                XmlNodeList nodes = doc.DocumentElement.GetElementsByTagName("pod");
+                return nodes[1].InnerText;
+            }
 
-
-            return wolframResponse.ToString();
+            return null;
         }
     }
 }

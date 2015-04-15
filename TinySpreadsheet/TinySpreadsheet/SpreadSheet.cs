@@ -34,7 +34,7 @@ namespace TinySpreadsheet
         /// </summary>
         private void CreateNewRow()
         {
-            RowColumn.AddRow();
+            //RowColumn.AddRow();
             foreach (KeyValuePair<string, Column> c in SpreadSheet)
             {
                 c.Value.AddRow();
