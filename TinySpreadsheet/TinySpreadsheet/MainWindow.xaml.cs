@@ -34,7 +34,7 @@ namespace TinySpreadsheet
 
             for (int i = 0; i < initialColumnCount; i++ )
                 CreateNewColumn();
-            
+
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="sender">The ScrollViewer</param>
         /// <param name="e">The wheel event information.</param>
-        private void ListViewScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void ListViewScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ScrollViewer scv = (ScrollViewer)sender;
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);

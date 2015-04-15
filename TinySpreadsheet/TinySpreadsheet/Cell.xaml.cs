@@ -140,7 +140,7 @@ namespace TinySpreadsheet
                 {
                     CellDisplay = Formula.Solve(this).ToString();
 
-                    if (!String.IsNullOrEmpty(CellDisplay))
+                    if (!String.IsNullOrEmpty(CellDisplay) && CellDisplay != "NaN")
                     {
                         Dependencies = Tokenizer.GetDependencies(this);
                         Dependencies.SubscribeCallback = DependencyChanged;
@@ -219,7 +219,7 @@ namespace TinySpreadsheet
                 if ((CellFormula != "") && (CellFormula[0] == '='))
                 {
                     CellDisplay = Formula.Solve(this).ToString();
-                    if (!String.IsNullOrEmpty(CellDisplay))
+                    if (!String.IsNullOrEmpty(CellDisplay) && CellDisplay != "NaN")
                     {
                         Dependencies = Tokenizer.GetDependencies(this);
                         Dependencies.SubscribeCallback = DependencyChanged;
