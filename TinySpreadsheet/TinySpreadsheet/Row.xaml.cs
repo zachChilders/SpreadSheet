@@ -70,5 +70,13 @@ namespace TinySpreadsheet
                 Margin = new Thickness(0, 0, 0, 0)
             };
         }
+
+        public Grid this[int row]
+        {
+            get
+            {
+                return RowStack.Children[row+1] as Grid;
+            }
+        }
     }
 }

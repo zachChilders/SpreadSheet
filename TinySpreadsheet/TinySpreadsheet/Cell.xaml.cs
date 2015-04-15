@@ -266,5 +266,33 @@ namespace TinySpreadsheet
             }
 
         }
+
+        private void Cell_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            CellGrid.RowDefinitions[0].Height = new GridLength(e.NewSize.Height);
+        }
+
+        private void GridSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            StringBuilder row = new StringBuilder();
+
+            //Go through each character and append to the appropriate StringBuilder
+            foreach (char c in Name)
+            {
+                if (!Char.IsLetter(c))
+                    row.Append(c);
+
+            }
+
+            //Get the index of the cell in the column.
+            int index;
+            Int32.TryParse(row.ToString(), out index);
+            MainWindow.Instance.RowColumn[index].RowDefinitions[0].Height = new GridLength(CellGrid.RowDefinitions[0].Height.Value + 0.5);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.SizeChanged += Cell_SizeChanged;
+        }
     }
 }

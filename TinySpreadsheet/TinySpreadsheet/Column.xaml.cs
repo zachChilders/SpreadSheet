@@ -40,8 +40,16 @@ namespace TinySpreadsheet
             {
                 Cell c = new Cell() { Name = name + i.ToString() }; //Make sure we name in addrow
                 ColumnName.Content = name;
+
+                Binding heightBind = new Binding();
+                heightBind.Path = new PropertyPath(Grid.ActualHeightProperty);
+                heightBind.Source = MainWindow.Instance.RowColumn[i];
+                c.SetBinding(Cell.HeightProperty, heightBind);
+
                 CellColumn.Items.Add(c);
                 cells.Add(c);
+
+                
             }
         }
 
@@ -69,7 +77,13 @@ namespace TinySpreadsheet
         /// </summary>
         public void AddRow()
         {
-            Cell c = new Cell(){Name = Name + cells.Count.ToString()};
+            Cell c = new Cell() { Name = Name + cells.Count.ToString() };
+
+            Binding heightBind = new Binding();
+            heightBind.Path = new PropertyPath(Grid.ActualHeightProperty);
+            heightBind.Source = MainWindow.Instance.RowColumn[MainWindow.RowCount];
+            c.SetBinding(Cell.HeightProperty, heightBind);
+
             CellColumn.Items.Add(c);
             cells.Add(c);
         }
