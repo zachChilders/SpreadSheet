@@ -78,5 +78,12 @@ namespace TinySpreadsheet
 
             return null;
         }
+
+        public String Run()
+        {
+            Execute();
+            return Result();
+
+        }
     }
 }

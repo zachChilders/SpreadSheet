@@ -22,7 +22,8 @@ namespace TinySpreadsheet
     /// <summary>
     /// A cell setup for UI with Spreadsheet interaction logic built in.
     /// </summary>
-    public partial class Cell : UserControl
+    [Serializable]
+    public partial class Cell : UserControl, ISerializable
     {
         ListBox listParent;
 
@@ -87,7 +88,7 @@ namespace TinySpreadsheet
         {
             if (Changed != null)
                 Changed(this);
-           // StateManager.SaveState(); //Save our current state
+            //StateManager.SaveState(); //Save our current state
             EvaluateMaxBounds(); //Check for maxes
         }
 
@@ -310,6 +311,13 @@ namespace TinySpreadsheet
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             this.SizeChanged += Cell_SizeChanged;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("formula", CellFormula);
+            info.AddValue("display", CellDisplay);
+            info.AddValue("ogFormula", OriginalFormula);
         }
     }
 }

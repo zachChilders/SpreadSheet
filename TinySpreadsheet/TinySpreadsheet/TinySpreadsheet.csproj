@@ -85,7 +85,9 @@
     <Compile Include="Row.xaml.cs">
       <DependentUpon>Row.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SerializableDictionary.cs" />
     <Compile Include="SpreadSheet.cs" />
+    <Compile Include="StateManager.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />
     <Compile Include="Wolfram.cs" />

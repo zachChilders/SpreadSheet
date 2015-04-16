@@ -18,7 +18,8 @@ namespace TinySpreadsheet
     /// <summary>
     /// A simple UI class that holds a list of Cells.
     /// </summary>
-    public partial class Column : UserControl
+    [Serializable]
+    public partial class Column : UserControl, ISerializable
     {
         private readonly List<Cell> cells = new List<Cell>();
 
@@ -88,5 +89,9 @@ namespace TinySpreadsheet
             cells.Add(c);
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("cells", cells);
+        }
     }
 }

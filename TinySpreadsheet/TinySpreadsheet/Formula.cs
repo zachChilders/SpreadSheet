@@ -32,8 +32,7 @@ namespace TinySpreadsheet
             {
 
                 Request wolf = new Request(c.OriginalFormula);
-                wolf.Execute();
-                c.CellFormula = wolf.Result();
+                c.CellFormula = wolf.Run();
                 return Double.NaN;
             }
 
@@ -115,6 +114,20 @@ namespace TinySpreadsheet
                         if (Math.Abs(num2) > tolerance)
                         {
                             result = num2 / num1;
+                            eval.Push(result.ToString());
+                        }
+                        else
+                        {
+                            return Double.NaN;
+                        }
+                        break;
+                    case "%":
+                        num1 = Double.Parse(eval.Pop().ToString());
+                        num2 = Double.Parse(eval.Pop().ToString());
+                        
+                        if (Math.Abs(num2) > tolerance)
+                        {
+                            result = num2 % num1;
                             eval.Push(result.ToString());
                         }
                         else
@@ -220,6 +233,7 @@ namespace TinySpreadsheet
                     return 4;
                 case "*":
                 case "/":
+                case "%":
                     return 3;
                 case "+":
                 case "-":

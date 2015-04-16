@@ -10,9 +10,10 @@ using System.Windows.Controls.Ribbon;
 
 namespace TinySpreadsheet
 {
-    public partial class MainWindow
+    [Serializable]
+    public partial class MainWindow : ISerializable
     {
-        public static Dictionary<String, Column> SpreadSheet = new Dictionary<String, Column>();
+        public static SerializableDictionary<String, Column> SpreadSheet = new SerializableDictionary<string, Column>();
         public static int RowCount { get; private set; }
 
         internal static List<int> rowMax = new List<int>();
@@ -96,6 +97,11 @@ namespace TinySpreadsheet
         private void Undo_OnClick(object sender, RoutedEventArgs e)
         {
             //StateManager.Load();
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("spreadsheet", SpreadSheet);
         }
     }
 }

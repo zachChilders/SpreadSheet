@@ -25,6 +25,7 @@ namespace TinySpreadsheet.Tokenize
                 case '-':
                 case '*':
                 case '/':
+                case '%':
                     return new FormulaToken(c.ToString(), TokenType.OP);
                 case '(':
                     return new FormulaToken(c.ToString(), TokenType.LBANANA);
@@ -46,13 +47,6 @@ namespace TinySpreadsheet.Tokenize
             double d;
             return double.TryParse(s, out d) ? new FormulaToken(s, TokenType.NUM) : new FormulaToken(s, TokenType.CELL);
         }
-
-        ///Incomplete
-        public static bool IsMinus(FormulaToken token)
-        {
-            return token.Token == "-";
-        }
-
 
         /// <summary>
         /// Creates a Queue of FormulaTokens from a given formula string.

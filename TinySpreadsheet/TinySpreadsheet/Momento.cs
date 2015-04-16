@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace TinySpreadsheet
 {
@@ -14,6 +15,8 @@ namespace TinySpreadsheet
         private readonly MemoryStream state;
         private readonly IFormatter formatter;
         private static MainWindow SpreadSheet = MainWindow.Instance;
+        private static XmlWriter writer;
+        private static XmlWriterSettings settings;
 
         /// <summary>
         /// The momento constructor takes a snapshot of our current spreadsheet,
@@ -24,6 +27,10 @@ namespace TinySpreadsheet
         {
             formatter = new BinaryFormatter();
             state = new MemoryStream();
+            settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.NewLineOnAttributes = true;
+            writer = XmlWriter.Create("Save.ts", settings);
         }
 
         /// <summary>
@@ -31,7 +38,7 @@ namespace TinySpreadsheet
         /// </summary>
         public void Capture()
         {
-            formatter.Serialize(state, SpreadSheet);
+            MainWindow.SpreadSheet.WriteXml(writer);
         }
 
         /// <summary>
@@ -50,7 +57,6 @@ namespace TinySpreadsheet
             using (FileStream fs = new FileStream("Spreadsheet.ts", FileMode.Create))
             {
                 state.WriteTo(fs);
-              //  state.Close();
             }
         }
 
@@ -63,7 +69,7 @@ namespace TinySpreadsheet
             {
                 fs.CopyTo(state);
             }
-
+    
             try
             {
                 state.Position = 0; //We have to read from beginning of the stream.

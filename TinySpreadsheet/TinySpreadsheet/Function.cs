@@ -9,7 +9,7 @@ namespace TinySpreadsheet
 {
     public static partial class Function
     {
-        private static readonly Dictionary<String, Func<Queue<String>, String>> LookupTable = new Dictionary<String, Func<Queue<String>,String>>();
+        private static readonly SerializableDictionary<String, Func<Queue<String>, String>> LookupTable = new SerializableDictionary<string, Func<Queue<string>, string>>();
 
         /// <summary>
         /// Constructor builds a lookup table of functions.
