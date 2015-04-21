@@ -194,6 +194,13 @@ namespace TinySpreadsheet
             {
                 listParent.SelectedItems.Remove(cell);
             }
+
+            foreach(KeyValuePair<String, Column> kv in MainWindow.SpreadSheet)
+            {
+                Column col = kv.Value;
+                if (listParent != col.CellColumn)
+                    col.CellColumn.SelectedItems.Clear();
+            }
         }
 
         /// <summary>
