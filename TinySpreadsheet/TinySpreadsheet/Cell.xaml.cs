@@ -26,6 +26,7 @@ namespace TinySpreadsheet
     public partial class Cell : UserControl, ISerializable
     {
         ListBox listParent;
+        private static Cell lastSelected;
 
         /// <summary>
         /// Gets the DependencyMap held by this Cell.
@@ -102,6 +103,14 @@ namespace TinySpreadsheet
 
         }
 
+        public void Select()
+        {
+            if (listParent == null)
+                listParent = GetParent(typeof(ListBox)) as ListBox;
+
+            listParent.SelectedItems.Add(this);
+        }
+
         /// <summary>
         /// Called when a cell is selected.
         /// </summary>
@@ -109,13 +118,28 @@ namespace TinySpreadsheet
         /// <param name="e"></param>
         void CellText_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (listParent == null)
-                listParent = GetParent(typeof(ListBox)) as ListBox;
             TextBox t = sender as TextBox;
 
-            if (listParent != null) listParent.SelectedItems.Add(this);
-            if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
-                HighlightCleanup();
+            if (((Keyboard.GetKeyStates(Key.LeftShift) & KeyStates.Down) != 0 || (Keyboard.GetKeyStates(Key.RightShift) & KeyStates.Down) != 0) && lastSelected != null)
+            {
+                Queue<String> cells = Function.ExpandCellRange(lastSelected.Name + ":" + Name);
+                if(cells.Count == 0)
+                    cells = Function.ExpandCellRange(Name + ":" + lastSelected.Name);
+
+                foreach (String s in cells)
+                {
+                    Cell c = Tokenizer.ExtractCell(s);
+
+                    c.Select();
+                }
+            }
+            else
+            {
+                Select();
+                
+                if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
+                    HighlightCleanup();
+            }
         }
 
         /// <summary>
@@ -127,7 +151,13 @@ namespace TinySpreadsheet
         {
             TextBox t = sender as TextBox;
 
-            if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
+            if ((Keyboard.GetKeyStates(Key.LeftShift) & KeyStates.Down) != 0 || (Keyboard.GetKeyStates(Key.RightShift) & KeyStates.Down) != 0)
+                lastSelected = this;
+            else
+                lastSelected = null;
+
+            if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0 &&
+                (Keyboard.GetKeyStates(Key.LeftShift) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightShift) & KeyStates.Down) == 0)
                 HighlightCleanup();
 
             if (!t.IsReadOnly)
@@ -195,7 +225,7 @@ namespace TinySpreadsheet
                 listParent.SelectedItems.Remove(cell);
             }
 
-            foreach(KeyValuePair<String, Column> kv in MainWindow.SpreadSheet)
+            foreach (KeyValuePair<String, Column> kv in MainWindow.SpreadSheet)
             {
                 Column col = kv.Value;
                 if (listParent != col.CellColumn)
@@ -250,7 +280,7 @@ namespace TinySpreadsheet
                 t.IsEnabled = false;
                 t.IsEnabled = true;
 
-                listParent.SelectedItems.Add(this);
+                Select();
             }
         }
 
@@ -286,7 +316,7 @@ namespace TinySpreadsheet
             }
             else //If we don't have something in the cell, we deleted the old max.
             {
-                if(MainWindow.colMax.Count > 0)
+                if (MainWindow.colMax.Count > 0)
                     MainWindow.rowMax.RemoveAt(MainWindow.rowMax.Count - 1);
             }
 

@@ -39,7 +39,7 @@ namespace TinySpreadsheet
 
             for (int i = 0; i < MainWindow.RowCount; i++)
             {
-                Cell c = new Cell() { Name = name + i.ToString() }; //Make sure we name in addrow
+                Cell c = new Cell() { Name = name + (i+1).ToString() }; //Make sure we name in addrow
                 ColumnName.Content = name;
 
                 Binding heightBind = new Binding();

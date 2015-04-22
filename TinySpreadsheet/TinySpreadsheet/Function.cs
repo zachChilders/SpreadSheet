@@ -48,7 +48,7 @@ namespace TinySpreadsheet
         /// </summary>
         /// <param name="cellRange"></param>
         /// <returns>Every Cell in a given range</returns>
-        private static Queue<String> ExpandCellRange(String cellRange)
+        public static Queue<String> ExpandCellRange(String cellRange)
         {
             int split = cellRange.IndexOf(':');
             if (split != -1)
