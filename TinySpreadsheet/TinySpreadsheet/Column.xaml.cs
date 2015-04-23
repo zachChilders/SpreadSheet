@@ -78,7 +78,9 @@ namespace TinySpreadsheet
         /// </summary>
         public void AddRow()
         {
-            Cell c = new Cell() { Name = Name + cells.Count.ToString() };
+            //Cell c = new Cell() { Name = Name + cells.Count.ToString() };
+            Cell c = new Cell() { Name = Name + (cells.Count + 1).ToString() }; //Make sure we name in addrow
+            ColumnName.Content = Name;
 
             Binding heightBind = new Binding();
             heightBind.Path = new PropertyPath(Grid.ActualHeightProperty);

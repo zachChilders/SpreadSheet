@@ -41,7 +41,7 @@ namespace TinySpreadsheet
             cell.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
             cell.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
 
-            cell.Children.Add(CreateLabel(row));
+            cell.Children.Add(CreateLabel(row+1));
 
             GridSplitter gs = new GridSplitter()
             {
@@ -64,10 +64,11 @@ namespace TinySpreadsheet
                 VerticalAlignment = System.Windows.VerticalAlignment.Stretch,
                 HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center,
                 VerticalContentAlignment = System.Windows.VerticalAlignment.Center,
-                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderBrush = new SolidColorBrush(Colors.Wheat),
                 BorderThickness = new Thickness(0.25),
                 Content = row.ToString(),
-                Margin = new Thickness(0, 0, 0, 0)
+                Margin = new Thickness(0, 0, 0, 0),
+                Background = new SolidColorBrush(Colors.Wheat)
             };
         }
 
