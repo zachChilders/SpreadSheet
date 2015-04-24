@@ -15,6 +15,7 @@ using TinySpreadsheet.Dependencies;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using TinySpreadsheet.Tokenize;
+using System.Windows.Threading;
 
 
 namespace TinySpreadsheet
@@ -27,6 +28,7 @@ namespace TinySpreadsheet
     {
         ListBox listParent;
         private static Cell lastSelected;
+        private static Cell dragged;
 
         /// <summary>
         /// Gets the DependencyMap held by this Cell.
@@ -111,6 +113,14 @@ namespace TinySpreadsheet
             listParent.SelectedItems.Add(this);
         }
 
+        public void Deselect()
+        {
+            if (listParent == null)
+                listParent = GetParent(typeof(ListBox)) as ListBox;
+
+            listParent.SelectedItems.Remove(this);
+        }
+
         /// <summary>
         /// Called when a cell is selected.
         /// </summary>
@@ -123,7 +133,7 @@ namespace TinySpreadsheet
             if (((Keyboard.GetKeyStates(Key.LeftShift) & KeyStates.Down) != 0 || (Keyboard.GetKeyStates(Key.RightShift) & KeyStates.Down) != 0) && lastSelected != null)
             {
                 Queue<String> cells = Function.ExpandCellRange(lastSelected.Name + ":" + Name);
-                if(cells.Count == 0)
+                if (cells.Count == 0)
                     cells = Function.ExpandCellRange(Name + ":" + lastSelected.Name);
 
                 foreach (String s in cells)
@@ -136,7 +146,7 @@ namespace TinySpreadsheet
             else
             {
                 Select();
-                
+
                 if ((Keyboard.GetKeyStates(Key.LeftCtrl) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightCtrl) & KeyStates.Down) == 0)
                     HighlightCleanup();
             }
@@ -218,6 +228,9 @@ namespace TinySpreadsheet
         /// </summary>
         void HighlightCleanup()
         {
+            if (listParent == null)
+                listParent = GetParent(typeof(ListBox)) as ListBox;
+
             List<Cell> cells = listParent.SelectedItems.Cast<Cell>().Where(cell => !cell.CellText.IsFocused).ToList();
 
             foreach (Cell cell in cells)
@@ -355,6 +368,59 @@ namespace TinySpreadsheet
             info.AddValue("formula", CellFormula);
             info.AddValue("display", CellDisplay);
             info.AddValue("ogFormula", OriginalFormula);
+        }
+
+        void DoDragDrop(object parameter)
+        {
+            DragDrop.DoDragDrop(this, parameter, DragDropEffects.All);
+        }
+
+        private void Cell_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && dragged == this)
+            {
+                // Inititate the drag-and-drop operation.
+
+                Application.Current.Dispatcher.BeginInvoke(
+                                DispatcherPriority.Background,
+                                new System.Threading.ParameterizedThreadStart(DoDragDrop),
+                                Name);
+                e.Handled = true;
+            }
+        }
+
+        private void Cell_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            HighlightCleanup();
+            Mouse.SetCursor(Cursor);
+
+            String name = e.Data.GetData(typeof(String)).ToString();
+            Queue<String> cells = Function.ExpandCellRange(name + ":" + Name);
+            if (cells.Count == 0)
+                cells = Function.ExpandCellRange(Name + ":" + name);
+
+            foreach (String s in cells)
+            {
+                Cell c = Tokenizer.ExtractCell(s);
+
+                c.Select();
+            }
+        }
+
+        private void Cell_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((Keyboard.GetKeyStates(Key.LeftShift) & KeyStates.Down) == 0 && (Keyboard.GetKeyStates(Key.RightShift) & KeyStates.Down) == 0)
+                dragged = this;
+            else
+                dragged = null;
+        }
+
+        protected override void OnGiveFeedback(GiveFeedbackEventArgs e)
+        {
+            base.OnGiveFeedback(e);
+            Mouse.SetCursor(Cursors.Cross);
+
+            e.Handled = true;
         }
     }
 }
