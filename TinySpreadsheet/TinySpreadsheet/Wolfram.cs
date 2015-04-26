@@ -14,6 +14,19 @@ namespace TinySpreadsheet
         private const String ApiKey = @"4EKP78-75TGQYR3K7";
         private readonly String wolframRequest;
         private String responseXml;
+        private static Dictionary<String, long> wordToNumber;
+
+        /// <summary>
+        /// Static Constructor intitializes the dictionary so each new request doesn't have to.
+        /// </summary>
+        static Request()
+        {
+            wordToNumber = new Dictionary<string, long>();
+            wordToNumber["trillion"] = 1000000000000;
+            wordToNumber["billion"] = 1000000000;
+            wordToNumber["million"] = 1000000;
+            wordToNumber["thousand"] = 1000;
+        }
 
         /// <summary>
         /// Builds a WolframAlpha webrequest from a cell.
@@ -38,7 +51,7 @@ namespace TinySpreadsheet
         /// <summary>
         /// Executes a web request
         /// </summary>
-        public void Execute()
+        private void Execute()
         {
             try
             {
@@ -59,14 +72,14 @@ namespace TinySpreadsheet
             {
                 responseXml = null;
             }
-            
+
         }
 
         /// <summary>
         /// Parses the response XML to retreive the proper answer.
         /// </summary>
         /// <returns></returns>
-        public String Result()
+        private String Result()
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(new StringReader(responseXml));
@@ -76,9 +89,53 @@ namespace TinySpreadsheet
                 return nodes[1].InnerText;
             }
 
-            return null;
+            return "NaN";
         }
 
+        /// <summary>
+        /// This method is used to ensure proper numbering is returned in wolfram responses.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        private String ParseWolfram(String request)
+        {
+            Double tmp = 1.0f;
+            //If we just get a single number back, that's a good thing, so just return that.
+            if (!Double.TryParse(request, out tmp))
+            {
+                //Split the request into lines
+                String [] lines = request.Split('\n');
+                //We probably only care about the first line
+                String[] words = lines[0].Split(' ');
+                List<Double> bucket = new List<double>();
+                
+                foreach (string t in words)
+                {
+                    //Check each word if it's a number.
+                    if (!Double.TryParse(t, out tmp))
+                    {
+                        //If it's not a number, but can be converted to one, convert it and then use it
+                        if (wordToNumber.ContainsKey(t))
+                        {
+                            bucket.Add(wordToNumber[t]);
+                        }
+                    }
+                    else //These words were successfully parsed as doubles.
+                    {
+                        bucket.Add(tmp);
+                    }
+                }
+                //Multiply everything together to get one number.
+                tmp = bucket.Aggregate(tmp, (current, num) => current*num);
+            }
+
+            return tmp.ToString();
+        }
+
+        /// <summary>
+        /// Public method to execute the wolfram query and return the result.
+        /// </summary>
+        /// <returns></returns>
         public String Run()
         {
             Execute();
