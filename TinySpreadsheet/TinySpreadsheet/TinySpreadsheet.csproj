@@ -82,6 +82,7 @@
     <Compile Include="Majik\Function.cs" />
     <Compile Include="Majik\Macros.cs" />
     <Compile Include="Majik\Momento.cs" />
+    <Compile Include="Spreadsheet\Components\CellInteractivity.cs" />
     <Compile Include="Spreadsheet\Components\Row.xaml.cs">
       <DependentUpon>Row.xaml</DependentUpon>
     </Compile>
