@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TinySpreadsheet.Spreadsheet;
 using TinySpreadsheet.Tokenize;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Majik
 {
     public static partial class Function
     {
@@ -69,7 +70,7 @@ namespace TinySpreadsheet
                 {
                     for (int j = firstRow; j <= lastRow; j++)
                     {
-                        String cell = MainWindow.GenerateName(i);
+                        String cell = SpreadsheetWindow.GenerateName(i);
                         String row = j.ToString();
                         cell = cell + row;
                         Cells.Enqueue(cell);

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Majik
 {
     /// <summary>
     /// This manages our momento class, which allows save states.

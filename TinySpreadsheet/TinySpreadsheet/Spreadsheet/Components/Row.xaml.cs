@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Spreadsheet.Components
 {
     /// <summary>
     /// Interaction logic for Row.xaml
@@ -23,7 +23,7 @@ namespace TinySpreadsheet
         public Row()
         {
             InitializeComponent();
-            for (int i = 0; i < MainWindow.RowCount; i++)
+            for (int i = 0; i < SpreadsheetWindow.RowCount; i++)
             {
                 RowStack.Children.Add(CreateRowCell(i));
             }
@@ -31,7 +31,7 @@ namespace TinySpreadsheet
 
         public void AddRow()
         {
-            RowStack.Children.Add(CreateRowCell(MainWindow.RowCount));
+            RowStack.Children.Add(CreateRowCell(SpreadsheetWindow.RowCount));
         }
 
         private Grid CreateRowCell(int row)

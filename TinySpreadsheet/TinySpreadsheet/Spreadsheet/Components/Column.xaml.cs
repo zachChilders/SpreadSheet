@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Spreadsheet.Components
 {
     /// <summary>
     /// A simple UI class that holds a list of Cells.
@@ -37,14 +37,14 @@ namespace TinySpreadsheet
 
             Name = name;
 
-            for (int i = 0; i < MainWindow.RowCount; i++)
+            for (int i = 0; i < SpreadsheetWindow.RowCount; i++)
             {
                 Cell c = new Cell() { Name = name + (i+1).ToString() }; //Make sure we name in addrow
                 ColumnName.Content = name;
 
                 Binding heightBind = new Binding();
                 heightBind.Path = new PropertyPath(Grid.ActualHeightProperty);
-                heightBind.Source = MainWindow.Instance.RowColumn[i];
+                heightBind.Source = SpreadsheetWindow.Instance.RowColumn[i];
                 c.SetBinding(Cell.HeightProperty, heightBind);
 
                 CellColumn.Items.Add(c);
@@ -84,7 +84,7 @@ namespace TinySpreadsheet
 
             Binding heightBind = new Binding();
             heightBind.Path = new PropertyPath(Grid.ActualHeightProperty);
-            heightBind.Source = MainWindow.Instance.RowColumn[MainWindow.RowCount];
+            heightBind.Source = SpreadsheetWindow.Instance.RowColumn[SpreadsheetWindow.RowCount];
             c.SetBinding(Cell.HeightProperty, heightBind);
 
             CellColumn.Items.Add(c);

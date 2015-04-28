@@ -7,14 +7,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using TinySpreadsheet.Spreadsheet;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Majik
 {
     public class Momento
     {
         private readonly MemoryStream state;
         private readonly IFormatter formatter;
-        private static MainWindow SpreadSheet = MainWindow.Instance;
+        private static SpreadsheetWindow SpreadSheet = SpreadsheetWindow.Instance;
         private static XmlWriter writer;
         private static XmlWriterSettings settings;
 
@@ -38,7 +39,7 @@ namespace TinySpreadsheet
         /// </summary>
         public void Capture()
         {
-            MainWindow.SpreadSheet.WriteXml(writer);
+            SpreadsheetWindow.SpreadSheet.WriteXml(writer);
         }
 
         /// <summary>
@@ -73,7 +74,7 @@ namespace TinySpreadsheet
             try
             {
                 state.Position = 0; //We have to read from beginning of the stream.
-                SpreadSheet = (MainWindow) formatter.Deserialize(state);
+                SpreadSheet = (SpreadsheetWindow) formatter.Deserialize(state);
             }
             catch (SerializationException e)
             {

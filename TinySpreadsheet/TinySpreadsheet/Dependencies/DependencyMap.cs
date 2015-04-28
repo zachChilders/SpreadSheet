@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using TinySpreadsheet.Spreadsheet.Components;
 
 namespace TinySpreadsheet.Dependencies
 {

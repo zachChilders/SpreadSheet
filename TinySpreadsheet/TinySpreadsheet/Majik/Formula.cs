@@ -5,10 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using TinySpreadsheet.Spreadsheet.Components;
 using TinySpreadsheet.Tokenize;
 
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Majik
 {
     /// <summary>
     /// A static class for validating and evaluating cell inputs.

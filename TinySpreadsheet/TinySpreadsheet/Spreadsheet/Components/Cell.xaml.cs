@@ -16,9 +16,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using TinySpreadsheet.Tokenize;
 using System.Windows.Threading;
+using TinySpreadsheet.Majik;
 
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Spreadsheet.Components
 {
     /// <summary>
     /// A cell setup for UI with Spreadsheet interaction logic built in.
@@ -241,7 +242,7 @@ namespace TinySpreadsheet
                 listParent.SelectedItems.Remove(cell);
             }
 
-            foreach (KeyValuePair<String, Column> kv in MainWindow.SpreadSheet)
+            foreach (KeyValuePair<String, Column> kv in SpreadsheetWindow.SpreadSheet)
             {
                 Column col = kv.Value;
                 if (listParent != col.CellColumn)
@@ -318,22 +319,22 @@ namespace TinySpreadsheet
 
             if (CellFormula != "") //If we have something in the cell, we found a new max.
             {
-                MainWindow.colMax.SortedInsert(column);
+                SpreadsheetWindow.colMax.SortedInsert(column);
             }
             else //If we don't have something in the cell, we deleted the old max.
             {
-                if (MainWindow.colMax.Count > 0)
-                    MainWindow.colMax.RemoveAt(MainWindow.colMax.Count - 1);
+                if (SpreadsheetWindow.colMax.Count > 0)
+                    SpreadsheetWindow.colMax.RemoveAt(SpreadsheetWindow.colMax.Count - 1);
             }
 
             if (CellFormula != "") //If we have something in the cell, we found a new max.
             {
-                MainWindow.rowMax.SortedInsert(row);
+                SpreadsheetWindow.rowMax.SortedInsert(row);
             }
             else //If we don't have something in the cell, we deleted the old max.
             {
-                if (MainWindow.colMax.Count > 0)
-                    MainWindow.rowMax.RemoveAt(MainWindow.rowMax.Count - 1);
+                if (SpreadsheetWindow.colMax.Count > 0)
+                    SpreadsheetWindow.rowMax.RemoveAt(SpreadsheetWindow.rowMax.Count - 1);
             }
 
         }
@@ -358,7 +359,7 @@ namespace TinySpreadsheet
             //Get the index of the cell in the column.
             int index;
             Int32.TryParse(row.ToString(), out index);
-            MainWindow.Instance.RowColumn[index].RowDefinitions[0].Height = new GridLength(CellGrid.RowDefinitions[0].Height.Value + 0.5);
+            SpreadsheetWindow.Instance.RowColumn[index].RowDefinitions[0].Height = new GridLength(CellGrid.RowDefinitions[0].Height.Value + 0.5);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

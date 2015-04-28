@@ -4,6 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using TinySpreadsheet.Dependencies;
+using TinySpreadsheet.Majik;
+using TinySpreadsheet.Spreadsheet;
+using TinySpreadsheet.Spreadsheet.Components;
 
 namespace TinySpreadsheet.Tokenize
 {
@@ -154,7 +157,7 @@ namespace TinySpreadsheet.Tokenize
             if (!Int32.TryParse(row.ToString(), out index))
                 throw new Exception("Not a cell");
 
-            return MainWindow.SpreadSheet[column.ToString().ToUpper()][index - 1];
+            return SpreadsheetWindow.SpreadSheet[column.ToString().ToUpper()][index - 1];
         }
 
         /// <summary>

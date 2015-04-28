@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Ribbon;
+using TinySpreadsheet.Majik;
+using TinySpreadsheet.Spreadsheet.Components;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Spreadsheet
 {
     [Serializable]
-    public partial class MainWindow : ISerializable
+    public partial class SpreadsheetWindow : ISerializable
     {
         public static SerializableDictionary<String, Column> SpreadSheet = new SerializableDictionary<string, Column>();
         public static int RowCount { get; private set; }

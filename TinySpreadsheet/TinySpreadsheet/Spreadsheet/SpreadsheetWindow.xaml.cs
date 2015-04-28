@@ -14,17 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TinySpreadsheet.Tokenize;
+using TinySpreadsheet.Spreadsheet.Components;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Spreadsheet
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class SpreadsheetWindow 
     {
-        public static MainWindow Instance;
+        public static SpreadsheetWindow Instance;
        
-        public MainWindow()
+        public SpreadsheetWindow()
         {
             Instance = this;
             RowCount = 60;

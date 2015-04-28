@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TinySpreadsheet.Spreadsheet.Components;
 using TinySpreadsheet.Tokenize;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Majik
 {
     public static partial class Function
     {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Xml;
 using System.Threading.Tasks;
 
-namespace TinySpreadsheet
+namespace TinySpreadsheet.Majik
 {
     public class Request
     {

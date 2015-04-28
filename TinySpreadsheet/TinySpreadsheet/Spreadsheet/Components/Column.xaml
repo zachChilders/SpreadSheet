@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TinySpreadsheet.Column"
+﻿<UserControl x:Class="TinySpreadsheet.Spreadsheet.Components.Column"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Spreadsheet/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

@@ -79,27 +79,27 @@
     <Compile Include="Dependencies\Dependency.cs" />
     <Compile Include="Dependencies\DependencyMap.cs" />
     <Compile Include="Dependencies\DependencyMapWrapping.cs" />
-    <Compile Include="Function.cs" />
-    <Compile Include="Macros.cs" />
-    <Compile Include="Momento.cs" />
-    <Compile Include="Row.xaml.cs">
+    <Compile Include="Majik\Function.cs" />
+    <Compile Include="Majik\Macros.cs" />
+    <Compile Include="Majik\Momento.cs" />
+    <Compile Include="Spreadsheet\Components\Row.xaml.cs">
       <DependentUpon>Row.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SerializableDictionary.cs" />
-    <Compile Include="SpreadSheet.cs" />
-    <Compile Include="StateManager.cs" />
+    <Compile Include="Majik\SerializableDictionary.cs" />
+    <Compile Include="Spreadsheet\SpreadSheet.cs" />
+    <Compile Include="Majik\StateManager.cs" />
     <Compile Include="Tokenize\FormulaToken.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />
-    <Compile Include="Wolfram.cs" />
-    <Page Include="Cell.xaml">
+    <Compile Include="Majik\Wolfram.cs" />
+    <Page Include="Spreadsheet\Components\Cell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Column.xaml">
+    <Page Include="Spreadsheet\Components\Column.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Spreadsheet\SpreadsheetWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -107,23 +107,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Cell.xaml.cs">
+    <Compile Include="Spreadsheet\Components\Cell.xaml.cs">
       <DependentUpon>Cell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Column.xaml.cs">
+    <Compile Include="Spreadsheet\Components\Column.xaml.cs">
       <DependentUpon>Column.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Formula.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Majik\Formula.cs" />
+    <Compile Include="Spreadsheet\SpreadsheetWindow.xaml.cs">
+      <DependentUpon>SpreadsheetWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Row.xaml">
+    <Page Include="Spreadsheet\Components\Row.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles.xaml">
+    <Page Include="Spreadsheet\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,6 +182,7 @@
   <ItemGroup>
     <SplashScreen Include="Images\ZH89D7a.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
