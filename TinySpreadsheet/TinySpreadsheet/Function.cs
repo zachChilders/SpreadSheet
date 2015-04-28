@@ -81,7 +81,7 @@ namespace TinySpreadsheet
             else
             {
                 Console.WriteLine("Format must be: A1:A5");
-                return null;
+                return new Queue<string>();
             }
 
         }
