@@ -212,15 +212,18 @@ namespace TinySpreadsheet
         void Cell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             TextBox t = sender as TextBox;
-            t.IsReadOnly = false;
-            Keyboard.Focus(t);
+            if (t.IsReadOnly)
+            {
+                t.IsReadOnly = false;
+                Keyboard.Focus(t);
 
-            t.Text = CellFormula == CellDisplay ? CellFormula : "=" + CellFormula;
+                t.Text = CellFormula == CellDisplay ? CellFormula : "=" + CellFormula;
 
-            t.Select(t.Text.Length, 0);
+                t.Select(t.Text.Length, 0);
 
-            listParent.SelectedItems.Remove(this);
-            HighlightCleanup();
+                listParent.SelectedItems.Remove(this);
+                HighlightCleanup();
+            }
         }
 
         /// <summary>
@@ -377,7 +380,7 @@ namespace TinySpreadsheet
 
         private void Cell_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && dragged == this)
+            if (e.LeftButton == MouseButtonState.Pressed && dragged == this && false)
             {
                 // Inititate the drag-and-drop operation.
 
