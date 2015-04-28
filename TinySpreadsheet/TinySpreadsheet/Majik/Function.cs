@@ -51,6 +51,8 @@ namespace TinySpreadsheet.Majik
         /// <returns>Every Cell in a given range</returns>
         public static Queue<String> ExpandCellRange(String cellRange)
         {
+
+            Queue<String> Cells = new Queue<String>();
             int split = cellRange.IndexOf(':');
             if (split != -1)
             {
@@ -64,7 +66,6 @@ namespace TinySpreadsheet.Majik
                 int firstRow = getRow(firstCell);
                 int lastRow = getRow(lastCell);
 
-                Queue<String> Cells = new Queue<String>();
                 // insert  to queue
                 for (int i = firstCol; i <= lastCol; i++)
                 {
@@ -81,8 +82,8 @@ namespace TinySpreadsheet.Majik
             }
             else
             {
-                Console.WriteLine("Format must be: A1:A5");
-                return new Queue<string>();
+                Cells.Enqueue(cellRange);
+                return Cells;
             }
 
         }
