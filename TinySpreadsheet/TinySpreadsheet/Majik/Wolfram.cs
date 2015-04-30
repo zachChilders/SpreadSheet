@@ -31,7 +31,7 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// Builds a WolframAlpha webrequest from a cell.
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="query">A string to be sent to Wolfram.</param>
         public Request(String query)
         {
             query = query.Replace("+", "%2B"); //We have to do this because + is handled as an append in URLs.
@@ -78,7 +78,7 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// Parses the response XML to retreive the proper answer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The result from Wolfram.</returns>
         private String Result()
         {
             XmlDocument doc = new XmlDocument();
@@ -95,8 +95,8 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// This method is used to ensure proper numbering is returned in wolfram responses.
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">A string from Wolfram to be parsed.</param>
+        /// <returns>A number representation of Wolfram's result.</returns>
         private String ParseWolfram(String request)
         {
             Double tmp = 1.0f;
@@ -135,7 +135,7 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// Public method to execute the wolfram query and return the result.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The result from Wolfram.</returns>
         public String Run()
         {
             Execute();

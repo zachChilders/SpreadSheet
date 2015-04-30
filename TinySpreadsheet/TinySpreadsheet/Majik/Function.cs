@@ -30,9 +30,9 @@ namespace TinySpreadsheet.Majik
         }
 
         /// <summary>
-        /// 
+        /// Resolves a given FormulaToken as a macro.
         /// </summary>
-        /// <param name="jrrToken"></param>
+        /// <param name="jrrToken">The macro token.</param>
         /// <returns>Result of a given function</returns>
         public static Queue<FormulaToken> Resolve(FormulaToken jrrToken)
         {
@@ -47,7 +47,7 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// Expands a string like "A1:A3" to A1, A2, A3
         /// </summary>
-        /// <param name="cellRange"></param>
+        /// <param name="cellRange">String indicating a cell range.</param>
         /// <returns>Every Cell in a given range</returns>
         public static Queue<String> ExpandCellRange(String cellRange)
         {
@@ -91,11 +91,11 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// getRowIndex(string)
         /// Converts Cell row reference to an integer index. 
-        /// 
-        /// Example:
-        ///     getRowIndex("AA") will return 27
-        ///     getRowIndex("BC") will return 55
         /// </summary>
+        /// <example>
+        /// getRowIndex("AA") will return 27
+        /// getRowIndex("BC") will return 55
+        /// </example>
         private static int GetColumnIndex(String col)
         {
             int lenstr = col.Length;
@@ -114,10 +114,10 @@ namespace TinySpreadsheet.Majik
         }
 
         /// <summary>
-        /// 
+        /// Given a cell name, get the associated column name.
         /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
+        /// <param name="cell">A cell name</param>
+        /// <returns>The column portion of the cell's name.</returns>
         private static string GetColumn(string cell)
         {
             System.Text.StringBuilder column = new System.Text.StringBuilder();
@@ -132,6 +132,11 @@ namespace TinySpreadsheet.Majik
             return column.ToString();
         }
 
+        /// <summary>
+        /// Given a cell name, get the associated row name.
+        /// </summary>
+        /// <param name="cell">A cell name</param>
+        /// <returns>The row portion of the cell's name.</returns>
         private static int getRow(string cell)
         {
             System.Text.StringBuilder row = new System.Text.StringBuilder();

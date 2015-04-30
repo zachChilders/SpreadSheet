@@ -48,7 +48,8 @@ namespace TinySpreadsheet.Spreadsheet
         /// <summary>
         /// Generates a column name by converting the cell number to base 26.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="index">The index of the column to be given a name.</param>
+        /// <returns>A column name representation of the given index.</returns>
         internal static String GenerateName(int index)
         {
 
@@ -76,7 +77,7 @@ namespace TinySpreadsheet.Spreadsheet
         /// <summary>
         /// Gets the greatest relevant column
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The last relevant column by name.</returns>
         public String GetMaxColumn()
         {
             return colMax[colMax.Count - 1];
@@ -85,7 +86,7 @@ namespace TinySpreadsheet.Spreadsheet
         /// <summary>
         /// Gets the greatest relevant row
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The last relevant row by name.</returns>
         public String GetMaxRow()
         {
             return colMax[rowMax.Count - 1];

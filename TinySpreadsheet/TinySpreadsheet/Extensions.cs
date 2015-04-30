@@ -78,12 +78,20 @@ namespace TinySpreadsheet
             return source.Substring(start, len); // Return Substring of length
         }
 
+        /// <summary>
+        /// Adds a String to the list and sorts it.
+        /// </summary>
+        /// <param name="o">The string to be added.</param>
         public static void SortedInsert(this List<String> l, String o)
         {
             l.Add(o);
             l.Sort();
         }
 
+        /// <summary>
+        /// Adds an int to the list and sorts it.
+        /// </summary>
+        /// <param name="o">The int to be added.</param>
         public static void SortedInsert(this List<int> l, int o)
         {
             l.Add(o);
@@ -93,9 +101,9 @@ namespace TinySpreadsheet
         /// <summary>
         /// Power function that takes and returns integers.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
+        /// <param name="a">The integer to be multiplied</param>
+        /// <param name="b">The power that the first parameter is raised to.</param>
+        /// <returns>The result of a^b.</returns>
         public static int Pow(int a, int b)
         {
             int ans = a;

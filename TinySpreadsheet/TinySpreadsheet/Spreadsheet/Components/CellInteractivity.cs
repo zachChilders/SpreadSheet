@@ -17,8 +17,8 @@ namespace TinySpreadsheet.Spreadsheet.Components
         /// <summary>
         /// Called when a cell is selected.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         void CellText_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -48,8 +48,8 @@ namespace TinySpreadsheet.Spreadsheet.Components
         /// <summary>
         /// Called when a cell is no longer selected.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         void CellText_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -100,8 +100,8 @@ namespace TinySpreadsheet.Spreadsheet.Components
         /// <summary>
         /// MouseListener.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         void Cell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -122,8 +122,8 @@ namespace TinySpreadsheet.Spreadsheet.Components
         /// <summary>
         /// Key Listener for cells.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         void CellText_KeyDown(object sender, KeyEventArgs e)
         {
             TextBox t = sender as TextBox;
@@ -170,11 +170,21 @@ namespace TinySpreadsheet.Spreadsheet.Components
             }
         }
 
+        /// <summary>
+        /// Called when the size of a cell changes.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         private void Cell_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             CellGrid.RowDefinitions[0].Height = new GridLength(e.NewSize.Height);
         }
 
+        /// <summary>
+        /// Called when the Cell's gridsplitter is done being dragged. This would be a vertical resize.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         private void GridSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             StringBuilder row = new StringBuilder();

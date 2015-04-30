@@ -55,10 +55,10 @@ namespace TinySpreadsheet.Spreadsheet.Components
         }
 
         /// <summary>
-        /// Indexer for columns
+        /// Indexer for columns.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The index of the cell in the column.</param>
+        /// <returns>The cell at the given index.</returns>
         public Cell this[int index]
         {
             get

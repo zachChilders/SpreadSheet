@@ -84,7 +84,9 @@ namespace TinySpreadsheet.Dependencies
             }
         }
 
-        //Our methods
+        /// <summary>
+        /// Unsubscribes from all dependencies.
+        /// </summary>
         public void Unsubscribe()
         {
             if (subscribeCallback == null)

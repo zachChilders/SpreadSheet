@@ -39,11 +39,13 @@ namespace TinySpreadsheet.Spreadsheet
         }
 
         /// <summary>
-        /// This locks up UI.  Fix it.
+        /// Handles the scroll event to create new columns and rows as needed.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// 
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
+        /// <remarks>
+        /// Depending on the direction of scrolling, this event handles creating new rows and columns. At a certain point, performance starts to fall.
+        /// </remarks>
         private void ScrollViewer_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             const double tolerance = 0.0000000001;
@@ -66,8 +68,8 @@ namespace TinySpreadsheet.Spreadsheet
         /// <summary>
         /// Ribbon is loaded.  
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments passed by the event.</param>
         private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
         {
             SheetScroll.ScrollChanged += ScrollViewer_OnScrollChanged;

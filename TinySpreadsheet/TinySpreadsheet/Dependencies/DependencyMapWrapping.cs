@@ -11,6 +11,9 @@ namespace TinySpreadsheet.Dependencies
     /// </summary>
     partial class DependencyMap : IEnumerable
     {
+        /// <summary>
+        /// Gets the number of dependencies in the map.
+        /// </summary>
         public int Count
         {
             get

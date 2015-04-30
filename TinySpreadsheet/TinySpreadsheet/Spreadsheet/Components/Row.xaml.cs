@@ -20,6 +20,9 @@ namespace TinySpreadsheet.Spreadsheet.Components
     /// </summary>
     public partial class Row : UserControl
     {
+        /// <summary>
+        /// Creates the row labels based on the number of rows specified by the spreadsheet.
+        /// </summary>
         public Row()
         {
             InitializeComponent();
@@ -29,11 +32,19 @@ namespace TinySpreadsheet.Spreadsheet.Components
             }
         }
 
+        /// <summary>
+        /// Adds in a new label to the end.
+        /// </summary>
         public void AddRow()
         {
             RowStack.Children.Add(CreateRowCell(SpreadsheetWindow.RowCount));
         }
 
+        /// <summary>
+        /// Creation logic for adding in a new row label.
+        /// </summary>
+        /// <param name="row">The row index.</param>
+        /// <returns>A Grid containing all of the visual components for the label.</returns>
         private Grid CreateRowCell(int row)
         {
             Grid cell = new Grid() { VerticalAlignment = System.Windows.VerticalAlignment.Stretch, HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch };
@@ -57,6 +68,11 @@ namespace TinySpreadsheet.Spreadsheet.Components
             return cell;
         }
 
+        /// <summary>
+        /// Creates the actual label portion of the view.
+        /// </summary>
+        /// <param name="row">The row number as to be shown to the user.</param>
+        /// <returns>A label with the given row number.</returns>
         private Label CreateLabel(int row)
         {
             return new Label()
@@ -72,6 +88,11 @@ namespace TinySpreadsheet.Spreadsheet.Components
             };
         }
 
+        /// <summary>
+        /// Gets a row Grid by the given index.
+        /// </summary>
+        /// <param name="row">The row index.</param>
+        /// <returns>A Grid representing the row.</returns>
         public Grid this[int row]
         {
             get

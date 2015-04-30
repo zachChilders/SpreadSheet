@@ -96,7 +96,10 @@ namespace TinySpreadsheet.Spreadsheet.Components
             EvaluateMaxBounds(); //Check for maxes
         }
 
-        //Event subscriptions
+        /// <summary>
+        /// The method used to subscribe to dependencies when they change.
+        /// </summary>
+        /// <param name="sender">The dependency that last changed.</param>
         void DependencyChanged(Cell sender)
         {
             CellDisplay = Formula.Solve(this).ToString();
@@ -106,6 +109,9 @@ namespace TinySpreadsheet.Spreadsheet.Components
 
         }
 
+        /// <summary>
+        /// Selects the current cell in its column.
+        /// </summary>
         public void Select()
         {
             if (listParent == null)
@@ -114,6 +120,9 @@ namespace TinySpreadsheet.Spreadsheet.Components
             listParent.SelectedItems.Add(this);
         }
 
+        /// <summary>
+        /// Deselects the current cell in its column.
+        /// </summary>
         public void Deselect()
         {
             if (listParent == null)

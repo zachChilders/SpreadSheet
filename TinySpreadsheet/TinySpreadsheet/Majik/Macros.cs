@@ -13,8 +13,8 @@ namespace TinySpreadsheet.Majik
         /// <summary>
         /// Returns the average of a cell range.
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns>((A1 + A2 + A3)/3)</returns>
+        /// <param name="s">A queue of cell names.</param>
+        /// <returns>An average formula based on the cell range given. Given (A1:A3), ((A1 + A2 + A3)/3) is returned.</returns>
         private static String Average(Queue<String> s)
         {
             StringBuilder sum = new StringBuilder();
@@ -32,10 +32,10 @@ namespace TinySpreadsheet.Majik
         }
 
         /// <summary>
-        /// 
+        /// Returns the sum of a cell range.
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
+        /// <param name="s">A queue of cell names.</param>
+        /// <returns>A sum formula based on the given cell range. Given (A1:A3), (A1 + A2 + A3) is returned.</returns>
         private static String Sum(Queue<String> s)
         {
             StringBuilder sum = new StringBuilder();
@@ -51,10 +51,10 @@ namespace TinySpreadsheet.Majik
         }
 
         /// <summary>
-        /// 
+        /// Returns the product of a cell range.
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
+        /// <param name="s">A queue of cell names.</param>
+        /// <returns>A product formula based on the given cell range. Given (A1:A3), (A1 * A2 * A3) is returned.</returns>
         private static String Product(Queue<String> s)
         {
             StringBuilder sum = new StringBuilder();
@@ -69,6 +69,11 @@ namespace TinySpreadsheet.Majik
             return sum.ToString();
         }
 
+        /// <summary>
+        /// Returns a random number.
+        /// </summary>
+        /// <param name="s">This should be an empty queue.</param>
+        /// <returns>Returns a random number as a string.</returns>
         private static String Random(Queue<String> s)
         {
             if (s.Count != 0)
@@ -79,6 +84,9 @@ namespace TinySpreadsheet.Majik
             return r.Next().ToString();
         }
 
+        /************
+         *Uhhhhh....*
+         ************/
         private static String Sine(Queue<String> s)
         {
             if (s.Count != 1)

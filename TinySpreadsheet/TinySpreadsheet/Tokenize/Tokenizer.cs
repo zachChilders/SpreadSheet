@@ -161,11 +161,11 @@ namespace TinySpreadsheet.Tokenize
         }
 
         /// <summary>
-        /// 
+        /// Determines whether a string contains a macro starting at the given index.
         /// </summary>
-        /// <param name="formula"></param>
-        /// <param name="i"></param>
-        /// <returns></returns>
+        /// <param name="formula">The formula input.</param>
+        /// <param name="i">The starting character index within the string.</param>
+        /// <returns>True if a macro is found. Otherwise false.</returns>
         public static bool IsMacro(ref String formula, int i)
         {
             try
