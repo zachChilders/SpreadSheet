@@ -86,7 +86,7 @@ namespace TinySpreadsheet.Majik
             if (doc.DocumentElement != null)
             {
                 XmlNodeList nodes = doc.DocumentElement.GetElementsByTagName("pod");
-                return nodes[1].InnerText;
+                return ParseWolfram(nodes[1].InnerText);
             }
 
             return "NaN";
@@ -126,7 +126,7 @@ namespace TinySpreadsheet.Majik
                     }
                 }
                 //Multiply everything together to get one number.
-                tmp = bucket.Aggregate(tmp, (current, num) => current*num);
+                tmp = bucket.Aggregate<double, double>(1.0f, (current, num) => current*num);
             }
 
             return tmp.ToString();
