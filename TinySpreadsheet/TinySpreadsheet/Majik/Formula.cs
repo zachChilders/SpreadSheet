@@ -28,6 +28,7 @@ namespace TinySpreadsheet.Majik
         {
             String cellFormulaString = c.CellFormula.Replace(" ", "");
             cellFormulaString = cellFormulaString.Replace("=", "");
+            cellFormulaString = cellFormulaString.ToUpper();
             c.CellFormula = cellFormulaString;
             if (!Rgx.IsMatch(cellFormulaString))
             {

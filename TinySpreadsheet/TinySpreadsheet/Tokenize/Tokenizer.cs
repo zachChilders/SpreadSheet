@@ -157,7 +157,10 @@ namespace TinySpreadsheet.Tokenize
             if (!Int32.TryParse(row.ToString(), out index))
                 throw new Exception("Not a cell");
 
-            return SpreadsheetWindow.SpreadSheet[column.ToString().ToUpper()][index - 1];
+            if (column.Length > 0)
+                return SpreadsheetWindow.SpreadSheet[column.ToString().ToUpper()][index - 1];
+            else
+                return new Cell() { CellFormula = index.ToString() };
         }
 
         /// <summary>
